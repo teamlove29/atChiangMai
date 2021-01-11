@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "360544845415",
+    "firebase_url": "https://atchiangmai-d066a.firebaseio.com",
+    "project_id": "atchiangmai-d066a",
+    "storage_bucket": "atchiangmai-d066a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360544845415:android:b807d0751678a010d79ec2",
+        "android_client_info": {
+          "package_name": "com.alw.atchiangmai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360544845415-3f61le1v4aijpcpp1dguod3djo1s9j86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alw.atchiangmai",
+            "certificate_hash": "d1daec13f0fc36f9e9679e6fb20fe3d511348591"
+          }
+        },
+        {
+          "client_id": "360544845415-uig42443vb1m4opf13pf60kle46erp3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVOnhqKOrxaO4QTgfA_5K0nM3pRoDlL0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360544845415-uig42443vb1m4opf13pf60kle46erp3r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "360544845415-d4amfnfbjb6e3refrbb8q1qa7mbrr06j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cash-pos.atChiangmai"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
