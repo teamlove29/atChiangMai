@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
-
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,17 +18,20 @@
 
     <TextView
         android:id="@+id/textViewFeedTitle"
+        android:layout_marginTop="10dp"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="FeedTitle"
-        android:textStyle="bold"/>
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/textViewFeedDescription"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="FeedDescription" />
+        android:layout_height="20dp"
+        android:text="FeedDescription"
+        android:textSize="15dp"/>
 
 
 </LinearLayout>
-</androidx.cardview.widget.CardView>

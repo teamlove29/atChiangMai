@@ -35,8 +35,7 @@ class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLic
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         var currency = itemlists[position]
 
-//        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.itemView.imageViewFeed);
-        holder.itemView.imageViewFeed.setImageResource(R.drawable.placeholder1024x640)
+        Picasso.get().load(currency.image).into(holder.itemView.imageViewFeed);
         holder.itemView.textViewFeedTitle.text = currency.title
         holder.itemView.textViewFeedDescription.text = currency.description
         onNoteCLickListener?.let { holder.setOnCLick(it) }

@@ -21,16 +21,19 @@ class FeedActivity : AppCompatActivity(),onNoteCLickListener{
     private val TAG = "FirebaseEmailPassword"
     private var mAuth: FirebaseAuth? = null
 
+    val itemsGroup = ArrayList<ItemGroupFeed>()
+    val itemData = ArrayList<ItemDataFeed>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar!!.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
 
 
-        val itemsGroup = ArrayList<ItemGroupFeed>()
-        val itemData = ArrayList<ItemDataFeed>()
         mAuth = FirebaseAuth.getInstance()
-
         val email = "ScreenAnyWhere@gmail.com"
         val password = "123456"
         mAuth!!.signInWithEmailAndPassword(email, password)
@@ -45,42 +48,41 @@ class FeedActivity : AppCompatActivity(),onNoteCLickListener{
                         Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
 //                        updateUI(null)
                     }
-
                 }
 
-        val db = FirebaseFirestore.getInstance()
+
         val collectionFirebase = arrayListOf<String>("feed","activity","recommend")
-
-        collectionFirebase.forEach{
-                collection ->
-            db.collection(collection)
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        val image = document.getString("image")
-                        val title = document.getString("name")
-                        val description = document.getString("des")
-//                                Log.d(i, "${document.getString("name")}")
-                        itemData.add(ItemDataFeed("$image", "$title", "$description"))
-                    }
-                    itemsGroup.add(ItemGroupFeed("$collection ", itemData))
-                    feedRecyclerViewPage.adapter = GroupFeedAdapter(itemsGroup, this)
-                    feedRecyclerViewPage.layoutManager = LinearLayoutManager(this)
-                }
-                .addOnFailureListener { exception ->
-                    Log.d("error", "Error getting documents: ", exception)
-                }
+        for (value in collectionFirebase){
+            firebaseTest(value)
         }
 
+    }
 
+    private fun firebaseTest(collection:String){
+        val db = FirebaseFirestore.getInstance()
+       db.collection(collection)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val image = document.getString("image")
+                    val title = document.getString("name")
+                    val description = document.getString("des")
+//                                Log.d(i, "${document.getString("name")}")
+                    itemData.add(ItemDataFeed("$image", "$title", "$description"))
+                }
+                when(collection){
+                    "feed" -> itemsGroup.add(ItemGroupFeed("Feed", itemData))
+                    "activity" -> itemsGroup.add(ItemGroupFeed("Activity", itemData))
+                    "recommend" -> itemsGroup.add(ItemGroupFeed("Recommend", itemData))
+                }
 
-//        }
-
-
-
-
-
-
+                feedRecyclerViewPage.adapter = GroupFeedAdapter(itemsGroup, this)
+                feedRecyclerViewPage.layoutManager = LinearLayoutManager(this)
+//                itemData.clear()
+            }
+            .addOnFailureListener { exception ->
+                Log.d("error", "Error getting documents: ", exception)
+            }
 
     }
 
