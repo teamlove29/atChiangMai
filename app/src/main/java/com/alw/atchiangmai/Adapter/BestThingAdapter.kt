@@ -1,27 +1,37 @@
 package com.alw.atchiangmai.Adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.Model.ModelCardPicText1
+import com.alw.atchiangmai.R
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.best_card.view.*
 
-class BestThingAdapter(val arrayList: ArrayList<ModelCardPicText1>):RecyclerView.Adapter<BestThingAdapter.ViewHolder>() {
+class BestThingAdapter(private val arrayList: ArrayList<ModelCardPicText1>):RecyclerView.Adapter<BestThingAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         fun bindCard(modelCardPicText1: ModelCardPicText1){
+            if (modelCardPicText1.image.toString() !== "") {
+                Picasso.get().load(modelCardPicText1.image)
+                        .into(itemView.imageCard)
+            }
+            itemView.textCard.text = modelCardPicText1.txt
 
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.best_card,parent,false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bindCard(arrayList[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return  arrayList.size
     }
 }

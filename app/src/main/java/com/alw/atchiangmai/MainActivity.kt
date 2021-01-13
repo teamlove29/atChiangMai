@@ -1,10 +1,15 @@
 package com.alw.atchiangmai
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
+import com.alw.atchiangmai.Adapter.BestThingAdapter
 import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
+import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         checkingUser()
         insertSlideImg()
+        getBestThings()
     }
 
     private fun insertSlideImg(){
@@ -51,4 +57,26 @@ class MainActivity : AppCompatActivity() {
        }
     }
 
+    fun getBestThings(){
+        val ref = db.collection("activity")
+        ref.get().addOnCompleteListener{
+            val arrayList = ArrayList<ModelCardPicText1>()
+            if (it.isSuccessful){
+                for (doc in it.result!!){
+                    val txt:String = doc["name"].toString()
+                    val uri = Uri.parse(doc.get("image").toString())
+                    arrayList.add(ModelCardPicText1(uri,txt))
+                }
+            }
+            val adapter =  BestThingAdapter(arrayList)
+            rcv_best_things.layoutManager  = GridLayoutManager(
+                    this,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
+                    false
+            )
+            rcv_best_things.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }
+    }
 }
