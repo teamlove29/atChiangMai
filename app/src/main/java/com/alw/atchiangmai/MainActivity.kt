@@ -1,15 +1,16 @@
 package com.alw.atchiangmai
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alw.atchiangmai.Adapter.BestThingAdapter
+import com.alw.atchiangmai.Adapter.VdoAdapter
 import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
+import com.alw.atchiangmai.Model.ModelYoutube
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -77,6 +78,20 @@ class MainActivity : AppCompatActivity() {
             )
             rcv_best_things.adapter = adapter
             adapter.notifyDataSetChanged()
+
+            val arrayListVdo = ArrayList<ModelYoutube>()
+            val VdoId = "WhKSf70h3BE"
+            arrayListVdo.add(ModelYoutube(VdoId,"CNX"))
+            arrayListVdo.add(ModelYoutube(VdoId,"CNX"))
+            arrayListVdo.add(ModelYoutube(VdoId,"CNX"))
+            val adapterVdo =  VdoAdapter(arrayListVdo)
+            rcv_vdo.layoutManager  = GridLayoutManager(
+                    this,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
+                    false
+            )
+            rcv_vdo.adapter = adapterVdo
         }
     }
 }
