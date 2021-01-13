@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.R
 import com.alw.atchiangmai.Model.ItemDataFeed
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.feed_list.view.*
 
 
@@ -15,17 +16,15 @@ interface onNoteCLickListener {
 
 class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLickListener:onNoteCLickListener?):RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var image = itemView.imageViewFeed
-        var title = itemView.textViewFeedTitle.text
-        var description = itemView.textViewFeedDescription.text
+//        var image = itemView.imageViewFeed
+//        var title = itemView.textViewFeedTitle.text
+//        var description = itemView.textViewFeedDescription.text
 
         fun setOnCLick(action: onNoteCLickListener) {
             itemView.setOnClickListener {
                 action.onClick(adapterPosition)
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
@@ -35,7 +34,9 @@ class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLic
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         var currency = itemlists[position]
-        holder.itemView.imageViewFeed.setImageResource(currency.image)
+
+//        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.itemView.imageViewFeed);
+        holder.itemView.imageViewFeed.setImageResource(R.drawable.placeholder1024x640)
         holder.itemView.textViewFeedTitle.text = currency.title
         holder.itemView.textViewFeedDescription.text = currency.description
         onNoteCLickListener?.let { holder.setOnCLick(it) }

@@ -1,4 +1,4 @@
 package com.alw.atchiangmai.Model
 
 
-data class ItemDataFeed(var image:Int, var title:String, var description :String)
+data class ItemDataFeed(var image:String, var title:String, var description :String)
