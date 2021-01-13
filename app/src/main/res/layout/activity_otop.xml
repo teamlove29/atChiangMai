@@ -23,7 +23,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:orientation="horizontal">
 
                     <GridLayout
@@ -135,8 +137,11 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOTOP_Lists"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    tools:listitem="@layout/item_otop_lists"/>
             </LinearLayout>
         </ScrollView>
 
