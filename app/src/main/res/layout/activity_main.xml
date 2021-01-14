@@ -47,7 +47,8 @@
             android:id="@+id/image_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/baseline_account_circle_black_24dp" />
+            app:srcCompat="@drawable/baseline_account_circle_black_24dp"
+            android:contentDescription="TODO" />
     </androidx.cardview.widget.CardView>
 
 
@@ -116,7 +117,7 @@
                         android:drawableTop="@drawable/outline_reorder_grey_500_24dp"
                         android:text="@string/btn_feed"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
 
                     <Button
                         android:id="@+id/btn_otop"
@@ -124,10 +125,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:drawableTop="@drawable/outline_enhanced_encryption_grey_500_24dp"
+                        android:drawableTop="@drawable/outline_shopping_bag_grey_500_24dp"
                         android:text="@string/btn_otop"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
 
                     <Button
                         android:id="@+id/btn_hotel"
@@ -138,7 +139,7 @@
                         android:drawableTop="@drawable/outline_king_bed_grey_500_24dp"
                         android:text="@string/btn_hotel"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
 
                     <Button
                         android:id="@+id/btn_food"
@@ -149,7 +150,7 @@
                         android:drawableTop="@drawable/outline_restaurant_grey_500_24dp"
                         android:text="@string/btn_food"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -168,7 +169,7 @@
                         android:drawableTop="@drawable/outline_monetization_on_grey_500_24dp"
                         android:text="@string/btn_exchange"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
 
                     <Button
                         android:id="@+id/btn_hospital"
@@ -179,7 +180,7 @@
                         android:drawableTop="@drawable/outline_home_work_grey_500_24dp"
                         android:text="@string/btn_hospital"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
 
                     <Button
                         android:id="@+id/btn_police"
@@ -190,7 +191,7 @@
                         android:drawableTop="@drawable/outline_apartment_grey_500_24dp"
                         android:text="@string/btn_police"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
 
                     <Button
                         android:id="@+id/btn_more"
@@ -201,7 +202,7 @@
                         android:drawableTop="@drawable/outline_more_horiz_grey_500_24dp"
                         android:text="@string/btn_more"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="8sp" />
+                        android:textSize="8dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

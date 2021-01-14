@@ -23,59 +23,64 @@ class MainActivity : AppCompatActivity() {
         insertSlideImg()
         getBestThings()
         vdoList()
+
+        btn_more.setOnClickListener {
+            val intent = Intent(this, MoreActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    private fun insertSlideImg(){
+    private fun insertSlideImg() {
 
         val ref = db.collection("slider")
         ref.get().addOnCompleteListener {
             val arrayList = ArrayList<String>()
-            if (it.isSuccessful){
-                for (doc in it.result!!){
+            if (it.isSuccessful) {
+                for (doc in it.result!!) {
                     arrayList.add(doc["image"].toString())
                 }
             }
             val adapter = ViewPagerAdapter(this, arrayList)
             view_pager.adapter = adapter
-         }
+        }
     }
 
-    private fun checkingUser(){
-       if(FirebaseAuth.getInstance().currentUser?.uid == null) {
-           val inten =Intent(this, UserActivity::class.java)
-           startActivity(inten)
+    private fun checkingUser() {
+        if (FirebaseAuth.getInstance().currentUser?.uid == null) {
+            val inten = Intent(this, UserActivity::class.java)
+            startActivity(inten)
 
-       }else {
-           txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
+        } else {
+            txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
 
 
-           if (FirebaseAuth.getInstance().currentUser?.photoUrl !== null) {
-               Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl)
-                   .into(image_user)
+            if (FirebaseAuth.getInstance().currentUser?.photoUrl !== null) {
+                Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+                    .into(image_user)
 
-           } else {
-               image_user.setImageResource(R.drawable.baseline_account_circle_black_24dp)
-           }
-       }
+            } else {
+                image_user.setImageResource(R.drawable.baseline_account_circle_black_24dp)
+            }
+        }
     }
 
-    private fun getBestThings(){
+    private fun getBestThings() {
         val ref = db.collection("activity")
-        ref.get().addOnCompleteListener{
+        ref.get().addOnCompleteListener {
             val arrayList = ArrayList<ModelCardPicText1>()
-            if (it.isSuccessful){
-                for (doc in it.result!!){
-                    val txt:String = doc["name"].toString()
+            if (it.isSuccessful) {
+                for (doc in it.result!!) {
+                    val txt: String = doc["name"].toString()
                     val uri = Uri.parse(doc.get("image").toString())
-                    arrayList.add(ModelCardPicText1(uri,txt))
+                    arrayList.add(ModelCardPicText1(uri, txt))
                 }
             }
-            val adapter =  BestThingAdapter(arrayList)
-            rcv_best_things.layoutManager  = GridLayoutManager(
-                    this,
-                    1,
-                    GridLayoutManager.HORIZONTAL,
-                    false
+            val adapter = BestThingAdapter(arrayList)
+            rcv_best_things.layoutManager = GridLayoutManager(
+                this,
+                1,
+                GridLayoutManager.HORIZONTAL,
+                false
             )
             rcv_best_things.adapter = adapter
             adapter.notifyDataSetChanged()
@@ -96,18 +101,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             val adapterVdo = VdoAdapter(arrayListVdo)
-            rcv_vdo.layoutManager  = GridLayoutManager(
-                    this,
-                    1,
-                    GridLayoutManager.HORIZONTAL,
-                    false
+            rcv_vdo.layoutManager = GridLayoutManager(
+                this,
+                1,
+                GridLayoutManager.HORIZONTAL,
+                false
             )
             rcv_vdo.adapter = adapterVdo
             adapterVdo.notifyDataSetChanged()
         }
     }
-        private fun getVdoID(url: String): String {
-            return url.substringAfter("watch?v=").substringBefore("&")
-        }
+
+    private fun getVdoID(url: String): String {
+        return url.substringAfter("watch?v=").substringBefore("&")
+    }
 
 }
