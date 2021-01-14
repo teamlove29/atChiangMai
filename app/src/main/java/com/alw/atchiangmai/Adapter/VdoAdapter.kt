@@ -9,15 +9,15 @@ import com.alw.atchiangmai.R
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.android.synthetic.main.vdo_card.view.*
-
 class VdoAdapter(private val arrayList: ArrayList<ModelYoutube>): RecyclerView.Adapter<VdoAdapter.ViewHolder>() {
+
 
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
         fun bindVdo(modelYoutube: ModelYoutube){
 
             itemView.videoView.addYouTubePlayerListener(object: AbstractYouTubePlayerListener() {
                 override fun onReady(youTubePlayer: YouTubePlayer) {
-                    val videoId = modelYoutube.id //"WhKSf70h3BE"
+                    val videoId = modelYoutube.id
                     youTubePlayer.loadVideo(videoId, 0F)
                     youTubePlayer.mute()
                 }

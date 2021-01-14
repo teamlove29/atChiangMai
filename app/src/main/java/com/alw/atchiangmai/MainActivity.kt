@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         checkingUser()
         insertSlideImg()
         getBestThings()
+        vdoList()
     }
 
     private fun insertSlideImg(){
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
        }
     }
 
-    fun getBestThings(){
+    private fun getBestThings(){
         val ref = db.collection("activity")
         ref.get().addOnCompleteListener{
             val arrayList = ArrayList<ModelCardPicText1>()
@@ -79,12 +80,22 @@ class MainActivity : AppCompatActivity() {
             rcv_best_things.adapter = adapter
             adapter.notifyDataSetChanged()
 
+
+        }
+    }
+
+    private fun vdoList() {
+        val ref = db.collection("vdo")
+        ref.get().addOnCompleteListener {
             val arrayListVdo = ArrayList<ModelYoutube>()
-            val VdoId = "WhKSf70h3BE"
-            arrayListVdo.add(ModelYoutube(VdoId,"CNX"))
-            arrayListVdo.add(ModelYoutube(VdoId,"CNX"))
-            arrayListVdo.add(ModelYoutube(VdoId,"CNX"))
-            val adapterVdo =  VdoAdapter(arrayListVdo)
+            if (it.isSuccessful) {
+                for (doc in it.result!!) {
+                    val txt: String = doc["title"].toString()
+                    val id = getVdoID(doc.get("url").toString())
+                    arrayListVdo.add(ModelYoutube(id, txt))
+                }
+            }
+            val adapterVdo = VdoAdapter(arrayListVdo)
             rcv_vdo.layoutManager  = GridLayoutManager(
                     this,
                     1,
@@ -92,6 +103,11 @@ class MainActivity : AppCompatActivity() {
                     false
             )
             rcv_vdo.adapter = adapterVdo
+            adapterVdo.notifyDataSetChanged()
         }
     }
+        private fun getVdoID(url: String): String {
+            return url.substringAfter("watch?v=").substringBefore("&")
+        }
+
 }
