@@ -9,4 +9,6 @@
     <string name="back_ic">Back</string>
     <string name="otop_cart_ic">OTOP Cart</string>
     <string name="imgitemotop">imgItemOtop</string>
+    <string name="text_otop">Text_OTOP</string>
+    <string name="item_img">item_img</string>
 </resources>

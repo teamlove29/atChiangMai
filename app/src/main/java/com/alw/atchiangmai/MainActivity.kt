@@ -1,9 +1,8 @@
-package com.alw.atchiangmai.activity
+package com.alw.atchiangmai
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

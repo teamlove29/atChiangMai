@@ -38,10 +38,13 @@
                         android:rowCount="1">
 
                         <LinearLayout
+                            android:id="@+id/linearFoodOtop"
+                            android:tag="FoodOtop"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:padding="5dp">
+                            android:padding="5dp"
+                            android:onClick="showOTOPitem">
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cvFoodOtop"
@@ -62,10 +65,13 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linearDrinkOtop"
+                            android:tag="DrinkOtop"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:padding="5dp">
+                            android:padding="5dp"
+                            android:onClick="showOTOPitem">
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cvDrinkOtop"
@@ -87,10 +93,13 @@
 
 
                         <LinearLayout
+                            android:id="@+id/linearShirtOtop"
+                            android:tag="ShirtsOtop"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:padding="5dp">
+                            android:padding="5dp"
+                            android:onClick="showOTOPitem">
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cvShirtOtop"
@@ -111,10 +120,13 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linearAccessOtop"
+                            android:tag="AccessoriesOtop"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:padding="5dp">
+                            android:padding="5dp"
+                            android:onClick="showOTOPitem">
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cvAccessoriesOtop"

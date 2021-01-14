@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="imgitemotop">imgItemOtop</string>
+    <string name="text_otop">Text_OTOP</string>
+    <string name="item_img">item_img</string>
 </resources>
