@@ -3,4 +3,6 @@
     <string name="imgitemotop">imgItemOtop</string>
     <string name="text_otop">Text_OTOP</string>
     <string name="item_img">item_img</string>
+    <string name="categoryotopicon">CategoryOTOPIcon</string>
+    <string name="categorytext">categoryText</string>
 </resources>

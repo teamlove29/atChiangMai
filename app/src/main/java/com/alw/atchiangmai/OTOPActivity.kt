@@ -7,14 +7,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.alw.atchiangmai.Adapter.CategoriesOTOPAdapter
 import com.alw.atchiangmai.Adapter.OTOP_Adapter
-import com.alw.atchiangmai.Model.OTOP_Model
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.alw.atchiangmai.model.OTOP_Model
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_otop.*
 
@@ -29,7 +29,17 @@ class OTOPActivity : AppCompatActivity() {
     var otop_Adapter: OTOP_Adapter? = null
     var otopLists = arrayListOf<OTOP_Model>()
 
-    // ...
+  //  var otopCateLists = arrayListOf<OTOP_Category_Model>()
+
+    // Array OTOP Category name
+    val categoriesOtoptext = arrayOf("Food","Drink", "Shirt", "Accessories")
+
+    //Array of OTOP category img
+    val categoriesOTOPimg = intArrayOf(R.drawable.ic_otop_food, R.drawable.ic_otop_drink, R.drawable.ic_otop_food, R.drawable.ic_otop_drink)
+
+
+
+
     // Initialize Firebase Auth
     var oAuth: FirebaseAuth = Firebase.auth
 
@@ -66,6 +76,18 @@ class OTOPActivity : AppCompatActivity() {
 
         //Set back Button
         actionbarOTOP.setDisplayHomeAsUpEnabled(true)
+
+
+        /////////////////// OTOP Categories /////////////////////
+        //val adapter = CategoriesOTOPAdapter(categoriesOtoptext)
+        var categoryList = ArrayList()
+        for (categoryItemList in categoriesOtoptext.indices) {
+           // val categoryOTText = categoryItemList.toString()
+            categoriesOtop.add(OTOP_Category_Model("$categoryItemList"))
+        }
+        rvOTOP_categories.adapter = adapter
+        rvOTOP_categories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+
     }
 
 

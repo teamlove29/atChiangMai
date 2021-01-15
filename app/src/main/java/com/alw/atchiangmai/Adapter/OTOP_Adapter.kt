@@ -1,22 +1,17 @@
 package com.alw.atchiangmai.Adapter
 
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.alw.atchiangmai.Model.OTOP_Model
+import com.alw.atchiangmai.model.OTOP_Model
 import com.alw.atchiangmai.R
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_otop_lists.view.*
 
-class OTOP_Adapter(var itemList: ArrayList<OTOP_Model> ) :  RecyclerView.Adapter<OTOP_Adapter.OTOPViewHolder>() {
+class OTOP_Adapter(private var itemList: ArrayList<OTOP_Model> ) :  RecyclerView.Adapter<OTOP_Adapter.OTOPViewHolder>() {
 
     class OTOPViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val ot_img: ImageView = itemView.imgOTOPItem
@@ -26,6 +21,7 @@ class OTOP_Adapter(var itemList: ArrayList<OTOP_Model> ) :  RecyclerView.Adapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OTOPViewHolder {
         return OTOPViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_otop_lists, parent, false))
+
     }
 
     override fun onBindViewHolder(holder: OTOPViewHolder, position: Int) {
@@ -34,9 +30,8 @@ class OTOP_Adapter(var itemList: ArrayList<OTOP_Model> ) :  RecyclerView.Adapter
         holder.ot_text.text = currently.otopItemText
     }
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount(): Int = itemList.size
+
 }
 
 
