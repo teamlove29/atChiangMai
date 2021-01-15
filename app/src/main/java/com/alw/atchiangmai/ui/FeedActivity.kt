@@ -1,6 +1,5 @@
 package com.alw.atchiangmai.ui
 
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -14,8 +13,9 @@ import com.alw.atchiangmai.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_feed.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import java.io.IOException
-
 
 
 class FeedActivity : AppCompatActivity(),onNoteCLickListener{
@@ -25,7 +25,7 @@ class FeedActivity : AppCompatActivity(),onNoteCLickListener{
     private val itemsGroup = ArrayList<ItemGroupFeed>()
     private val itemDataFeed = ArrayList<ItemDataFeed>()
     private val itemDataActivity = ArrayList<ItemDataFeed>()
-    private val itemDataRecom = ArrayList<ItemDataFeed>()
+    private val itemDataRecommend = ArrayList<ItemDataFeed>()
 
     private val db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,55 +53,64 @@ class FeedActivity : AppCompatActivity(),onNoteCLickListener{
                     }
                 }
 
-        val collectionFirebase = arrayListOf<String>("feed","activity","recommend")
-        for (value in collectionFirebase){
-            val loadDataOnFirebase = LoadDataOnFirebase(value)
-            loadDataOnFirebase.execute()
+        val collectionFirebase = arrayListOf<String>("feed", "activity", "recommend")
 
-        }
+                CoroutineScope(IO).launch {
+                    for (value in collectionFirebase){
+                        getResult(value)
+                    }
+
+                }
+
+//            val loadDataOnFirebase = LoadDataOnFirebase(value)
+//            loadDataOnFirebase.execute()
     }
 
-inner class LoadDataOnFirebase(var collection : String) : AsyncTask<String,String,String>(){
-    override fun doInBackground(vararg params: String?): String {
-       try {
-      db.collection(collection)
-                   .get()
-                   .addOnSuccessListener { result ->
-                       for (document in result) {
-                           val image = document.getString("image")
-                           val title = document.getString("name")
-                           val description = document.getString("des")
-                           when(collection){
-                               "feed" ->  itemDataFeed.add(ItemDataFeed("$image", "$title", "$description"))
-                               "activity" -> itemDataActivity.add(ItemDataFeed("$image", "$title", "$description"))
-                               "recommend" ->  itemDataRecom.add(ItemDataFeed("$image", "$title", "$description"))
-                           }
-                       }
-                       when(collection){
-                           "feed" -> itemsGroup.add(ItemGroupFeed("Feed", itemDataFeed))
-                           "activity" -> itemsGroup.add(ItemGroupFeed("Activity", itemDataActivity))
-                           "recommend" -> itemsGroup.add(ItemGroupFeed("Recommend", itemDataRecom))
-                       }
-                           feedRecyclerViewPage.adapter = GroupFeedAdapter(itemsGroup, this@FeedActivity)
-                           feedRecyclerViewPage.layoutManager = LinearLayoutManager(this@FeedActivity)
-
-                   }
-                   .addOnFailureListener { exception ->
-                       Log.d("error", "Error getting documents: ", exception)
-                   }
-
-           return collection
-       }catch (ioe:IOException){
-           return ""
-       }
+    private suspend fun getResult(collection : String) : String {
+            return withContext(Dispatchers.IO) {
+                try {
+                    db.collection(collection)
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (document in result) {
+                                    val image = document.getString("image")
+                                    val title = document.getString("name")
+                                    val description = document.getString("des")
+                                    when(collection){
+                                        "feed" -> itemDataFeed.add(ItemDataFeed("$image", "$title", "$description"))
+                                        "activity" -> itemDataActivity.add(ItemDataFeed("$image", "$title", "$description"))
+                                        "recommend" -> itemDataRecommend.add(ItemDataFeed("$image", "$title", "$description"))
+                                    }
+                                }
+                                when(collection){
+                                    "feed" -> itemsGroup.add(ItemGroupFeed("Feed", itemDataFeed))
+                                    "activity" -> itemsGroup.add(ItemGroupFeed("Activity", itemDataActivity))
+                                    "recommend" -> itemsGroup.add(ItemGroupFeed("Recommend", itemDataRecommend))
+                                }
+                                feedRecyclerViewPage.adapter = GroupFeedAdapter(itemsGroup, this@FeedActivity)
+                                feedRecyclerViewPage.layoutManager = LinearLayoutManager(this@FeedActivity)
+                            }
+                            .addOnFailureListener { exception ->
+                                Log.d("error", "Error getting documents: ", exception)
+                            }
+                    collection
+                }catch (ioe: IOException){
+                    collection
+                }
+            }
     }
 
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
 
-    }
-}
-
+// inner class LoadDataOnFirebase(var collection : String) : AsyncTask<String,String,String>(){
+//    override fun doInBackground(vararg params: String?): String {
+//       return ""
+//    }
+//
+//    override fun onPostExecute(result: String?) {
+//        super.onPostExecute(result)
+//
+//    }
+//}
 
     override fun onClick(postion: Int) {
 //        val intent = Intent(this,FeedActivity::class.java)
