@@ -8,6 +8,7 @@
     android:background="@drawable/bg_1"
     tools:context=".MainActivity">
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -31,6 +32,8 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/cvImageUser"
         app:layout_constraintTop_toTopOf="parent" />
+=======
+>>>>>>> origin/Team_Dev
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvImageUser"
