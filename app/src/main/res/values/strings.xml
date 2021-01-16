@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">\@ChiangMai</string>
+<<<<<<< HEAD
     <string name="btn_feed">Feed</string>
     <string name="btn_otop">Otop</string>
     <string name="btn_hotel">Hotel</string>
@@ -9,4 +10,19 @@
     <string name="btn_police">Police</string>
     <string name="btn_more">More</string>
     <string name="txt_best_things">Best Things to do in Chiang mai</string>
+=======
+
+    <string name="otop_btn"><b>OTOP</b></string>
+    <string name="food_otop"><b>Food</b></string>
+    <string name="drink_otop"><b>Drink</b></string>
+    <string name="shirt_otop"><b>Shirt</b></string>
+    <string name="accessories_otop"><b>Accessory</b></string>
+    <string name="back_ic">Back</string>
+    <string name="otop_cart_ic">OTOP Cart</string>
+    <string name="imgitemotop">imgItemOtop</string>
+    <string name="text_otop">Text_OTOP</string>
+    <string name="item_img">item_img</string>
+    <string name="categoryotopicon">CategoryOTOPIcon</string>
+    <string name="categorytext">categoryText</string>
+>>>>>>> origin/feature/OTOP_Activity
 </resources>

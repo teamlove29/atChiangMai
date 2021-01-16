@@ -14,6 +14,8 @@ import com.alw.atchiangmai.Model.ModelYoutube
 import com.alw.atchiangmai.ui.ExchangeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -93,6 +95,14 @@ class MainActivity : AppCompatActivity(){
 
 
         }
+
+        btnOTOP.setOnClickListener{
+            //Create instance of an intent that to start OTOP activity
+            Intent(this, OTOPActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
     }
 
     private fun vdoList() {
