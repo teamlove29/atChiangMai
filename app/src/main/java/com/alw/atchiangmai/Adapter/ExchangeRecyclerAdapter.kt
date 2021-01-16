@@ -9,9 +9,7 @@ import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.currency_list.view.*
 
 class ExchangeRecyclerAdapter(var currencyData: ArrayList<CurrencyData>) : RecyclerView.Adapter<ExchangeRecyclerAdapter.ExchangViewHolder>() {
-    class ExchangViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    }
+    class ExchangViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExchangViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.currency_list,parent,false)

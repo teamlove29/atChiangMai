@@ -15,14 +15,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ExchangeActivity : AppCompatActivity() {
-    lateinit private var apiService: ApiService
+    private lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar!!.apply {
-            title = "Exchange"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
+//        supportActionBar!!.apply {
+//            title = "Exchange"
+//            setDisplayHomeAsUpEnabled(true)
+//            setDisplayShowHomeEnabled(true)
+//        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exchange)
 

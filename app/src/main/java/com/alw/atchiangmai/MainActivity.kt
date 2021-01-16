@@ -1,11 +1,7 @@
 package com.alw.atchiangmai
 
-<<<<<<< HEAD
 import android.content.Intent
 import android.net.Uri
-=======
-
->>>>>>> origin/Team_Dev
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,6 +11,7 @@ import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
+import com.alw.atchiangmai.ui.ExchangeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,6 +28,10 @@ class MainActivity : AppCompatActivity(){
 
         btn_more.setOnClickListener {
             val intent = Intent(this, MoreActivity::class.java)
+            startActivity(intent)
+        }
+        btn_exchange.setOnClickListener {
+            val intent = Intent(this, ExchangeActivity::class.java)
             startActivity(intent)
         }
     }
