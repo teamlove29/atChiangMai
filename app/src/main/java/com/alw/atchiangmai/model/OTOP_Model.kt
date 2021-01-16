@@ -1,4 +1,4 @@
-package com.alw.atchiangmai.model
+package com.alw.atchiangmai.Model
 
 import android.graphics.Bitmap
 
@@ -7,4 +7,4 @@ data class OTOP_Model(
     val otopItemText: String) {
 }
 
-data class OTOP_Category_Model(val cateOTimg: Bitmap, val cateOTText: String)
+data class OTOP_Category_Model(val cateOTimg: Int, val cateOTText: String)

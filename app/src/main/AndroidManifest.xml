@@ -20,8 +20,8 @@
         </intent-filter>
         </activity>
         <activity android:name=".ui.ExchangeActivity"/>
-        <activity android:name=".OTOPActivity">
-        </activity>
+        <activity android:name=".OTOPActivity"/>
+        <activity android:name=".ui.FeedActivity"/>
     </application>
 
 </manifest>

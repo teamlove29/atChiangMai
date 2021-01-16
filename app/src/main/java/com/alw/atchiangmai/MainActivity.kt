@@ -12,10 +12,9 @@ import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
 import com.alw.atchiangmai.ui.ExchangeActivity
+import com.alw.atchiangmai.ui.FeedActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -34,6 +33,14 @@ class MainActivity : AppCompatActivity(){
         }
         btn_exchange.setOnClickListener {
             val intent = Intent(this, ExchangeActivity::class.java)
+            startActivity(intent)
+        }
+        btn_otop.setOnClickListener{
+            val intent = Intent(this, OTOPActivity::class.java)
+            startActivity(intent)
+        }
+        btn_feed.setOnClickListener {
+            val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)
         }
     }
@@ -96,12 +103,7 @@ class MainActivity : AppCompatActivity(){
 
         }
 
-        btnOTOP.setOnClickListener{
-            //Create instance of an intent that to start OTOP activity
-            Intent(this, OTOPActivity::class.java).also {
-                startActivity(it)
-            }
-        }
+
 
     }
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.alw.atchiangmai.model.OTOP_Model
+import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_otop_lists.view.*
