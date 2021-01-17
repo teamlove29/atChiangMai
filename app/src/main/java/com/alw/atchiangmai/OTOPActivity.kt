@@ -1,15 +1,16 @@
 package com.alw.atchiangmai
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.Adapter.CategoriesOTOPAdapter
 import com.alw.atchiangmai.Adapter.OTOP_Adapter
+import com.alw.atchiangmai.model.OTOP_Category_Model
 import com.alw.atchiangmai.model.OTOP_Model
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -18,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_otop.*
 
-class OTOPActivity : AppCompatActivity() {
+class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
 
     /// Firebase Firestore
     val TAG = "MyMessage"
@@ -26,19 +27,17 @@ class OTOPActivity : AppCompatActivity() {
     private val collectionReference: CollectionReference = db.collection("otopFood")
     ////
 
+    lateinit var bitmap: Bitmap
+
     var otop_Adapter: OTOP_Adapter? = null
-    var otopLists = arrayListOf<OTOP_Model>()
-
-  //  var otopCateLists = arrayListOf<OTOP_Category_Model>()
-
-    // Array OTOP Category name
-    val categoriesOtoptext = arrayOf("Food","Drink", "Shirt", "Accessories")
-
-    //Array of OTOP category img
-    val categoriesOTOPimg = intArrayOf(R.drawable.ic_otop_food, R.drawable.ic_otop_drink, R.drawable.ic_otop_food, R.drawable.ic_otop_drink)
+    private var otopLists = arrayListOf<OTOP_Model>()
 
 
+    //Array OTOP Category IMG
+    private val categoryOTOPimg = arrayOf(R.drawable.ic_otop_food, R.drawable.ic_otop_drink, R.drawable.ic_otop_food, R.drawable.ic_otop_drink)
 
+    //Array OTOP Category IMG
+    private val categoryOTOPname = arrayOf("Food", "Drink", "Shirt", "Accessories")
 
     // Initialize Firebase Auth
     var oAuth: FirebaseAuth = Firebase.auth
@@ -79,13 +78,18 @@ class OTOPActivity : AppCompatActivity() {
 
 
         /////////////////// OTOP Categories /////////////////////
-        //val adapter = CategoriesOTOPAdapter(categoriesOtoptext)
-        var categoryList = ArrayList()
-        for (categoryItemList in categoriesOtoptext.indices) {
+//        val categoryAdapter = OTOP_Category_Model(categoriesOtopLists)
+
+//       val categoryList: MutableList<OTOP_Category_Model> = ArrayList()
+        val categoryList = ArrayList<OTOP_Category_Model>()
+//        val bitmap =  BitmapFactory.decodeResource(resources, categoryOTOPimg[categoryItemList])
+        for (categoryItemList in categoryOTOPname.indices) {
            // val categoryOTText = categoryItemList.toString()
-            categoriesOtop.add(OTOP_Category_Model("$categoryItemList"))
+            categoryList.add(OTOP_Category_Model(  categoryOTOPimg[categoryItemList], categoryOTOPname[categoryItemList] ))
+
         }
-        rvOTOP_categories.adapter = adapter
+
+        rvOTOP_categories.adapter = CategoriesOTOPAdapter(categoryList, this)
         rvOTOP_categories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
 
     }
@@ -111,8 +115,6 @@ class OTOPActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
-
-
     }
 
     override fun onStart() {
@@ -142,19 +144,35 @@ class OTOPActivity : AppCompatActivity() {
     }
 
 
+
 //    OTOP Categories Function
-    fun showOTOPitem(view: View) {
-        println("${view.tag}")
-
+    override fun onItemClick(item: OTOP_Category_Model, position: Int){
+       // Toast.makeText(this, item.cateOTText, Toast.LENGTH_SHORT).show()
         otopLists.clear()
-
-        when(view.tag){
-           "FoodOtop" -> firebaseFirestore("otopFood")
-           "DrinkOtop" -> firebaseFirestore("drink")
-           "ShirtsOtop" -> firebaseFirestore("shirt")
-           "AccessoriesOtop" -> firebaseFirestore("acessories")
+        when(item.cateOTText){
+           "Food" -> firebaseFirestore("otopFood")
+           "Drink" -> firebaseFirestore("drink")
+           "Shirt" -> firebaseFirestore("shirt")
+           "Accessories" -> firebaseFirestore("acessories")
         }
     }
+
+
+
+
+ //   fun showOTOPitem(view: String) {
+        //showOTOPitem(categoryOTOPname[categoryItemList])
+//        println(view)
+
+     //   otopLists.clear()
+
+//        when(view.tag){
+//           "FoodOtop" -> firebaseFirestore("otopFood")
+//           "DrinkOtop" -> firebaseFirestore("drink")
+//           "ShirtsOtop" -> firebaseFirestore("shirt")
+//           "AccessoriesOtop" -> firebaseFirestore("acessories")
+//        }
+ //   }
 }
 
 
