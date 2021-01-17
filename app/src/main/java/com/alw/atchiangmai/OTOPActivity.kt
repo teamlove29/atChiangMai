@@ -34,10 +34,10 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 
 
     //Array OTOP Category IMG
-    private val categoryOTOPimg = arrayOf(R.drawable.ic_otop_food, R.drawable.ic_otop_drink, R.drawable.ic_otop_food, R.drawable.ic_otop_drink)
+    private val categoryOTOPimg = arrayOf(R.drawable.ic_otop_food, R.drawable.ic_otop_drink, R.drawable.ic_otop_tshirt, R.drawable.ic_otop_accesory)
 
     //Array OTOP Category IMG
-    private val categoryOTOPname = arrayOf("Food", "Drink", "Shirt", "Accessories")
+    private val categoryOTOPname = arrayOf("Food", "Drink", "Clothes", "Accessories")
 
     // Initialize Firebase Auth
     var oAuth: FirebaseAuth = Firebase.auth
@@ -152,7 +152,7 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         when(item.cateOTText){
            "Food" -> firebaseFirestore("otopFood")
            "Drink" -> firebaseFirestore("drink")
-           "Shirt" -> firebaseFirestore("shirt")
+           "Clothes" -> firebaseFirestore("shirt")
            "Accessories" -> firebaseFirestore("acessories")
         }
     }
