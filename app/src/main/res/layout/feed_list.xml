@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp">
+
+
+    <ImageView
+        android:id="@+id/imageViewFeed"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewFeedTitle"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:text="FeedTitle"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/textViewFeedDescription"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:text="FeedDescription"
+        android:textSize="15dp"/>
+
+
+</LinearLayout>

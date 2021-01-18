@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
-<!--        <activity android:name=".activity.OTOPActivity" android:parentActivityName=".activity.MainActivity"/>-->
-
-        <!--    Main Activity    -->
-        <activity android:name=".OTOPActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".UserActivity" />
+        <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity android:name=".ui.ExchangeActivity"/>
+        <activity android:name=".OTOPActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ui.FeedActivity"/>
     </application>
 
 </manifest>

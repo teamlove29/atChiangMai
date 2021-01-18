@@ -13,7 +13,7 @@
         android:id="@+id/cardViewCategoryOT"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:cardBackgroundColor="#E39393"
+        app:cardBackgroundColor="#05705F"
         app:cardCornerRadius="10dp"
         android:layout_margin="8dp">
 

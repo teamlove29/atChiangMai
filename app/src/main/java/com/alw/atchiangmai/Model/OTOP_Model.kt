@@ -1,6 +1,4 @@
-package com.alw.atchiangmai.model
-
-import android.graphics.Bitmap
+package com.alw.atchiangmai.Model
 
 data class OTOP_Model(
     val otopImage: String,

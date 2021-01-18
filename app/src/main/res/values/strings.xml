@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">\@ChiangMai</string>
+    <string name="btn_feed">Feed</string>
+    <string name="btn_otop">Otop</string>
+    <string name="btn_hotel">Hotel</string>
+    <string name="btn_food">Food</string>
+    <string name="btn_exchange">Exchange</string>
+    <string name="btn_hospital">Hospital</string>
+    <string name="btn_police">Police</string>
+    <string name="btn_more">More</string>
+    <string name="txt_best_things">Best Things to do in Chiang mai</string>
 
     <string name="otop_btn"><b>OTOP</b></string>
     <string name="food_otop"><b>Food</b></string>

@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.R
-import com.alw.atchiangmai.model.OTOP_Category_Model
+import com.alw.atchiangmai.Model.OTOP_Category_Model
 import kotlinx.android.synthetic.main.category_ot_row.view.*
 
 class CategoriesOTOPAdapter(private val categoryList: ArrayList<OTOP_Category_Model>, var clickListener: OnItemCategoryClickListener) : RecyclerView.Adapter<CategoriesOTOPAdapter.CateOTOPViewHolder>() {
