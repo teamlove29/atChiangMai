@@ -1,9 +1,8 @@
-package com.alw.atchiangmai
+package com.alw.atchiangmai.ui
 
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,11 +11,7 @@ import com.alw.atchiangmai.Adapter.OTOP_Adapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.OTOP_Category_Model
 import com.alw.atchiangmai.Model.OTOP_Model
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
+import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_otop.*
 
 class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
@@ -28,12 +23,15 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 
 
     //Array OTOP Category IMG
-    private val categoryOTOPimg = arrayOf(R.drawable.ic_otop_food, R.drawable.ic_otop_drink, R.drawable.ic_otop_tshirt, R.drawable.ic_otop_accesory)
+    private val categoryOTOPimg = arrayOf(
+        R.drawable.ic_otop_food,
+        R.drawable.ic_otop_drink,
+        R.drawable.ic_otop_tshirt,
+        R.drawable.ic_otop_accesory
+    )
 
     //Array OTOP Category IMG
     private val categoryOTOPname = arrayOf("Food", "Drink", "Clothes", "Accessories")
-
-    // Initialize Firebase Auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

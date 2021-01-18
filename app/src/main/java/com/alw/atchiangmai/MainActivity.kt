@@ -12,10 +12,7 @@ import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
-import com.alw.atchiangmai.ui.ExchangeActivity
-import com.alw.atchiangmai.ui.FeedActivity
-import com.alw.atchiangmai.ui.MoreActivity
-import com.alw.atchiangmai.ui.UserActivity
+import com.alw.atchiangmai.ui.*
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
