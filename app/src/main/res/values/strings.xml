@@ -10,6 +10,7 @@
     <string name="btn_more">More</string>
     <string name="txt_best_things">Best Things to do in Chiang mai</string>
 
+<!--  OTOP String  -->
     <string name="otop_btn"><b>OTOP</b></string>
     <string name="food_otop"><b>Food</b></string>
     <string name="drink_otop"><b>Drink</b></string>
@@ -22,4 +23,13 @@
     <string name="item_img">item_img</string>
     <string name="categoryotopicon">CategoryOTOPIcon</string>
     <string name="categorytext">categoryText</string>
+
+<!--  Hospital String  -->
+    <string name="txt_hospital">Hospital</string>
+    <string name="txt_hospital_name">Hospital name</string>
+    <string name="txt_hospital_address_title"><b>Address: </b></string>
+    <string name="txt_hospital_tel_title"><b>Telephone: </b></string>
+    <string name="description">Description</string>
+    <string name="address">Address</string>
+    <string name="telephone">Telephone</string>
 </resources>

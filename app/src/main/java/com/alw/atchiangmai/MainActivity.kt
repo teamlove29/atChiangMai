@@ -12,10 +12,7 @@ import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
-import com.alw.atchiangmai.ui.ExchangeActivity
-import com.alw.atchiangmai.ui.FeedActivity
-import com.alw.atchiangmai.ui.MoreActivity
-import com.alw.atchiangmai.ui.UserActivity
+import com.alw.atchiangmai.ui.*
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -31,9 +28,6 @@ class MainActivity : AppCompatActivity(){
         getBestThings()
         vdoList()
 
-
-
-
         btn_more.setOnClickListener {
             val intent = Intent(this, MoreActivity::class.java)
             startActivity(intent)
@@ -45,10 +39,16 @@ class MainActivity : AppCompatActivity(){
         btn_otop.setOnClickListener{
             val intent = Intent(this, OTOPActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)
+        }
+        btn_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
     }
 

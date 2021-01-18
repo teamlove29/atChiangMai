@@ -5,4 +5,6 @@
     <string name="item_img">item_img</string>
     <string name="categoryotopicon">CategoryOTOPIcon</string>
     <string name="categorytext">categoryText</string>
+    <string name="description">Description</string>
+    <string name="telephone">Telephone</string>
 </resources>
