@@ -15,8 +15,15 @@ import kotlinx.android.synthetic.main.feed_group.view.*
 
 
 
-class GroupFeedAdapter(private val itemsGroup : List<ItemGroupFeed>,var onclick : onNoteCLickListener): RecyclerView.Adapter<GroupFeedAdapter.GroupFeedViewHolder>() {
+class GroupFeedAdapter(private val itemsGroup : List<ItemGroupFeed>,var onclick : onCLickAdapterListener): RecyclerView.Adapter<GroupFeedAdapter.GroupFeedViewHolder>() {
     class GroupFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+
+        fun setOnClick(action: onCLickAdapterListener){
+            itemView.setOnClickListener {
+                action.onClick(adapterPosition)
+            }
+        }
 
     }
 

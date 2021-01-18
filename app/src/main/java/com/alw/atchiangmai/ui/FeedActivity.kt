@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alw.atchiangmai.Adapter.GroupFeedAdapter
-import com.alw.atchiangmai.Adapter.onNoteCLickListener
+import com.alw.atchiangmai.Adapter.onCLickAdapterListener
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ItemDataFeed
 import com.alw.atchiangmai.Model.ItemGroupFeed
@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import java.io.IOException
 
 
-class FeedActivity : AppCompatActivity(),onNoteCLickListener{
+class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
     private val TAG = "FirebaseEmailPassword"
 
     private val itemsGroup = ArrayList<ItemGroupFeed>()

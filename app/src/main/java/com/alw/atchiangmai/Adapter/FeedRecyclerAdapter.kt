@@ -10,17 +10,17 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.feed_list.view.*
 
 
-interface onNoteCLickListener {
+interface onCLickAdapterListener {
     fun onClick(postion: Int)
 }
 
-class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLickListener:onNoteCLickListener?):RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
+class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLickListener:onCLickAdapterListener?):RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 //        var image = itemView.imageViewFeed
 //        var title = itemView.textViewFeedTitle.text
 //        var description = itemView.textViewFeedDescription.text
 
-        fun setOnCLick(action: onNoteCLickListener) {
+        fun setOnCLick(action: onCLickAdapterListener) {
             itemView.setOnClickListener {
                 action.onClick(adapterPosition)
             }
