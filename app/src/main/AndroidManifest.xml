@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
+        <activity android:name=".ui.HotelActivity"></activity>
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,7 @@
         </activity>
         <activity android:name=".ui.MoreActivity" />
         <activity android:name=".ui.UserActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.ExchangeActivity" />
         <activity android:name=".OTOPActivity" />
         <activity android:name=".ui.FeedActivity" />

@@ -1,6 +1,5 @@
-package com.alw.atchiangmai
+package com.alw.atchiangmai.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +11,8 @@ import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
-import com.alw.atchiangmai.ui.ExchangeActivity
-import com.alw.atchiangmai.ui.FeedActivity
-import com.alw.atchiangmai.ui.MoreActivity
-import com.alw.atchiangmai.ui.UserActivity
-import com.firebase.ui.auth.AuthUI
+import com.alw.atchiangmai.OTOPActivity
+import com.alw.atchiangmai.R
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,6 +43,10 @@ class MainActivity : AppCompatActivity(){
             val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)
         }
+        btn_hotel.setOnClickListener {
+            val intent = Intent(this, HotelActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun insertSlideImg() {
@@ -66,20 +66,8 @@ class MainActivity : AppCompatActivity(){
 
     private fun checkingUser() {
         if (FirebaseAuth.getInstance().currentUser?.uid == null) {
-//            val inten = Intent(this, UserActivity::class.java)
-//            startActivity(inten)
-            val providers = arrayListOf(
-//                AuthUI.IdpConfig.EmailBuilder().build(),
-                AuthUI.IdpConfig.GoogleBuilder().build()
-            )
-            startActivityForResult(
-                AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(providers)
-//                   .setTheme(R.style.LoginTheme)
-                    .build(),
-                1
-            )
+            val inten = Intent(this, UserActivity::class.java)
+            startActivity(inten)
 
         } else {
             txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
@@ -94,14 +82,6 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK){
-            Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl)
-                .into(image_user)
-            txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
-        }
-    }
 
     private fun getBestThings() {
         val ref = db.collection("activity")
@@ -111,7 +91,7 @@ class MainActivity : AppCompatActivity(){
                 for (doc in it.result!!) {
                     val txt: String = doc["name"].toString()
                     val uri = Uri.parse(doc.get("image").toString())
-                    arrayList.add(ModelCardPicText1(uri, txt))
+                    arrayList.add(ModelCardPicText1(uri, txt,""))
                 }
             }
             val adapter = BestThingAdapter(arrayList)
