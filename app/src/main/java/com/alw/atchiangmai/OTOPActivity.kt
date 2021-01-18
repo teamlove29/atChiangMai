@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.Adapter.CategoriesOTOPAdapter
 import com.alw.atchiangmai.Adapter.OTOP_Adapter
+import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.OTOP_Category_Model
 import com.alw.atchiangmai.Model.OTOP_Model
 import com.google.firebase.auth.FirebaseAuth
@@ -22,9 +23,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 
     /// Firebase Firestore
     val TAG = "MyMessage"
-    private val db:FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val collectionReference: CollectionReference = db.collection("otopFood")
-
 
     private var otopLists = arrayListOf<OTOP_Model>()
 
@@ -36,29 +34,11 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
     private val categoryOTOPname = arrayOf("Food", "Drink", "Clothes", "Accessories")
 
     // Initialize Firebase Auth
-    var oAuth: FirebaseAuth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
 
-        ///// Fire base zone //////
-        oAuth = FirebaseAuth.getInstance()
-        val email = "nk.tae26986@gmail.com"
-        val password = "123456tae"
-        oAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.e(TAG, "signIn: Success!")
-                    // update UI with the signed-in user's information
-//                        val user = mAuth!!.getCurrentUser()
-//                        updateUI(user)
-                } else {
-                    Log.w(TAG, "signIn: Fail!", task.exception)
-                    Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
-//                        updateUI(null)
-                }
-            }
 
         ///////////////////////// Action Bar Start ////////////////////////////
         //Action Bar - OTOP
@@ -107,7 +87,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         super.onStart()
 //        otop_Adapter!!.startListening()
 
-        val currentUser = oAuth.currentUser
 //        updateUI(currentUser)
     }
 

@@ -1,11 +1,11 @@
-package com.alw.atchiangmai
+package com.alw.atchiangmai.ui
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.alw.atchiangmai.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_more.*
-import kotlinx.android.synthetic.main.best_card.view.*
 
 class MoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
