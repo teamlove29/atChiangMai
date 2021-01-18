@@ -13,8 +13,6 @@ import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_hospital.*
 import kotlinx.android.synthetic.main.activity_otop.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
 
 class HospitalActivity: AppCompatActivity() {
 
