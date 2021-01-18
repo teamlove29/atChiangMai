@@ -13,6 +13,8 @@ import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
 import com.alw.atchiangmai.ui.ExchangeActivity
 import com.alw.atchiangmai.ui.FeedActivity
+import com.alw.atchiangmai.ui.MoreActivity
+import com.alw.atchiangmai.ui.UserActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
