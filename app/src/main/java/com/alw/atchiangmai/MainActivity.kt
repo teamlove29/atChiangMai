@@ -13,6 +13,7 @@ import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
 import com.alw.atchiangmai.ui.ExchangeActivity
 import com.alw.atchiangmai.ui.FeedActivity
+import com.alw.atchiangmai.ui.RestaurantActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity(){
         }
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
+            startActivity(intent)
+        }
+        btn_food.setOnClickListener {
+            val intent = Intent(this, RestaurantActivity::class.java)
             startActivity(intent)
         }
     }

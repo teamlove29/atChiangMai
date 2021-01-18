@@ -9,31 +9,27 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="20dp">
 
-
-
-    <ImageView
-        android:id="@+id/imageViewFeed"
+    <View
+        android:id="@+id/thumbnail"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:background="@color/placeHolderBG"
-        android:animateLayoutChanges="true"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/textViewFeedTitle"
+    <View
+        android:id="@+id/thumbnailTextTitle"
+        android:layout_marginTop="10dp"
+        android:layout_width="200dp"
+        android:layout_height="15dp"
+        android:background="@color/placeHolderBG"
+        />
+
+    <View
+        android:id="@+id/thumbnailTextDes"
         android:layout_marginTop="10dp"
         android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:text="FeedTitle"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/textViewFeedDescription"
-        android:layout_width="300dp"
-        android:layout_height="20dp"
-        android:text="FeedDescription"
-        android:textSize="15dp"/>
+        android:layout_height="15dp"
+        android:background="@color/placeHolderBG"
+        />
 
 </LinearLayout>

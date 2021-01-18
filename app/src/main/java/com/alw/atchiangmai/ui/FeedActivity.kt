@@ -2,17 +2,15 @@ package com.alw.atchiangmai.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alw.atchiangmai.Adapter.GroupFeedAdapter
+import com.alw.atchiangmai.Adapter.FeedRecyclerAdapter
 import com.alw.atchiangmai.Adapter.onCLickAdapterListener
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ItemDataFeed
-import com.alw.atchiangmai.Model.ItemGroupFeed
 import com.alw.atchiangmai.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.ethanhua.skeleton.Skeleton
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -20,9 +18,7 @@ import java.io.IOException
 
 
 class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
-    private val TAG = "FirebaseEmailPassword"
 
-    private val itemsGroup = ArrayList<ItemGroupFeed>()
     private val itemDataFeed = ArrayList<ItemDataFeed>()
     private val itemDataActivity = ArrayList<ItemDataFeed>()
     private val itemDataRecommend = ArrayList<ItemDataFeed>()
@@ -36,14 +32,18 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
         setContentView(R.layout.activity_feed)
 
         val collectionFirebase = arrayListOf<String>("feed", "activity", "recommend")
+        textViewTitleFeed.text = ""
+        textViewTitleActivity.text = ""
+        textViewTitleRecommend.text = ""
+        shimmerLayoutFeed.startShimmerAnimation()
+        shimmerLayoutActivity.startShimmerAnimation()
+        shimmerLayoutRecommend.startShimmerAnimation()
 
                 CoroutineScope(IO).launch {
                     for (value in collectionFirebase){
                         getResult(value)
                     }
-
                 }
-
 //            val loadDataOnFirebase = LoadDataOnFirebase(value)
 //            loadDataOnFirebase.execute()
     }
@@ -64,13 +64,25 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
                                         "recommend" -> itemDataRecommend.add(ItemDataFeed("$image", "$title", "$description"))
                                     }
                                 }
-                                when(collection){
-                                    "feed" -> itemsGroup.add(ItemGroupFeed("Feed", itemDataFeed))
-                                    "activity" -> itemsGroup.add(ItemGroupFeed("Activity", itemDataActivity))
-                                    "recommend" -> itemsGroup.add(ItemGroupFeed("Recommend", itemDataRecommend))
-                                }
-                                feedRecyclerViewPage.adapter = GroupFeedAdapter(itemsGroup, this@FeedActivity)
-                                feedRecyclerViewPage.layoutManager = LinearLayoutManager(this@FeedActivity)
+
+                                // AdapterFeed
+                                feedRecyclerView.adapter = FeedRecyclerAdapter(itemDataFeed, this@FeedActivity)
+                                feedRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
+                                textViewTitleFeed.text = "Feed"
+                                shimmerLayoutFeed.stopShimmerAnimation()
+                                shimmerLayoutFeed.setVisibility(View.GONE)
+                                // AdapterActivity
+                                activityRecyclerView.adapter = FeedRecyclerAdapter(itemDataActivity, this@FeedActivity)
+                                activityRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
+                                textViewTitleActivity.text = "Activity"
+                                shimmerLayoutActivity.stopShimmerAnimation()
+                                shimmerLayoutActivity.setVisibility(View.GONE)
+//                                // AdapterRecommend
+                                recommendRecyclerView.adapter = FeedRecyclerAdapter(itemDataRecommend, this@FeedActivity)
+                                recommendRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
+                                textViewTitleRecommend.text = "Recommend"
+                                shimmerLayoutRecommend.stopShimmerAnimation()
+                                shimmerLayoutRecommend.setVisibility(View.GONE)
                             }
                             .addOnFailureListener { exception ->
                                 Log.d("error", "Error getting documents: ", exception)
@@ -83,17 +95,6 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
     }
 
 
-// inner class LoadDataOnFirebase(var collection : String) : AsyncTask<String,String,String>(){
-//    override fun doInBackground(vararg params: String?): String {
-//       return ""
-//    }
-//
-//    override fun onPostExecute(result: String?) {
-//        super.onPostExecute(result)
-//
-//    }
-//}
-
     override fun onClick(postion: Int) {
 //        val intent = Intent(this,FeedActivity::class.java)
 //        val bundle = Bundle()
@@ -101,12 +102,6 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
 //        intent.putExtras(bundle)
 //        startActivity(intent)
 //        Toast.makeText(this,"Show : ${noteList[postion]}",Toast.LENGTH_LONG).show()
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        val currentUser = mAuth!!.currentUser
-//        updateUI(currentUser)
     }
 
 }

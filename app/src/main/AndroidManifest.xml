@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
         <activity android:name=".ui.DetailRestaurantActivity"></activity>
-        <!-- <activity android:name=".ui.RestaurantActivity"></activity> -->
+         <activity android:name=".ui.RestaurantActivity"></activity>
         <activity android:name=".MoreActivity" />
         <activity android:name=".UserActivity" />
-        <activity android:name=".ui.RestaurantActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
