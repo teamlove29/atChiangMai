@@ -1,8 +1,10 @@
 package com.alw.atchiangmai.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alw.atchiangmai.Adapter.HospitalAdapter
@@ -19,16 +21,20 @@ class HospitalActivity: AppCompatActivity() {
     private var TAG = "My Hospital Tag"
     private var hospitalList = ArrayList<Hospital_Model>()
 
+    companion object {
+        val INTENT_PARCELABLE = "OBJECT_INTENT"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
 
         val collectionHospitalFirestore = "hospital"
-        getFirestoreResult(collectionHospitalFirestore)
+        getFirestoreHospitalResult(collectionHospitalFirestore)
     }
 
     /// Get data once from Firestore
-    private fun getFirestoreResult(collection: String) {
+    private fun getFirestoreHospitalResult(collection: String) {
         FirebaseController.Firebase.db.collection(collection)
             .get()
             .addOnSuccessListener { result ->
@@ -44,11 +50,21 @@ class HospitalActivity: AppCompatActivity() {
                         "hospital" -> hospitalList.add(Hospital_Model("$hospitalImages", "$hospitalName", "$hospitalDescription", "$hospitalAddress", "$hospitalTel"))
                     }
                 }
-                rvHospital_Lists.adapter = HospitalAdapter(hospitalList)
                 rvHospital_Lists.layoutManager = LinearLayoutManager(this)
+                rvHospital_Lists.setHasFixedSize(true)
+                rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
+             //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, HospitalDetailActivity::class.java)
+                    intent.putExtra(INTENT_PARCELABLE, it)
+                    startActivity(intent)
+                }
+
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
     }
+
+
+
 }

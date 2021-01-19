@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <SearchView
-                android:id="@+id/searchViewHospital"
+                android:id="@+id/searchViewPoliceDepartment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autofillHints="Search here"
@@ -31,7 +31,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvHospital_Lists"
+            android:id="@+id/rvPolice_Lists"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
