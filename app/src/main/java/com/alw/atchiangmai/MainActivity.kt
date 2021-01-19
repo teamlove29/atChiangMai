@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity(){
         getBestThings()
         vdoList()
 
-
-
-
         btn_more.setOnClickListener {
             val intent = Intent(this, MoreActivity::class.java)
             startActivity(intent)
@@ -42,10 +39,16 @@ class MainActivity : AppCompatActivity(){
         btn_otop.setOnClickListener{
             val intent = Intent(this, OTOPActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)
+        }
+        btn_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
     }
 

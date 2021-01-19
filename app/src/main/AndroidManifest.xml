@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
+        <activity android:name=".ui.PoliceStationDetailActivity"></activity>
+        <activity
+            android:name=".ui.PoliceActivity"
+            android:label="@string/title_activity_police"
+            android:theme="@style/Theme.ChiangMai.NoActionBar" />
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +23,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".ui.ExchangeActivity"/>
         <activity android:name=".ui.OTOPActivity" android:parentActivityName=".MainActivity"/>
         <activity android:name=".ui.FeedActivity"/>
+=======
+        <activity android:name=".ui.ExchangeActivity" />
+        <activity android:name=".ui.HospitalActivity" />
+        <activity android:name=".ui.HospitalDetailActivity" />
+        <activity
+            android:name=".ui.OTOPActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ui.FeedActivity" />
+>>>>>>> feature/Hospital_Activity
         <activity android:name=".ui.MoreActivity" />
         <activity android:name=".ui.UserActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
