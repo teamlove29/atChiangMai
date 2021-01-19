@@ -6,7 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     android:layout_marginBottom="15dp"
-    app:cardBackgroundColor="@color/teal_700">
+    app:cardBackgroundColor="@color/teal_700"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground">
 
 <LinearLayout
     android:orientation="vertical"
