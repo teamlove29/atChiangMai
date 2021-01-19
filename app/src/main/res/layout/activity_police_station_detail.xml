@@ -1,9 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.PoliceStationDetailActivity">
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutImgPolDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgPolDetail"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:contentDescription="@string/hospitaldetailimg"
+            android:layout_gravity="top"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:id="@+id/infoGroupLinear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearTxtNamePolDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNamePolDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/txt_hospital_name"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearTxtAddPolDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtAddressPolDetailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/txt_hospital_address_title"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/addressPolDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:textColor="@color/black"
+                    android:text="@string/address" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearTelDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtTelPolDetailTitle"
+                    android:layout_width="76dp"
+                    android:layout_height="26dp"
+                    android:text="@string/txt_hospital_tel_title"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/telPolDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/telephone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

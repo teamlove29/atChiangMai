@@ -22,7 +22,7 @@ class PoliceActivity : AppCompatActivity() {
     private var policeLists = ArrayList<PoliceModel>()
 
     companion object{
-        val INTENT_PARCELABLE = "OBJECT_INTENT"
+        val INTENT_PARCELABLE_Police = "OBJECT_INTENT"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class PoliceActivity : AppCompatActivity() {
                     when (collection) {
                         //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
                         "policestation" -> policeLists.add(
-                            PoliceModel("$policeImages", "$policeName", "$policeDescription", "$policeAddress", "$policeTel")
+                            PoliceModel("$policeImages", "$policeName", "$policeAddress", "$policeTel")
                         )
                     }
                 }
@@ -57,7 +57,7 @@ class PoliceActivity : AppCompatActivity() {
                 rvPolice_Lists.adapter = PoliceAdapter(this, policeLists){
                     //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, PoliceStationDetailActivity::class.java)
-                    intent.putExtra(PoliceActivity.INTENT_PARCELABLE, it)
+                    intent.putExtra(PoliceActivity.INTENT_PARCELABLE_Police, it)
                     startActivity(intent)
                 }
 

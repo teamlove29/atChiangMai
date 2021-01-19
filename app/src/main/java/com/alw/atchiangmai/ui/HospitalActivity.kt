@@ -22,7 +22,7 @@ class HospitalActivity: AppCompatActivity() {
     private var hospitalList = ArrayList<Hospital_Model>()
 
     companion object {
-        val INTENT_PARCELABLE = "OBJECT_INTENT"
+        val INTENT_PARCELABLE_Hospital = "OBJECT_INTENT"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +55,7 @@ class HospitalActivity: AppCompatActivity() {
                 rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
              //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, HospitalDetailActivity::class.java)
-                    intent.putExtra(INTENT_PARCELABLE, it)
+                    intent.putExtra(INTENT_PARCELABLE_Hospital, it)
                     startActivity(intent)
                 }
 

@@ -19,14 +19,14 @@ class PoliceAdapter(private var context: Context, private val itemPoliceList: Ar
     inner class PoliceViewHolder(itemPoliceView: View): RecyclerView.ViewHolder(itemPoliceView) {
         val pd_img: ImageView = itemPoliceView.imgPoliceItem
         val pd_Name: TextView = itemPoliceView.tvPolice_name
-        val pd_des: TextView = itemPoliceView.tvPolice_des
+//        val pd_des: TextView = itemPoliceView.tvPolice_des
         val pd_address: TextView = itemPoliceView.tvPolice_address
         val pd_tel: TextView = itemPoliceView.tvPolice_tel
 
         fun bindViewPolice(policeIMG: PoliceModel, liatenerPol: (PoliceModel) -> Unit){
             Picasso.get().load(policeIMG.cmpdImg).into(pd_img)
             pd_Name.text = policeIMG.cmpdName
-            pd_des.text = policeIMG.cmpdDes
+//            pd_des.text = policeIMG.cmpdDes
             pd_address.text = policeIMG.cmpdAddress
             pd_tel.text = policeIMG.cmpdTel
 
