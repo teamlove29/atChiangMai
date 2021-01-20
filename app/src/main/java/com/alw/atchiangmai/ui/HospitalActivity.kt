@@ -16,7 +16,7 @@ import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_hospital.*
 import kotlinx.android.synthetic.main.activity_otop.*
 
-class HospitalActivity: AppCompatActivity() {
+class HospitalActivity : AppCompatActivity() {
 
     private var TAG = "My Hospital Tag"
     private var hospitalList = ArrayList<Hospital_Model>()
@@ -46,14 +46,22 @@ class HospitalActivity: AppCompatActivity() {
                     val hospitalAddress = document.getString("add")
                     val hospitalTel = document.getString("tel")
                     when (collection) {
-                    //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
-                        "hospital" -> hospitalList.add(Hospital_Model("$hospitalImages", "$hospitalName", "$hospitalDescription", "$hospitalAddress", "$hospitalTel"))
+                        //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
+                        "hospital" -> hospitalList.add(
+                            Hospital_Model(
+                                "$hospitalImages",
+                                "$hospitalName",
+                                "$hospitalDescription",
+                                "$hospitalAddress",
+                                "$hospitalTel"
+                            )
+                        )
                     }
                 }
                 rvHospital_Lists.layoutManager = LinearLayoutManager(this)
                 rvHospital_Lists.setHasFixedSize(true)
-                rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
-             //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
+                rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList) {
+                    //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, HospitalDetailActivity::class.java)
                     intent.putExtra(INTENT_PARCELABLE_Hospital, it)
                     startActivity(intent)
@@ -64,7 +72,6 @@ class HospitalActivity: AppCompatActivity() {
                 Log.d(TAG, "Error getting documents: ", exception)
             }
     }
-
 
 
 }
