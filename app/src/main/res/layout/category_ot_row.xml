@@ -6,23 +6,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:onClick="showOTOPitem">
+    android:orientation="vertical">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewCategoryOT"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_margin="8dp"
-        app:cardBackgroundColor="#E39393"
-        app:cardCornerRadius="10dp">
+        app:cardBackgroundColor="#05705F"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="8dp">
 
         <ImageView
             android:id="@+id/categoryIMG"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
             android:contentDescription="@string/categoryotopicon" />
     </androidx.cardview.widget.CardView>
 

@@ -28,4 +28,33 @@
     <string name="txt_hotel_filter">Filter</string>
     <string name="txt_hotel_editor">Editeor \'s Pick of Chiang Mai favourite hotels  </string>
     <string name="txt_hotel_search">Search</string>
+    <!--  Hospital String  -->
+    <string name="txt_hospital">Hospital</string>
+    <string name="txt_hospital_name"><b>Hospital name</b></string>
+    <string name="txt_hospital_address_title"><b>Address: </b></string>
+    <string name="txt_hospital_tel_title"><b>Telephone: </b></string>
+    <string name="description">Description</string>
+    <string name="address">Address</string>
+    <string name="telephone">Telephone</string>
+    <string name="hospitaldetailimg">HospitalDetailIMG</string>
+    <string name="hos_detail_name">Hospital Name</string>
+    <string name="title_activity_police">PoliceActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <!--  Police Department String  -->
+    <string name="txt_police_name"><b>Police department name</b></string>
+    <string name="txt_police_address"><b>Address: </b></string>
+    <string name="txt_police_tel"><b>Telephone: </b></string>
+    <string name="txt_police_address_detail">Address detail</string>
+    <string name="txt_police_tel_detail"><b>Tel. detail</b></string>
+
+>>>>>>> origin/feature/PoliceStation_Activity
 </resources>

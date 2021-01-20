@@ -2,8 +2,8 @@ package com.alw.atchiangmai.ui
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alw.atchiangmai.Adapter.BestThingAdapter
 import com.alw.atchiangmai.Adapter.VdoAdapter
@@ -11,7 +11,6 @@ import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
-import com.alw.atchiangmai.OTOPActivity
 import com.alw.atchiangmai.R
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
@@ -38,6 +37,7 @@ class MainActivity : AppCompatActivity(){
         btn_otop.setOnClickListener{
             val intent = Intent(this, OTOPActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
@@ -46,6 +46,16 @@ class MainActivity : AppCompatActivity(){
         btn_hotel.setOnClickListener {
             val intent = Intent(this, HotelActivity::class.java)
             startActivity(intent)
+        }
+        btn_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+        }
+        btn_police.setOnClickListener {
+            val intent = Intent(this, PoliceActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
     }
 
