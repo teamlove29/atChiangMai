@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_toRightOf="@id/resImageView"
-            android:text="TextView"
+            android:hint="TextView"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ratingTextView"
             android:layout_toRightOf="@id/resImageView"
-            android:text="TextView"
+            android:hint="TextView"
             android:textSize="13dp"/>
 
 </RelativeLayout>

@@ -82,7 +82,7 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
                                 recommendRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
                                 textViewTitleRecommend.text = "Recommend"
                                 shimmerLayoutRecommend.stopShimmerAnimation()
-                                shimmerLayoutRecommend.setVisibility(View.GONE)
+                                shimmerLayoutRecommend.visibility = View.GONE
                             }
                             .addOnFailureListener { exception ->
                                 Log.d("error", "Error getting documents: ", exception)

@@ -16,9 +16,9 @@ interface onCLickAdapterListener {
 
 class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLickListener:onCLickAdapterListener?):RecyclerView.Adapter<FeedRecyclerAdapter.FeedViewHolder>() {
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-//        var image = itemView.imageViewFeed
-//        var title = itemView.textViewFeedTitle.text
-//        var description = itemView.textViewFeedDescription.text
+        var image = itemView.imageViewFeed
+        var title = itemView.textViewFeedTitle.text
+        var description = itemView.textViewFeedDescription.text
 
         fun setOnCLick(action: onCLickAdapterListener) {
             itemView.setOnClickListener {
