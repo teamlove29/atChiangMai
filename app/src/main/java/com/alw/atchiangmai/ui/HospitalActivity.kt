@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.Adapter.HospitalAdapter
 import com.alw.atchiangmai.Adapter.OTOP_Adapter
 import com.alw.atchiangmai.FirebaseController
@@ -15,6 +18,7 @@ import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_hospital.*
 import kotlinx.android.synthetic.main.activity_otop.*
+import retrofit2.Retrofit
 
 class HospitalActivity: AppCompatActivity() {
 
@@ -22,13 +26,21 @@ class HospitalActivity: AppCompatActivity() {
     private var hospitalList = ArrayList<Hospital_Model>()
 
     companion object {
-        val INTENT_PARCELABLE = "OBJECT_INTENT"
+        val INTENT_PARCELABLE_hospital = "OBJECT_INTENT"
     }
+
+    // Progress Bar
+//    private lateinit var nestedScrollViewHospital: NestedScrollView
+//    private lateinit var recyclerViewHospital: RecyclerView
+//    private lateinit var progressBarHospital: ProgressBar
+//    private var page = 1
+//    private var limit = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
 
+        // Firestore Collection
         val collectionHospitalFirestore = "hospital"
         getFirestoreHospitalResult(collectionHospitalFirestore)
     }
@@ -55,16 +67,12 @@ class HospitalActivity: AppCompatActivity() {
                 rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
              //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, HospitalDetailActivity::class.java)
-                    intent.putExtra(INTENT_PARCELABLE, it)
+                    intent.putExtra(INTENT_PARCELABLE_hospital, it)
                     startActivity(intent)
                 }
-
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
     }
-
-
-
 }
