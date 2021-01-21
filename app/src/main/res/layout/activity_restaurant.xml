@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,6 +38,16 @@
 
     </io.supercharge.shimmerlayout.ShimmerLayout>
 
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh_layout"
+        >
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/restaurantRecyclerView"
             android:layout_width="match_parent"
@@ -44,16 +55,7 @@
             android:nestedScrollingEnabled="false"
             android:padding="15dp" />
 
-<!--        <ProgressBar-->
-<!--            android:id="@+id/progressBar"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:indeterminate="true"-->
-<!--            android:paddingLeft="8dp"-->
-<!--            android:paddingRight="8dp" />-->
-
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
 

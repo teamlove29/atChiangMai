@@ -11,9 +11,13 @@ import com.alw.atchiangmai.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.restaurant_list.view.*
 
-class RestaurantAdapter(var restaurantList: ArrayList<RestaurantData>, var onCLickAdapterListener: onCLickAdapterListener) : ListAdapter<RestaurantData, RestaurantAdapter.FoodViewHolder>(RestaurantDiffUtil()){
-//) : RecyclerView.Adapter<RestaurantAdapter.FoodViewHolder>(){
+class RestaurantAdapter(var restaurantList: ArrayList<RestaurantData>, var onCLickAdapterListener: onCLickAdapterListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+//) : ListAdapter<RestaurantData, RestaurantAdapter.FoodViewHolder>(RestaurantDiffUtil()){
 
+    val ITEM_TYPE = 0
+    val LOADING_TYPE = 1
+
+    class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) { }
 
     class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.resImageView!!
@@ -28,35 +32,49 @@ class RestaurantAdapter(var restaurantList: ArrayList<RestaurantData>, var onCLi
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(
-            R.layout.restaurant_list,
-            parent,
-            false
-        )
-        return FoodViewHolder(view)
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == ITEM_TYPE){
+            val view: View = LayoutInflater.from(parent.context).inflate(R.layout.restaurant_list, parent, false)
+            FoodViewHolder(view)
+        }else{
+            val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_loading, parent, false)
+            LoadingViewHolder(view)
+        }
     }
 
-    override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currency = restaurantList[position]
-        holder.bind(currency, onCLickAdapterListener)
-
+        if (holder is FoodViewHolder){
+            holder.bind(currency, onCLickAdapterListener)
+        }
     }
+
     override fun getItemCount(): Int {
         return restaurantList.size
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return if(restaurantList[position].name == "loadmore"){
+            LOADING_TYPE
+        } else ITEM_TYPE
+    }
+
+
+
 }
 
 
-class RestaurantDiffUtil : DiffUtil.ItemCallback<RestaurantData>(){
-    override fun areItemsTheSame(oldItem: RestaurantData, newItem: RestaurantData): Boolean {
-        return oldItem.name == newItem.name
-    }
-
-    override fun areContentsTheSame(oldItem: RestaurantData, newItem: RestaurantData): Boolean {
-        return oldItem == newItem
-    }
-}
+//class RestaurantDiffUtil : DiffUtil.ItemCallback<RestaurantData>(){
+//    override fun areItemsTheSame(oldItem: RestaurantData, newItem: RestaurantData): Boolean {
+//        return oldItem.name == newItem.name
+//    }
+//
+//    override fun areContentsTheSame(oldItem: RestaurantData, newItem: RestaurantData): Boolean {
+//        return oldItem == newItem
+//    }
+//}
 
 
 //class MyRestaurantDiffUtil(var oldList : ArrayList<RestaurantData>, var newList : ArrayList<RestaurantData>) : DiffUtil.Callback(){

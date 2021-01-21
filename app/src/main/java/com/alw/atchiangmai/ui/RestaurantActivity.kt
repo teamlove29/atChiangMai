@@ -24,6 +24,7 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
     val foodList = ArrayList<RestaurantData>()
     val arrayList = ArrayList<RestaurantData>()
     var visibleThreshold = 1
+    var firstItemVisible = 0
     var lastVisibleItem = 0
     var totalItemCount = 0
     var loading: Boolean = false
@@ -37,6 +38,8 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
         setContentView(R.layout.activity_restaurant)
         shimmerLayoutRestaurant.startShimmerAnimation()
         getDataOnFirebase()
+        addScrollerListener()
+
         restaurantSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 shimmerLayoutRestaurant.startShimmerAnimation()
@@ -47,43 +50,64 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
             override fun onQueryTextChange(newText: String?): Boolean {
                 shimmerLayoutRestaurant.startShimmerAnimation()
                 search(newText.toString())
-                return true
-            }
-        })}
-
-    private fun addScrollerListener(){
-        restaurantRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                // จำนวนข้อมูลที่แสดงทั้งหมด ณ ปัจจุบัน
-                totalItemCount = linearLayoutManager.itemCount
-                // จำนวนข้อมูลตัวสุดท้าย
-                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
-
-                if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                    loading = true
-
-//                    foodList.add(RestaurantData("dasda", "loadmore", " ", " ", " ", " "))
-//                    adapter.submitList(foodList)
-                    Handler().postDelayed({
-//                        getDataOnFirebase()
-//                        RestaurantAdapter(foodList, this@RestaurantActivity).removeItem( RestaurantAdapter(foodList, this@RestaurantActivity).itemCount -1 )
-//                        RestaurantAdapter(foodList, this@RestaurantActivity).addItem(foodList)
-
-                        loading = false
-                    }, 1500)
-
-                }
-
-
+                return false
             }
         })
+
+
+
+            swipe_refresh_layout.setOnRefreshListener {
+                Handler().postDelayed({
+                foodList.clear()
+                getDataOnFirebase()
+                restaurantRecyclerView.adapter!!.notifyDataSetChanged()
+                swipe_refresh_layout.isRefreshing = false
+                },1500)
+            }
+
+
+    }
+
+    private fun addScrollerListener(){
+            restaurantRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    // จำนวนข้อมูลที่แสดงทั้งหมด ณ ปัจจุบัน
+                    totalItemCount = linearLayoutManager.itemCount
+                    // จำนวนข้อมูลตัวแรก
+                    firstItemVisible = linearLayoutManager.findFirstVisibleItemPosition()
+                    // จำนวนข้อมูลตัวสุดท้าย
+                    lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
+
+
+                    if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold) && foodList.size > 10) {
+                        loading = true
+
+                        foodList.add(RestaurantData("dasda", "loadmore", " ", " ", " ", " "))
+                        restaurantRecyclerView.adapter!!.notifyItemInserted(foodList.size)
+                        Handler().postDelayed({
+                            foodList.removeAt(foodList.size -1).apply {
+                                restaurantRecyclerView.adapter!!.notifyItemRemoved(foodList.size)
+                            }
+                            foodList.add(RestaurantData("https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2017/01/99-Rest-42-800x535.jpg", "dasdasddaad", "5", "qwerty", "053-123-432", "null"))
+                            foodList.add(RestaurantData("https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2017/01/99-Rest-42-800x535.jpg", "wwwwwwwww", "5", "qwerty", "053-123-432", "null"))
+                            restaurantRecyclerView.adapter!!.notifyItemRangeInserted(foodList.size, foodList.size)
+                            loading = false
+                        }, 1500)
+
+                    }
+
+
+
+                }
+            })
 
     }
 
 
     fun search(value:String){
+
         if (value.isNotEmpty()){
             foodList.clear()
             // นำมาปรับตัวให้เป็นตัวเล็กทั้งหมด
@@ -95,14 +119,18 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
                 }
             }
             restaurantRecyclerView.adapter!!.notifyDataSetChanged()
-            shimmerLayoutRestaurant.stopShimmerAnimation()
-            shimmerLayoutRestaurant.visibility = View.GONE
+            shimmerLayoutRestaurant.stopShimmerAnimation().apply {
+                shimmerLayoutRestaurant.visibility = View.GONE
+            }
+
         }else{
             foodList.clear()
             foodList.addAll(arrayList)
             restaurantRecyclerView.adapter!!.notifyDataSetChanged()
-            shimmerLayoutRestaurant.stopShimmerAnimation()
-            shimmerLayoutRestaurant.visibility = View.GONE
+            shimmerLayoutRestaurant.stopShimmerAnimation().apply {
+                shimmerLayoutRestaurant.visibility = View.GONE
+            }
+
 
         }
     }
@@ -115,7 +143,6 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
         db.collection("restaurant")
             .get().addOnCompleteListener {
                 if (it.isSuccessful){
-                    println("dasadadasdsad ${it.result!!.size()}")
                     for(document in it.result!!){
                         val image = document.getString("image")
                         val title = document.getString("name")
@@ -132,10 +159,6 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
                     restaurantRecyclerView.layoutManager = linearLayoutManager
                     shimmerLayoutRestaurant.stopShimmerAnimation()
                     shimmerLayoutRestaurant.visibility = View.GONE
-
-
-//                    addScrollerListener()
-
                 }
             }
     }
