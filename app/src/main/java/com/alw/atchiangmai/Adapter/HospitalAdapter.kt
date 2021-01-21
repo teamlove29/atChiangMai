@@ -1,7 +1,6 @@
 package com.alw.atchiangmai.Adapter
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,10 @@ import com.alw.atchiangmai.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_hospital_lists.view.*
 
-class HospitalAdapter(private var context: Context, private var itemHospitalList: ArrayList<Hospital_Model>, private val listenerHospital: (Hospital_Model) -> Unit): RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {
+class HospitalAdapter(private var context: Context,
+                      private var itemHospitalList: ArrayList<Hospital_Model>,
+                      private val listenerHospital: (Hospital_Model) -> Unit): RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {
+
 
     inner class HospitalViewHolder(itemHosView: View): RecyclerView.ViewHolder(itemHosView){
         val hospital_img: ImageView = itemHosView.imgHospitalItem

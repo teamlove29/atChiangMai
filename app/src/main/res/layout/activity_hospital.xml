@@ -27,16 +27,19 @@
 <!--                android:layout_weight="1"-->
 <!--                android:ems="10"-->
 <!--                android:inputType="text"-->
+<!--                android:textColor="@color/black"-->
 <!--                android:padding="8dp"-->
 <!--                android:background="@drawable/rounded_txt_search_input"-->
 <!--                android:drawableStart="@drawable/ic_search"-->
 <!--                android:autofillHints="Search" />-->
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewSearchHospital"
+            <SearchView
+                android:id="@+id/searchViewHospital"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rounded_txt_search_input"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search hospital..."
                 />
 
         </LinearLayout>
