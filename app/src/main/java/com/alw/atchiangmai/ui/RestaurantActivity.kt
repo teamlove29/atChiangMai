@@ -40,6 +40,16 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
         getDataOnFirebase()
         addScrollerListener()
 
+        swipe_refresh_layout.setOnRefreshListener {
+            Handler().postDelayed({
+                arrayList.clear()
+                foodList.clear()
+                getDataOnFirebase()
+                restaurantRecyclerView.adapter!!.notifyDataSetChanged()
+                swipe_refresh_layout.isRefreshing = false
+            },1500)
+        }
+
         restaurantSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 shimmerLayoutRestaurant.startShimmerAnimation()
@@ -53,18 +63,6 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
                 return false
             }
         })
-
-
-
-            swipe_refresh_layout.setOnRefreshListener {
-                Handler().postDelayed({
-                foodList.clear()
-                getDataOnFirebase()
-                restaurantRecyclerView.adapter!!.notifyDataSetChanged()
-                swipe_refresh_layout.isRefreshing = false
-                },1500)
-            }
-
 
     }
 
@@ -80,31 +78,47 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
                     // จำนวนข้อมูลตัวสุดท้าย
                     lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
 
-
-                    if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold) && foodList.size > 10) {
+                    if (!loading && totalItemCount <= (lastVisibleItem + visibleThreshold) && foodList.size >= 10 && !swipe_refresh_layout.isRefreshing && (foodList.size % 10) == 0 ) {
                         loading = true
 
-                        foodList.add(RestaurantData("dasda", "loadmore", " ", " ", " ", " "))
+                        foodList.add(RestaurantData("", "loadmore", " ", " ", " ", " "))
                         restaurantRecyclerView.adapter!!.notifyItemInserted(foodList.size)
+
                         Handler().postDelayed({
-                            foodList.removeAt(foodList.size -1).apply {
-                                restaurantRecyclerView.adapter!!.notifyItemRemoved(foodList.size)
-                            }
-                            foodList.add(RestaurantData("https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2017/01/99-Rest-42-800x535.jpg", "dasdasddaad", "5", "qwerty", "053-123-432", "null"))
-                            foodList.add(RestaurantData("https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2017/01/99-Rest-42-800x535.jpg", "wwwwwwwww", "5", "qwerty", "053-123-432", "null"))
-                            restaurantRecyclerView.adapter!!.notifyItemRangeInserted(foodList.size, foodList.size)
+                            foodList.removeAt(foodList.size -1)
+                            loadMoreData()
                             loading = false
                         }, 1500)
 
                     }
-
-
-
                 }
             })
 
     }
 
+
+
+    fun loadMoreData(){
+
+            db.collection("restaurant")
+                .orderBy("name")
+                .startAfter(foodList[foodList.size -1].name)
+                .limit(10).get()
+                .addOnCompleteListener { value ->
+            if (value.isSuccessful){
+                for(document in value.result!!){
+                    val image = document.getString("image")
+                    val title = document.getString("name")
+                    val description = document.getString("des")
+                    val rating = document.get("rating").toString()
+                    val telephone = document.getString("tel")
+                    val map = document.getString("map")
+                    foodList.add(RestaurantData("$image", "$title", rating, "$description", "$telephone", "$map"))
+                }
+                restaurantRecyclerView.adapter!!.notifyItemRangeChanged(foodList.size,foodList.size)
+            }
+        }
+    }
 
     fun search(value:String){
 
@@ -139,20 +153,23 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
         super.onBackPressed()
     }
 
+
+
     private fun getDataOnFirebase(){
-        db.collection("restaurant")
-            .get().addOnCompleteListener {
-                if (it.isSuccessful){
-                    for(document in it.result!!){
+
+        val ref =  db.collection("restaurant").limit(10).orderBy("name")
+
+        ref.get().addOnCompleteListener {value ->
+
+                if (value.isSuccessful){
+                    for(document in value.result!!){
                         val image = document.getString("image")
                         val title = document.getString("name")
                         val description = document.getString("des")
                         val rating = document.get("rating").toString()
                         val telephone = document.getString("tel")
                         val map = document.getString("map")
-                        arrayList.add(RestaurantData("$image", "$title", rating, "$description", "$telephone", "$map"
-                            )
-                        )
+                        arrayList.add(RestaurantData("$image", "$title", rating, "$description", "$telephone", "$map"))
                     }
                     foodList.addAll(arrayList)
                     restaurantRecyclerView.adapter = RestaurantAdapter(foodList, this@RestaurantActivity)
@@ -161,7 +178,9 @@ class RestaurantActivity : AppCompatActivity(), onCLickAdapterListener {
                     shimmerLayoutRestaurant.visibility = View.GONE
                 }
             }
-    }
+
+            }
+
 
     override fun onClick(postion: Int) {
         val intent = Intent(this, DetailRestaurantActivity::class.java)
