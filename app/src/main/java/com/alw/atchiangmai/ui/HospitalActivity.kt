@@ -1,6 +1,8 @@
 package com.alw.atchiangmai.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.widget.SearchView
@@ -19,54 +21,50 @@ class HospitalActivity: AppCompatActivity() {
 
     private var TAG = "My Hospital Tag"
 
-    private var hospitalList = ArrayList<Hospital_Model>()
+    var hospitalList = ArrayList<Hospital_Model>()
 
     private var hospitalListSearch: List<Hospital_Model> = ArrayList()
 
-    private val collectionHospitalFirestore = "hospital"
-
 
     companion object {
-        val INTENT_PARCELABLE_hospital = "OBJECT_INTENT"
+        const val INTENT_PARCELABLE_hospital = "OBJECT_INTENT"
     }
 
+    override fun onStart() {
+        super.onStart()
+        getFirestoreHospitalResult()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        rvHospital_Lists.adapter?.notifyDataSetChanged()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
 
         // Firestore Collection
-
-        getFirestoreHospitalResult(collectionHospitalFirestore )
-
-//        editTextSearchHospital!!.addTextChangedListener(object : TextWatcher{
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                hospitalList.clear()
-//                searchInFirestore(s.toString().toLowerCase(Locale.ROOT))
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {}
-//
-//        })
+        //getFirestoreHospitalResult()
 
         searchViewHospital.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null){
+                    hospitalList.clear()
                     searchHospitalInFirestore(query)
+
                 }
 //                else {
-//                    getFirestoreHospitalResult(collectionHospitalFirestore )
+//                    getFirestoreHospitalResult()
 //                }
                 return false
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null){
-                    searchHospitalInFirestore(newText)
-                }
+//                if (newText != null){
+//                    searchHospitalInFirestore(newText)
+//                }
 //                else {
-//                    getFirestoreHospitalResult(collectionHospitalFirestore )
+//                    getFirestoreHospitalResult()
 //                }
                 return false
             }
@@ -74,16 +72,17 @@ class HospitalActivity: AppCompatActivity() {
 
     }
 
+
     private fun searchHospitalInFirestore(searchText: String){
         // Search query
-        println("Search text: $searchText")
+    //    println("Search text: $searchText")
         FirebaseController.Firebase.db.collection("hospital")
             .whereEqualTo("name", searchText)
             .get()
-            .addOnSuccessListener { result ->
-                val newArrayListHos = ArrayList<Hospital_Model>()
-                if (result.isEmpty){
-                    for (documentSearch in result){
+            .addOnCompleteListener { task ->
+             //  val hospitalList = ArrayList<Hospital_Model>()
+                if (task.isSuccessful){
+                    for (documentSearch in task.result!!){
                         Log.e(TAG, "${documentSearch.id} => ${documentSearch.data}")
                         val hospitalImages = documentSearch.getString("image")
                         val hospitalName = documentSearch.getString("name")
@@ -109,6 +108,7 @@ class HospitalActivity: AppCompatActivity() {
                         val intent = Intent(this, HospitalDetailActivity::class.java)
                         intent.putExtra(INTENT_PARCELABLE_hospital, it)
                         startActivity(intent)
+
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -117,13 +117,11 @@ class HospitalActivity: AppCompatActivity() {
     }
 
     /// Get data once from Firestore
-    private fun getFirestoreHospitalResult(collection: String) {
-
-        //If search text is empty will display all docs from hospital collection
-
-            FirebaseController.Firebase.db.collection(collection)
+    private fun getFirestoreHospitalResult() {
+            FirebaseController.Firebase.db.collection("hospital")
                 .get()
                 .addOnSuccessListener { result ->
+                 //   val hospitalList = ArrayList<Hospital_Model>()
                     for (document in result) {
                         Log.e(TAG, "${document.id} => ${document.data}")
                         val hospitalImages = document.getString("image")
@@ -131,10 +129,8 @@ class HospitalActivity: AppCompatActivity() {
                         val hospitalDescription = document.getString("des")
                         val hospitalAddress = document.getString("add")
                         val hospitalTel = document.getString("tel")
-                        when (collection) {
-                            //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
-                            "hospital" -> hospitalList.add(
-                                Hospital_Model(
+                        hospitalList.add(
+                            Hospital_Model(
                                     "$hospitalImages",
                                     "$hospitalName",
                                     "$hospitalDescription",
@@ -142,15 +138,15 @@ class HospitalActivity: AppCompatActivity() {
                                     "$hospitalTel"
                                 )
                             )
-                        }
                     }
                     rvHospital_Lists.layoutManager = LinearLayoutManager(this)
                     rvHospital_Lists.setHasFixedSize(true)
                     rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
-                        //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
+//                               Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
                         val intent = Intent(this, HospitalDetailActivity::class.java)
                         intent.putExtra(INTENT_PARCELABLE_hospital, it)
                         startActivity(intent)
+                    rvHospital_Lists.adapter?.notifyDataSetChanged()
                     }
 
                 }
@@ -160,7 +156,32 @@ class HospitalActivity: AppCompatActivity() {
 //        }
     }
 
+//    override fun onConfigurationChanged(newConfig: Configuration) {
+//        super.onConfigurationChanged(newConfig)
+//
+//        // Checks the orientation of the screen
+//        if (newConfig.orientation === Configuration.ORIENTATION_LANDSCAPE) {
+//            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show()
+//        } else if (newConfig.orientation === Configuration.ORIENTATION_PORTRAIT) {
+//            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show()
+//        }
+//    }
+
+//
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putString("hospital_list", hospitalList.toString())
+//
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        hospitalList = savedInstanceState.getParcelableArrayList(hospitalList.toString())!!
+//
+//    }
+
 
 
 }
+
 
