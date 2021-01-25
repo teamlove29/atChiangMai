@@ -17,7 +17,7 @@ class HospitalDetailActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_detail)
 
-        val imageIntent = intent.getParcelableExtra<Hospital_Model>(HospitalActivity.INTENT_PARCEABLE)
+        val imageIntent = intent.getParcelableExtra<Hospital_Model>(HospitalActivity.INTENT_PARCELABLE_hospital)
 
         val imgSrcHos = findViewById<ImageView>(R.id.imgHosDetail)
         val imgHosName = findViewById<TextView>(R.id.txtNameHosDetail)
