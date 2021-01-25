@@ -34,11 +34,11 @@ class HospitalActivity: AppCompatActivity() {
         super.onStart()
         getFirestoreHospitalResult()
     }
-
-    override fun onResume() {
-        super.onResume()
-        rvHospital_Lists.adapter?.notifyDataSetChanged()
-    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        rvHospital_Lists.adapter?.notifyDataSetChanged()
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
