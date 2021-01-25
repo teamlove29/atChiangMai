@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class PoliceModel(
     val cmpdImg: String,
     val cmpdName: String,
-    val cmpdDes: String,
+//    val cmpdDes: String,
     val cmpdAddress: String,
     val cmpdTel: String) : Parcelable {
 }
