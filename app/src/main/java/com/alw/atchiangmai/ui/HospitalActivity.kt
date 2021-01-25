@@ -34,41 +34,48 @@ class HospitalActivity: AppCompatActivity() {
         super.onStart()
         getFirestoreHospitalResult()
     }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        rvHospital_Lists.adapter?.notifyDataSetChanged()
-//    }
+
+    override fun onResume() {
+        super.onResume()
+        searchViewHospital.clearFocus()
+        searchViewHospital.setQuery("",false)
+//        searchViewHospital.isIconified = false;
+        rvHospital_Lists.adapter?.notifyDataSetChanged()
+        hospitalList.clear()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
 
         // Firestore Collection
-        //getFirestoreHospitalResult()
+    //    getFirestoreHospitalResult()
 
         searchViewHospital.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null){
                     hospitalList.clear()
+//                    println(query)
                     searchHospitalInFirestore(query)
-
                 }
-//                else {
-//                    getFirestoreHospitalResult()
-//                }
+                else {
+                    getFirestoreHospitalResult()
+                }
                 return false
             }
             override fun onQueryTextChange(newText: String?): Boolean {
 //                if (newText != null){
+//                    hospitalList.clear()
 //                    searchHospitalInFirestore(newText)
 //                }
 //                else {
 //                    getFirestoreHospitalResult()
 //                }
-                return false
+               return false
             }
         })
+
 
     }
 
@@ -108,7 +115,7 @@ class HospitalActivity: AppCompatActivity() {
                         val intent = Intent(this, HospitalDetailActivity::class.java)
                         intent.putExtra(INTENT_PARCELABLE_hospital, it)
                         startActivity(intent)
-
+                   // rvHospital_Lists.adapter?.notifyDataSetChanged()
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -148,7 +155,6 @@ class HospitalActivity: AppCompatActivity() {
                         startActivity(intent)
                     rvHospital_Lists.adapter?.notifyDataSetChanged()
                     }
-
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
