@@ -21,9 +21,7 @@ class HospitalActivity: AppCompatActivity() {
 
     private var TAG = "My Hospital Tag"
 
-    var hospitalList = ArrayList<Hospital_Model>()
-
-    private var hospitalListSearch: List<Hospital_Model> = ArrayList()
+    private var hospitalList = ArrayList<Hospital_Model>()
 
 
     companion object {
@@ -53,25 +51,25 @@ class HospitalActivity: AppCompatActivity() {
     //    getFirestoreHospitalResult()
 
         searchViewHospital.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null){
+            override fun onQueryTextSubmit(queryHospital: String?): Boolean {
+                if (queryHospital != null){
                     hospitalList.clear()
 //                    println(query)
-                    searchHospitalInFirestore(query)
+                    searchHospitalInFirestore(queryHospital)
                 }
                 else {
                     getFirestoreHospitalResult()
                 }
                 return false
             }
-            override fun onQueryTextChange(newText: String?): Boolean {
-//                if (newText != null){
-//                    hospitalList.clear()
-//                    searchHospitalInFirestore(newText)
-//                }
-//                else {
-//                    getFirestoreHospitalResult()
-//                }
+            override fun onQueryTextChange(newTextHospital: String?): Boolean {
+                if (newTextHospital != null){
+                    hospitalList.clear()
+                    searchHospitalInFirestore(newTextHospital)
+                }
+                else {
+                    getFirestoreHospitalResult()
+                }
                return false
             }
         })
@@ -80,11 +78,11 @@ class HospitalActivity: AppCompatActivity() {
     }
 
 
-    private fun searchHospitalInFirestore(searchText: String){
+    private fun searchHospitalInFirestore(searchHosTxt: String){
         // Search query
     //    println("Search text: $searchText")
         FirebaseController.Firebase.db.collection("hospital")
-            .whereEqualTo("name", searchText)
+            .whereEqualTo("name", searchHosTxt)
             .get()
             .addOnCompleteListener { task ->
              //  val hospitalList = ArrayList<Hospital_Model>()
