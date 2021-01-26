@@ -30,8 +30,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
     //Array OTOP Category IMG
     private val categoryOTOPname = arrayOf("Food", "Drink", "Clothes", "Accessories")
 
-    // Initialize Firebase Auth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)

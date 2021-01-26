@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,22 +21,56 @@
             android:padding="8dp"
             android:orientation="horizontal">
 
+<!--            <EditText-->
+<!--                android:id="@+id/editTextSearchHospital"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:inputType="text"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:padding="8dp"-->
+<!--                android:background="@drawable/rounded_txt_search_input"-->
+<!--                android:drawableStart="@drawable/ic_search"-->
+<!--                android:autofillHints="Search" />-->
+
             <SearchView
                 android:id="@+id/searchViewHospital"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:autofillHints="Search here"
-                android:clickable="true"
                 android:background="@drawable/rounded_txt_search_input"
-                android:focusable="true" />
+                android:iconifiedByDefault="false"
+                android:queryHint="Search hospital..."
+                />
+
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvHospital_Lists"
+        <ScrollView
+            android:id="@+id/scrollView_hospital"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            tools:listitem="@layout/item_hospital_lists"/>
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHospital_Lists"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    tools:listitem="@layout/item_hospital_lists">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+<!--                <ProgressBar-->
+<!--                    android:id="@+id/progress_bar_hospital"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"/>-->
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

@@ -1,7 +1,6 @@
 package com.alw.atchiangmai.Adapter
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,17 @@ import com.alw.atchiangmai.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_hospital_lists.view.*
 
-class HospitalAdapter(private var context: Context, private var itemHospitalList: ArrayList<Hospital_Model>, private val listenerHospital: (Hospital_Model) -> Unit): RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {
+class HospitalAdapter(private var context: Context,
+                      private var itemHospitalList: ArrayList<Hospital_Model>,
+                      private val listenerHospital: (Hospital_Model) -> Unit): RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {
+
 
     inner class HospitalViewHolder(itemHosView: View): RecyclerView.ViewHolder(itemHosView){
-        val hospital_img: ImageView = itemHosView.imgHospitalItem
-        val hospital_name: TextView = itemHosView.tvHospital_name
-        val hospital_description: TextView = itemHosView.tvHospital_des
-        val hospital_address: TextView = itemHosView.tvHospital_address
-        val hospital_tel: TextView = itemHosView.tvHospital_tel
+        private val hospital_img: ImageView = itemHosView.imgHospitalItem
+        private val hospital_name: TextView = itemHosView.tvHospital_name
+        private val hospital_description: TextView = itemHosView.tvHospital_des
+        private val hospital_address: TextView = itemHosView.tvHospital_address
+        private val hospital_tel: TextView = itemHosView.tvHospital_tel
 
         fun bindVIew(hosIMG: Hospital_Model, listener: (Hospital_Model)->Unit){
             Picasso.get().load(hosIMG.hospitalImg).into(hospital_img)

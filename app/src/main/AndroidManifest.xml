@@ -22,12 +22,27 @@
         <activity android:name=".ui.MoreActivity" />
         <activity android:name=".ui.UserActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.ExchangeActivity" />
-        <activity android:name=".ui.HospitalActivity" />
-        <activity android:name=".ui.HospitalDetailActivity" />
-        <activity android:name=".ui.OTOPActivity"/>
+<!--        <activity android:name=".ui.ExchangeActivity" />-->
+<!--        <activity android:name=".ui.HospitalActivity" />-->
+<!--        <activity android:name=".ui.HospitalDetailActivity" />-->
+<!--        <activity android:name=".ui.OTOPActivity"/>-->
+<!--        <activity android:name=".ui.PoliceStationDetailActivity" />-->
+<!--        <activity android:name=".ui.PoliceActivity" />-->
         <activity android:name=".ui.PoliceStationDetailActivity" />
         <activity android:name=".ui.PoliceActivity" />
+        <activity android:name=".ui.ExchangeActivity" />
+        <activity
+            android:name=".ui.HospitalActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="sensor"/>
+        <activity
+            android:name=".ui.HospitalDetailActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="sensor"/>
+        <activity
+            android:name=".ui.OTOPActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="sensor"/>
         <activity android:name=".ui.FeedActivity" />
     </application>
 

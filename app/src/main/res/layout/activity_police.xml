@@ -24,10 +24,9 @@
                 android:id="@+id/searchViewPoliceDepartment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:autofillHints="Search here"
-                android:clickable="true"
                 android:background="@drawable/rounded_txt_search_input"
-                android:focusable="true" />
+                android:iconifiedByDefault="false"
+                android:queryHint="Search police station..." />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
