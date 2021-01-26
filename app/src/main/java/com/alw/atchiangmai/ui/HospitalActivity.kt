@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +48,12 @@ class HospitalActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
+
+        shimmerLayoutHos1.startShimmerAnimation()
+        Handler().postDelayed({
+            shimmerLayoutHos1.stopShimmerAnimation()
+            shimmerLayoutHos1.visibility = View.GONE
+        }, 4000)
 
         // Firestore Collection
     //    getFirestoreHospitalResult()
@@ -113,6 +121,7 @@ class HospitalActivity: AppCompatActivity() {
                         val intent = Intent(this, HospitalDetailActivity::class.java)
                         intent.putExtra(INTENT_PARCELABLE_hospital, it)
                         startActivity(intent)
+                        overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
                    // rvHospital_Lists.adapter?.notifyDataSetChanged()
                     }
                 }
@@ -151,6 +160,7 @@ class HospitalActivity: AppCompatActivity() {
                         val intent = Intent(this, HospitalDetailActivity::class.java)
                         intent.putExtra(INTENT_PARCELABLE_hospital, it)
                         startActivity(intent)
+                        overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
                     rvHospital_Lists.adapter?.notifyDataSetChanged()
                     }
                 }

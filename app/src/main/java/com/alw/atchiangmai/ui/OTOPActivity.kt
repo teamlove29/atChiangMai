@@ -1,8 +1,10 @@
 package com.alw.atchiangmai.ui
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.alw.atchiangmai.Model.OTOP_Category_Model
 import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_otop.*
+import kotlinx.android.synthetic.main.activity_police.*
 
 class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
 
@@ -37,7 +40,15 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
 
+        shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
+        shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
+        Handler().postDelayed({
+            shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
+            shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
 
+            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
+            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
+        }, 4000)
         ///////////////////////// Action Bar Start ////////////////////////////
         //Action Bar - OTOP
 

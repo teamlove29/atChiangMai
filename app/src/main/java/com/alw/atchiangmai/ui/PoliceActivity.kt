@@ -2,7 +2,9 @@ package com.alw.atchiangmai.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.SearchView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -44,6 +46,11 @@ class PoliceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_police)
 
+        shimmerLayoutPolice1.startShimmerAnimation()
+        Handler().postDelayed({
+            shimmerLayoutPolice1.stopShimmerAnimation()
+            shimmerLayoutPolice1.visibility = View.GONE
+        }, 4000)
 
         searchViewPoliceDepartment.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(queryPolice: String?): Boolean {
@@ -106,6 +113,7 @@ class PoliceActivity : AppCompatActivity() {
                     val intent = Intent(this, PoliceStationDetailActivity::class.java)
                     intent.putExtra(PoliceActivity.INTENT_PARCELABLE_Police, it)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
                 }
 
             }
@@ -146,6 +154,7 @@ class PoliceActivity : AppCompatActivity() {
                     val intent = Intent(this, PoliceStationDetailActivity::class.java)
                     intent.putExtra(PoliceActivity.INTENT_PARCELABLE_Police, it)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
                 }
             }
                     .addOnFailureListener { exception ->
