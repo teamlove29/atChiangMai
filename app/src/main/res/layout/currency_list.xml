@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     android:layout_marginBottom="15dp"
-    app:cardBackgroundColor="@color/teal_700"
+    app:cardBackgroundColor="@color/dark_green"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:selectableItemBackground">
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:text="Currency"/>
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:text="ค่าเงิน : สกุลเงิน (ตัวย่อค่าเงิน)"/>
 
 
@@ -49,7 +49,7 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:text="Average Selling Rates"/>
 
     </RelativeLayout>

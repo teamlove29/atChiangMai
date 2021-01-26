@@ -32,10 +32,8 @@
             <include layout="@layout/restaurant_place_holder"/>
             <include layout="@layout/restaurant_place_holder"/>
             <include layout="@layout/restaurant_place_holder"/>
-            <include layout="@layout/restaurant_place_holder" />
             <include layout="@layout/restaurant_place_holder"/>
         </LinearLayout>
-
     </io.supercharge.shimmerlayout.ShimmerLayout>
 
 

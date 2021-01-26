@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
         <activity android:name=".ui.DetailRestaurantActivity"></activity>
-         <activity android:name=".ui.RestaurantActivity"></activity>
+         <activity  android:name=".ui.RestaurantActivity"
+                    android:screenOrientation="sensor"></activity>
         <activity android:name=".MoreActivity" />
         <activity android:name=".UserActivity" />
         <activity android:name=".MainActivity">
@@ -22,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ExchangeActivity" />
+        <activity   android:name=".ui.ExchangeActivity"
+                    android:screenOrientation="sensor"/>
         <activity android:name=".OTOPActivity" />
         <activity android:name=".ui.FeedActivity" />
     </application>
