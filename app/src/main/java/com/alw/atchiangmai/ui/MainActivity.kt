@@ -60,10 +60,6 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent)
 //            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
-        btn_hotel.setOnClickListener {
-            val intent = Intent(this, HotelActivity::class.java)
-            startActivity(intent)
-        }
 
     }
 
@@ -129,7 +125,7 @@ class MainActivity : AppCompatActivity(){
                 for (doc in it.result!!) {
                     val txt: String = doc["name"].toString()
                     val uri = Uri.parse(doc.get("image").toString())
-                    arrayList.add(ModelCardPicText1(uri, txt,""))
+                    arrayList.add(ModelCardPicText1(uri, txt, ""))
                 }
             }
             val adapter = BestThingAdapter(arrayList)

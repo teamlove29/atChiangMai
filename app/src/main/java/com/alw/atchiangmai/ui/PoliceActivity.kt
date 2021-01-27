@@ -47,10 +47,12 @@ class PoliceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_police)
 
         shimmerLayoutPolice1.startShimmerAnimation()
-        Handler().postDelayed({
-            shimmerLayoutPolice1.stopShimmerAnimation()
-            shimmerLayoutPolice1.visibility = View.GONE
-        }, 4000)
+        shimmerLayoutPolice1.stopShimmerAnimation()
+        shimmerLayoutPolice1.visibility = View.GONE
+//        Handler().postDelayed({
+//            shimmerLayoutPolice1.stopShimmerAnimation()
+//            shimmerLayoutPolice1.visibility = View.GONE
+//        }, 4000)
 
         searchViewPoliceDepartment.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(queryPolice: String?): Boolean {

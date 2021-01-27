@@ -6,6 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
     android:orientation="vertical">
 
 
@@ -15,6 +18,7 @@
         android:layout_height="80dp"
         app:cardBackgroundColor="#05705F"
         app:cardCornerRadius="10dp"
+
         android:layout_margin="8dp">
 
         <ImageView
