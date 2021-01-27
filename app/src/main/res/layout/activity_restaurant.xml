@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.RestaurantActivity">
+
+    <SearchView
+        android:id="@+id/restaurantSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:iconifiedByDefault="false"
+        android:background="@color/white_smoke"
+        android:queryHint="Search Here"
+/>
+
+    <io.supercharge.shimmerlayout.ShimmerLayout
+        android:id="@+id/shimmerLayoutRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shimmer_animation_duration="1200">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp" >
+            <include layout="@layout/restaurant_place_holder"/>
+            <include layout="@layout/restaurant_place_holder"/>
+            <include layout="@layout/restaurant_place_holder"/>
+            <include layout="@layout/restaurant_place_holder"/>
+        </LinearLayout>
+    </io.supercharge.shimmerlayout.ShimmerLayout>
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/restaurantRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:padding="15dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>
+

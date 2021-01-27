@@ -10,8 +10,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.Model.Hospital_Model
 import com.alw.atchiangmai.R
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_hospital_lists.view.*
+import kotlinx.android.synthetic.main.item_hospital_lists.view.imgHospitalItem
+import kotlinx.android.synthetic.main.item_hospital_lists.view.tvHospital_address
+import kotlinx.android.synthetic.main.item_hospital_lists.view.tvHospital_des
+import kotlinx.android.synthetic.main.item_hospital_lists.view.tvHospital_name
+import kotlinx.android.synthetic.main.item_hospital_lists.view.tvHospital_tel
 
 class HospitalAdapter(private var context: Context,
                       private var itemHospitalList: ArrayList<Hospital_Model>,
@@ -19,6 +25,7 @@ class HospitalAdapter(private var context: Context,
 
 
     inner class HospitalViewHolder(itemHosView: View): RecyclerView.ViewHolder(itemHosView){
+        //val shimmerFrameLayout: ShimmerFrameLayout = itemHosView.shimmerLayoutHos1
         private val hospital_img: ImageView = itemHosView.imgHospitalItem
         private val hospital_name: TextView = itemHosView.tvHospital_name
         private val hospital_description: TextView = itemHosView.tvHospital_des
@@ -26,6 +33,7 @@ class HospitalAdapter(private var context: Context,
         private val hospital_tel: TextView = itemHosView.tvHospital_tel
 
         fun bindVIew(hosIMG: Hospital_Model, listener: (Hospital_Model)->Unit){
+
             Picasso.get().load(hosIMG.hospitalImg).into(hospital_img)
          //  hospital_img.setImageResource(hosIMG.hospitalImg)
             hospital_name.text = hosIMG.hospitalName
@@ -55,7 +63,9 @@ class HospitalAdapter(private var context: Context,
 //        holder.hospital_tel.text = itemHosCurrent.hospitalTel
     }
 
-    override fun getItemCount(): Int = itemHospitalList.size
+    override fun getItemCount(): Int {
+        return itemHospitalList.size
+    }
 
 }
 
