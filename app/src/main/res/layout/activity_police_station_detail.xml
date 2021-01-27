@@ -10,22 +10,27 @@
         android:id="@+id/linearLayoutImgPolDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgPolDetail"
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            android:contentDescription="@string/hospitaldetailimg"
             android:layout_gravity="top"
+            android:contentDescription="@string/hospitaldetailimg"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:id="@+id/infoGroupLinear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <LinearLayout
                 android:id="@+id/linearTxtNamePolDetail"
@@ -38,10 +43,10 @@
                     android:id="@+id/txtNamePolDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     android:text="@string/txt_hospital_name"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -49,8 +54,8 @@
                 android:id="@+id/linearTxtAddPolDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="16dp">
 
                 <TextView
                     android:id="@+id/txtAddressPolDetailTitle"
@@ -64,16 +69,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:textColor="@color/black"
-                    android:text="@string/address" />
+                    android:text="@string/address"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearTelDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="16dp">
 
                 <TextView
                     android:id="@+id/txtTelPolDetailTitle"
@@ -86,8 +91,8 @@
                     android:id="@+id/telPolDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="@string/telephone" />
+                    android:text="@string/telephone"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>

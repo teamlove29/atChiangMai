@@ -9,8 +9,6 @@
     <string name="btn_police">Police</string>
     <string name="btn_more">More</string>
     <string name="txt_best_things">Best Things to do in Chiang mai</string>
-
-    <!--  OTOP String  -->
     <string name="otop_btn"><b>OTOP</b></string>
     <string name="food_otop"><b>Food</b></string>
     <string name="drink_otop"><b>Drink</b></string>
@@ -23,7 +21,13 @@
     <string name="item_img">item_img</string>
     <string name="categoryotopicon">CategoryOTOPIcon</string>
     <string name="categorytext">categoryText</string>
-
+    <string name="txt_hotel_destiantion">Destiantion</string>
+    <string name="txt_hotel_checkin">Check in - Check out</string>
+    <string name="txt_hotel_guest">Guest</string>
+    <string name="txt_hotel_room">Room</string>
+    <string name="txt_hotel_filter">Filter</string>
+    <string name="txt_hotel_editor">Editeor \'s Pick of Chiang Mai favourite hotels  </string>
+    <string name="txt_hotel_search">Search</string>
     <!--  Hospital String  -->
     <string name="txt_hospital">Hospital</string>
     <string name="txt_hospital_name"><b>Hospital name</b></string>
@@ -52,4 +56,5 @@
     <string name="txt_police_address_detail">Address detail</string>
     <string name="txt_police_tel_detail"><b>Tel. detail</b></string>
 
+>>>>>>> origin/feature/PoliceStation_Activity
 </resources>
