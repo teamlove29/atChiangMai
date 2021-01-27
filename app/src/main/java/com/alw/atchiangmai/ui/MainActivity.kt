@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(){
         btn_otop.setOnClickListener{
             val intent = Intent(this, OTOPActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+//            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
@@ -48,17 +48,21 @@ class MainActivity : AppCompatActivity(){
         btn_hospital.setOnClickListener {
             val intent = Intent(this, HospitalActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+//            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_police.setOnClickListener {
             val intent = Intent(this, PoliceActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+//            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_food.setOnClickListener {
             val intent = Intent(this, RestaurantActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+//            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+        }
+        btn_hotel.setOnClickListener {
+            val intent = Intent(this, HotelActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -125,7 +129,7 @@ class MainActivity : AppCompatActivity(){
                 for (doc in it.result!!) {
                     val txt: String = doc["name"].toString()
                     val uri = Uri.parse(doc.get("image").toString())
-                    arrayList.add(ModelCardPicText1(uri, txt))
+                    arrayList.add(ModelCardPicText1(uri, txt,""))
                 }
             }
             val adapter = BestThingAdapter(arrayList)
