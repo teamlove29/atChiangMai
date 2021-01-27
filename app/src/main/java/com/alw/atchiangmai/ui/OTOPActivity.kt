@@ -19,9 +19,12 @@ import kotlinx.android.synthetic.main.activity_police.*
 
 class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
 
+    /// Firebase Firestore
     val TAG = "MyMessage"
 
     private var otopLists = arrayListOf<OTOP_Model>()
+
+
     //Array OTOP Category IMG
     private val categoryOTOPimg = arrayOf(
         R.drawable.ic_otop_food,
@@ -36,7 +39,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
-
 
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
@@ -60,7 +62,7 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 
         //Set back Button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        getOtopItem()
+
         /////////////////// OTOP Categories /////////////////////
         val categoryList = ArrayList<OTOP_Category_Model>()
         for (categoryItemList in categoryOTOPname.indices) {
@@ -95,6 +97,12 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             }
     }
 
+    override fun onStart() {
+        super.onStart()
+//        otop_Adapter!!.startListening()
+
+//        updateUI(currentUser)
+    }
 
     ////// Action bar function
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -120,24 +128,4 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         }
     }
 
-
-
-    // Test New Otop Data
-    private fun getOtopItem(){
-        val ref = db.collection("otop")
-            ref.get().addOnCompleteListener {
-                for ( dt in it.result!!){
-                    val ls = dt["list"] as ArrayList<*>
-                    for (doc in ls){
-                        val data: MutableMap<*, *>? = doc as MutableMap<*, *>?
-                        val images = data?.get("image").toString()
-                        val name = data?.get("name").toString()
-                        otopLists.add(OTOP_Model(images, name))
-                    }
-                }
-                rvOTOP_Lists.adapter = OTOP_Adapter(otopLists)
-                rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
-            }
-
-    }
 }

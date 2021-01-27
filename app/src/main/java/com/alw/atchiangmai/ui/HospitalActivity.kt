@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_hospital.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HospitalActivity : AppCompatActivity() {
+class HospitalActivity: AppCompatActivity() {
 
     private var TAG = "My Hospital Tag"
 
