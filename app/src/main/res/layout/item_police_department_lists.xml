@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
-
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
     app:layout_constraintCircleRadius="8dp">
 
     <LinearLayout
@@ -51,6 +53,7 @@
                         android:layout_height="150dp"
                         android:contentDescription="@string/item_img"
                         android:scaleType="center"
+                        android:background="@color/colorShimmer"
                         tools:srcCompat="@tools:sample/avatars" />
                 </androidx.cardview.widget.CardView>
 

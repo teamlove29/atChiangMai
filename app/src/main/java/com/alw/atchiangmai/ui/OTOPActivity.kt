@@ -40,13 +40,18 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
-        Handler().postDelayed({
-            shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
-            shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
+        shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
+        shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
 
-            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
-            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
-        }, 4000)
+        shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
+        shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
+//        Handler().postDelayed({
+//            shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
+//            shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
+//
+//            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
+//            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
+//        }, 4000)
         ///////////////////////// Action Bar Start ////////////////////////////
         //Action Bar - OTOP
 

@@ -50,10 +50,12 @@ class HospitalActivity : AppCompatActivity() {
         setContentView(R.layout.activity_hospital)
 
         shimmerLayoutHos1.startShimmerAnimation()
-        Handler().postDelayed({
-            shimmerLayoutHos1.stopShimmerAnimation()
-            shimmerLayoutHos1.visibility = View.GONE
-        }, 4000)
+        shimmerLayoutHos1.stopShimmerAnimation()
+        shimmerLayoutHos1.visibility = View.GONE
+//        Handler().postDelayed({
+//            shimmerLayoutHos1.stopShimmerAnimation()
+//            shimmerLayoutHos1.visibility = View.GONE
+//        }, 4000)
 
         // Firestore Collection
     //    getFirestoreHospitalResult()
