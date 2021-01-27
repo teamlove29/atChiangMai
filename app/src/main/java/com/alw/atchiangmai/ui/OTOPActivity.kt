@@ -40,6 +40,7 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
 
+        getOtopItem()
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
@@ -95,6 +96,25 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
+    }
+
+    // Test New Otop Data
+    private fun getOtopItem(){
+        val ref = db.collection("otop")
+        ref.get().addOnCompleteListener {
+            for ( dt in it.result!!){
+                val ls = dt["list"] as ArrayList<*>
+                for (doc in ls){
+                    val data: MutableMap<*, *>? = doc as MutableMap<*, *>?
+                    val images = data?.get("image").toString()
+                    val name = data?.get("name").toString()
+                    otopLists.add(OTOP_Model(images, name))
+                }
+            }
+            rvOTOP_Lists.adapter = OTOP_Adapter(otopLists)
+            rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
+        }
+
     }
 
     override fun onStart() {
