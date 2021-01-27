@@ -55,6 +55,12 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent)
             overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
+        btn_food.setOnClickListener {
+            val intent = Intent(this, RestaurantActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+        }
+
     }
 
     private fun insertSlideImg() {

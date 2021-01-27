@@ -7,13 +7,17 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
     android:layout_marginRight="20dp">
-
 
     <ImageView
         android:id="@+id/imageViewFeed"
         android:layout_width="300dp"
         android:layout_height="200dp"
+        android:background="@color/placeHolderBG"
+        android:animateLayoutChanges="true"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -32,6 +36,5 @@
         android:layout_height="20dp"
         android:text="FeedDescription"
         android:textSize="15dp"/>
-
 
 </LinearLayout>
