@@ -1,5 +1,6 @@
 package com.alw.atchiangmai
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +12,8 @@ import com.alw.atchiangmai.Adapter.ViewPagerAdapter
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
-import com.alw.atchiangmai.ui.ExchangeActivity
-import com.alw.atchiangmai.ui.FeedActivity
-import com.alw.atchiangmai.ui.RestaurantActivity
+import com.alw.atchiangmai.ui.*
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,15 +39,28 @@ class MainActivity : AppCompatActivity(){
         btn_otop.setOnClickListener{
             val intent = Intent(this, OTOPActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)
         }
+        btn_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+        }
+        btn_police.setOnClickListener {
+            val intent = Intent(this, PoliceActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+        }
         btn_food.setOnClickListener {
             val intent = Intent(this, RestaurantActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
+
     }
 
     private fun insertSlideImg() {
@@ -67,8 +80,20 @@ class MainActivity : AppCompatActivity(){
 
     private fun checkingUser() {
         if (FirebaseAuth.getInstance().currentUser?.uid == null) {
-            val inten = Intent(this, UserActivity::class.java)
-            startActivity(inten)
+//            val inten = Intent(this, UserActivity::class.java)
+//            startActivity(inten)
+            val providers = arrayListOf(
+//                AuthUI.IdpConfig.EmailBuilder().build(),
+                AuthUI.IdpConfig.GoogleBuilder().build()
+            )
+            startActivityForResult(
+                AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(providers)
+//                   .setTheme(R.style.LoginTheme)
+                    .build(),
+                1
+            )
 
         } else {
             txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
@@ -81,6 +106,14 @@ class MainActivity : AppCompatActivity(){
             } else {
                 image_user.setImageResource(R.drawable.baseline_account_circle_black_24dp)
             }
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK){
+            Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+                .into(image_user)
+            txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
         }
     }
 
