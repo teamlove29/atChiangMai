@@ -39,7 +39,8 @@
             android:parentActivityName="MainActivity"
             android:screenOrientation="sensor"/>
 
-        <activity android:name=".ui.FeedActivity" android:screenOrientation="sensor" />
+        <activity android:name=".ui.FeedActivity"
+            android:screenOrientation="sensor" />
 
         <activity android:name=".ui.RestaurantActivity" android:screenOrientation="sensor" />
         <activity android:name=".ui.DetailRestaurantActivity" android:screenOrientation="sensor" />

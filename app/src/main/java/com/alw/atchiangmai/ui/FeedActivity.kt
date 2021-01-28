@@ -2,7 +2,10 @@ package com.alw.atchiangmai.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alw.atchiangmai.Adapter.FeedRecyclerAdapter
@@ -10,7 +13,7 @@ import com.alw.atchiangmai.Adapter.onCLickAdapterListener
 import com.alw.atchiangmai.FirebaseController.Firebase.db
 import com.alw.atchiangmai.Model.ItemDataFeed
 import com.alw.atchiangmai.R
-import com.ethanhua.skeleton.Skeleton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -25,6 +28,8 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 //        supportActionBar!!.apply {
+//            title = "Feed"
+//            title
 //            setDisplayHomeAsUpEnabled(true)
 //            setDisplayHomeAsUpEnabled(true)
 //        }
@@ -48,7 +53,7 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
 //            loadDataOnFirebase.execute()
     }
 
-    private suspend fun getResult(collection : String) : String {
+    private suspend fun getResult(collection: String) : String {
             return withContext(Dispatchers.IO) {
                 try {
                     db.collection(collection)
@@ -59,27 +64,66 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
                                     val title = document.getString("name")
                                     val description = document.getString("des")
                                     when(collection){
-                                        "feed" -> itemDataFeed.add(ItemDataFeed("$image", "$title", "$description"))
-                                        "activity" -> itemDataActivity.add(ItemDataFeed("$image", "$title", "$description"))
-                                        "recommend" -> itemDataRecommend.add(ItemDataFeed("$image", "$title", "$description"))
+                                        "feed" -> itemDataFeed.add(
+                                            ItemDataFeed(
+                                                "$image",
+                                                "$title",
+                                                "$description"
+                                            )
+                                        )
+                                        "activity" -> itemDataActivity.add(
+                                            ItemDataFeed(
+                                                "$image",
+                                                "$title",
+                                                "$description"
+                                            )
+                                        )
+                                        "recommend" -> itemDataRecommend.add(
+                                            ItemDataFeed(
+                                                "$image",
+                                                "$title",
+                                                "$description"
+                                            )
+                                        )
                                     }
                                 }
 
                                 // AdapterFeed
-                                feedRecyclerView.adapter = FeedRecyclerAdapter(itemDataFeed, this@FeedActivity)
-                                feedRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
+                                feedRecyclerView.adapter = FeedRecyclerAdapter(
+                                    itemDataFeed,
+                                    this@FeedActivity
+                                )
+                                feedRecyclerView.layoutManager = LinearLayoutManager(
+                                    this@FeedActivity,
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
                                 textViewTitleFeed.text = "Feed"
                                 shimmerLayoutFeed.stopShimmerAnimation()
                                 shimmerLayoutFeed.setVisibility(View.GONE)
                                 // AdapterActivity
-                                activityRecyclerView.adapter = FeedRecyclerAdapter(itemDataActivity, this@FeedActivity)
-                                activityRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
+                                activityRecyclerView.adapter = FeedRecyclerAdapter(
+                                    itemDataActivity,
+                                    this@FeedActivity
+                                )
+                                activityRecyclerView.layoutManager = LinearLayoutManager(
+                                    this@FeedActivity,
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
                                 textViewTitleActivity.text = "Activity"
                                 shimmerLayoutActivity.stopShimmerAnimation()
                                 shimmerLayoutActivity.setVisibility(View.GONE)
 //                                // AdapterRecommend
-                                recommendRecyclerView.adapter = FeedRecyclerAdapter(itemDataRecommend, this@FeedActivity)
-                                recommendRecyclerView.layoutManager = LinearLayoutManager(this@FeedActivity,LinearLayoutManager.HORIZONTAL,false)
+                                recommendRecyclerView.adapter = FeedRecyclerAdapter(
+                                    itemDataRecommend,
+                                    this@FeedActivity
+                                )
+                                recommendRecyclerView.layoutManager = LinearLayoutManager(
+                                    this@FeedActivity,
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false
+                                )
                                 textViewTitleRecommend.text = "Recommend"
                                 shimmerLayoutRecommend.stopShimmerAnimation()
                                 shimmerLayoutRecommend.visibility = View.GONE
@@ -103,5 +147,7 @@ class FeedActivity : AppCompatActivity(), onCLickAdapterListener {
 //        startActivity(intent)
 //        Toast.makeText(this,"Show : ${noteList[postion]}",Toast.LENGTH_LONG).show()
     }
+
+
 
 }

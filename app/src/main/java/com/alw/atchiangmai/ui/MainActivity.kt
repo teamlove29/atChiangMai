@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent)
 //            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
+        btn_hotel.setOnClickListener {
+            val intent = Intent(this, HotelActivity::class.java)
+            startActivity(intent)
+//            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+        }
 
     }
 
