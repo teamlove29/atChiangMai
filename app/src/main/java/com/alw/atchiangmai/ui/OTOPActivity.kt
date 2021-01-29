@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +44,8 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
 
+
+
         getOtopItem()
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
@@ -55,14 +61,15 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 //            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
 //            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
 //        }, 4000)
-        ///////////////////////// Action Bar Start ////////////////////////////
-        //Action Bar - OTOP
 
-        //Set ACtion Title
-//        actionbarOTOP!!.title = "OTOP"
-
-        //Set back Button
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        ///////////// Action Bar ////////////////
+        val actionbarOtop = supportActionBar
+//        actionbarOtop!!.title = "OTOP"
+        actionbarOtop?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        actionbarOtop?.setCustomView(R.layout.title_otop_layout)
+        actionbarOtop?.setHomeAsUpIndicator(R.drawable.ic_action_back_default)
+        //Set back button
+        actionbarOtop?.setDisplayHomeAsUpEnabled(true)
 
         /////////////////// OTOP Categories /////////////////////
         val categoryList = ArrayList<OTOP_Category_Model>()

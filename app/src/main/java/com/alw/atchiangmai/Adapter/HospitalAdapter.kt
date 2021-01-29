@@ -23,6 +23,9 @@ class HospitalAdapter(private var context: Context,
                       private var itemHospitalList: ArrayList<Hospital_Model>,
                       private val listenerHospital: (Hospital_Model) -> Unit): RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {
 
+    val ITEM_HOSPITAL_TYPE = 0
+    val LOADING_HOSPITAL_TYPE = 1
+
 
     inner class HospitalViewHolder(itemHosView: View): RecyclerView.ViewHolder(itemHosView){
         //val shimmerFrameLayout: ShimmerFrameLayout = itemHosView.shimmerLayoutHos1
@@ -49,7 +52,13 @@ class HospitalAdapter(private var context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HospitalViewHolder {
-        return HospitalViewHolder(LayoutInflater.from(context).inflate(R.layout.item_hospital_lists, parent, false))
+        return if(viewType == ITEM_HOSPITAL_TYPE){
+            val view: View = LayoutInflater.from(context).inflate(R.layout.item_hospital_lists, parent, false)
+            HospitalViewHolder(view)
+        }else{
+            val view: View = LayoutInflater.from(context).inflate(R.layout.item_loading, parent, false)
+            HospitalViewHolder(view)
+        }
     }
 
     override fun onBindViewHolder(holder: HospitalViewHolder, position: Int) {
@@ -65,6 +74,14 @@ class HospitalAdapter(private var context: Context,
 
     override fun getItemCount(): Int {
         return itemHospitalList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (itemHospitalList[position].hospitalName == "loadmore_hospital"){
+            LOADING_HOSPITAL_TYPE
+        }else{
+            ITEM_HOSPITAL_TYPE
+        }
     }
 
 }

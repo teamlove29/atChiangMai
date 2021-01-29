@@ -55,6 +55,7 @@
     <string name="txt_police_tel"><b>Telephone: </b></string>
     <string name="txt_police_address_detail">Address detail</string>
     <string name="txt_police_tel_detail"><b>Tel. detail</b></string>
+    <string name="backtxt">Back</string>
 
->>>>>>> origin/feature/PoliceStation_Activity
+    >>>>>>> origin/feature/PoliceStation_Activity
 </resources>

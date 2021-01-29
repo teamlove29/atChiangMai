@@ -43,33 +43,37 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:orientation="vertical">-->
 
-                <io.supercharge.shimmerlayout.ShimmerLayout
-                    android:id="@+id/shimmerLayoutHos1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+        <io.supercharge.shimmerlayout.ShimmerLayout
+            android:id="@+id/shimmerLayoutHos1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical">
 
-                        <include layout="@layout/placeholder_hospital"/>
-                        <include layout="@layout/placeholder_hospital"/>
-                        <include layout="@layout/placeholder_hospital"/>
-                        <include layout="@layout/placeholder_hospital"/>
-                        <include layout="@layout/placeholder_hospital"/>
+                 <include layout="@layout/placeholder_hospital"/>
+                 <include layout="@layout/placeholder_hospital"/>
+                 <include layout="@layout/placeholder_hospital"/>
+                 <include layout="@layout/placeholder_hospital"/>
+                 <include layout="@layout/placeholder_hospital"/>
 
-                    </LinearLayout>
+             </LinearLayout>
 
+        </io.supercharge.shimmerlayout.ShimmerLayout>
 
-                </io.supercharge.shimmerlayout.ShimmerLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_refresh_hospital_layout">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHospital_Lists"
@@ -77,9 +81,9 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     tools:listitem="@layout/item_hospital_lists">
-
                 </androidx.recyclerview.widget.RecyclerView>
 
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 <!--                <ProgressBar-->
 <!--                    android:id="@+id/progress_bar_hospital"-->
 <!--                    android:layout_width="match_parent"-->

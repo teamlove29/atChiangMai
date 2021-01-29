@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,31 +20,33 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MoreActivity" />
-        <activity android:name=".ui.UserActivity" />
+        <activity android:name=".ui.MoreActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor" />
+        <activity android:name=".ui.UserActivity"  android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor"/>
 
-        <activity android:name=".ui.PoliceStationDetailActivity" android:screenOrientation="sensor" />
-        <activity android:name=".ui.PoliceActivity"  android:screenOrientation="sensor" />
+        <activity android:name=".ui.PoliceStationDetailActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor" />
+        <activity android:name=".ui.PoliceActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.ExchangeActivity" />
+        <activity android:name=".ui.ExchangeActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor"/>
         <activity
             android:name=".ui.HospitalActivity"
             android:parentActivityName="MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="sensor"/>
         <activity
             android:name=".ui.HospitalDetailActivity"
             android:parentActivityName="MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="sensor"/>
         <activity
             android:name=".ui.OTOPActivity"
             android:parentActivityName="MainActivity"
             android:screenOrientation="sensor"/>
 
-        <activity android:name=".ui.FeedActivity" android:screenOrientation="sensor" />
+        <activity android:name=".ui.FeedActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.RestaurantActivity" android:screenOrientation="sensor" />
-        <activity android:name=".ui.DetailRestaurantActivity" android:screenOrientation="sensor" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.RestaurantActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor" />
+        <activity android:name=".ui.DetailRestaurantActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:screenOrientation="sensor" />
+        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

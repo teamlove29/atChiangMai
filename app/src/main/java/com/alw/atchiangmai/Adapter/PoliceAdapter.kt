@@ -14,7 +14,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_police_department_lists.view.*
 import org.w3c.dom.Text
 
-class PoliceAdapter(private var context: Context, private val itemPoliceList: ArrayList<PoliceModel>, private var listenerPolice: (PoliceModel) -> Unit): RecyclerView.Adapter<PoliceAdapter.PoliceViewHolder>() {
+class PoliceAdapter(private var context: Context,
+                    private val itemPoliceList: ArrayList<PoliceModel>,
+                    private var listenerPolice: (PoliceModel) -> Unit): RecyclerView.Adapter<PoliceAdapter.PoliceViewHolder>() {
+
+    val ITEM_POLICE_TYPE = 0
+    val LOADING_POLICE_TYPE = 1
 
     inner class PoliceViewHolder(itemPoliceView: View): RecyclerView.ViewHolder(itemPoliceView) {
         val pd_img: ImageView = itemPoliceView.imgPoliceItem
@@ -31,16 +36,19 @@ class PoliceAdapter(private var context: Context, private val itemPoliceList: Ar
             pd_tel.text = policeIMG.cmpdTel
 
             itemView.setOnClickListener{
-                listenerPolice(policeIMG)
+                liatenerPol(policeIMG)
             }
         }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): PoliceAdapter.PoliceViewHolder {
-        return PoliceViewHolder(LayoutInflater.from(context).inflate(R.layout.item_police_department_lists, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoliceAdapter.PoliceViewHolder {
+        return if(viewType == ITEM_POLICE_TYPE){
+            val view: View = LayoutInflater.from(context).inflate(R.layout.item_police_department_lists, parent, false)
+            PoliceViewHolder(view)
+        }else{
+            val view: View = LayoutInflater.from(context).inflate(R.layout.item_loading, parent, false)
+            PoliceViewHolder(view)
+        }
     }
 
     override fun onBindViewHolder(holder:PoliceViewHolder, position: Int) {
@@ -48,4 +56,12 @@ class PoliceAdapter(private var context: Context, private val itemPoliceList: Ar
     }
 
     override fun getItemCount(): Int = itemPoliceList.size
+
+    override fun getItemViewType(position: Int): Int {
+        return  if(itemPoliceList[position].cmpdName == "loadmore_police_station"){
+            LOADING_POLICE_TYPE
+        }else{
+            ITEM_POLICE_TYPE
+        }
+    }
 }

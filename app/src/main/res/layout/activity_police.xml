@@ -56,13 +56,18 @@
 
         </io.supercharge.shimmerlayout.ShimmerLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPolice_Lists"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            tools:listitem="@layout/item_hospital_lists"/>
+            android:id="@+id/swipe_refresh_police_layout">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPolice_Lists"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    tools:listitem="@layout/item_police_department_lists"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
