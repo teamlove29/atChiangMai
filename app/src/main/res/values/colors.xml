@@ -12,4 +12,5 @@
     <color name="colorActionBarOTOP">#05705F</color>
     <color name="white_smoke">#F5F5F5</color>
     <color name="placeHolderBG">#dddddd</color>
+    <color name="backBtn">#FF0A0A</color>
 </resources>

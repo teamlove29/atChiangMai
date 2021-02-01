@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +44,9 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
 
+
+
+        getOtopItem()
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
@@ -54,14 +61,15 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 //            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
 //            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
 //        }, 4000)
-        ///////////////////////// Action Bar Start ////////////////////////////
-        //Action Bar - OTOP
 
-        //Set ACtion Title
-//        actionbarOTOP!!.title = "OTOP"
-
-        //Set back Button
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        ///////////// Action Bar ////////////////
+        val actionbarOtop = supportActionBar
+//        actionbarOtop!!.title = "OTOP"
+        actionbarOtop?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        actionbarOtop?.setCustomView(R.layout.title_otop_layout)
+        actionbarOtop?.setHomeAsUpIndicator(R.drawable.ic_action_back_default)
+        //Set back button
+        actionbarOtop?.setDisplayHomeAsUpEnabled(true)
 
         /////////////////// OTOP Categories /////////////////////
         val categoryList = ArrayList<OTOP_Category_Model>()
@@ -95,6 +103,25 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)
             }
+    }
+
+    // Test New Otop Data
+    private fun getOtopItem(){
+        val ref = db.collection("otop")
+        ref.get().addOnCompleteListener {
+            for ( dt in it.result!!){
+                val ls = dt["list"] as ArrayList<*>
+                for (doc in ls){
+                    val data: MutableMap<*, *>? = doc as MutableMap<*, *>?
+                    val images = data?.get("image").toString()
+                    val name = data?.get("name").toString()
+                    otopLists.add(OTOP_Model(images, name))
+                }
+            }
+            rvOTOP_Lists.adapter = OTOP_Adapter(otopLists)
+            rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
+        }
+
     }
 
     override fun onStart() {

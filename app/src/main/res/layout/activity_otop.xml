@@ -6,66 +6,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayoutActionbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorActionBarOTOP"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/scrollViewOtop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/linearLayoutActionbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:background="@color/colorActionBarOTOP"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scrollViewOtop"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <ImageButton
-            android:id="@+id/icBack"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_action_back"
-            android:layout_marginStart="8dp"
-            android:title="@string/otop_cart_ic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showAsAction="always" />
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linearBackOtopToHome"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
-        <TextView
-            android:id="@+id/txtOtop"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/otop_btn"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showAsAction="always" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/icBack"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:background="@drawable/ic_action_back"-->
+<!--                android:contentDescription="BackBtnOTOP"-->
+<!--                android:title="@string/otop_cart_ic"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:showAsAction="always" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtBack"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/backtxt"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/icBack"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+<!--        </LinearLayout>-->
+<!--            <TextView-->
+<!--                android:id="@+id/txtOtop"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/otop_btn"-->
+<!--                android:textSize="24sp"-->
+<!--                android:textColor="@color/white"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:showAsAction="always" />-->
 
 
-        <ImageButton
-            android:id="@+id/icCart"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/ic_action_cart"
-            android:title="@string/otop_cart_ic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/icCart"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@drawable/ic_action_cart"-->
+<!--            android:title="@string/otop_cart_ic"-->
+<!--            app:actionLayout="@layout/action_bar_notify_icon"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         <ScrollView
             android:id="@+id/scrollViewOtop"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutActionbar"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

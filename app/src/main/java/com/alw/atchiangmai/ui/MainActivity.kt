@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity(){
         getBestThings()
         vdoList()
 
+
+
         btn_more.setOnClickListener {
             val intent = Intent(this, MoreActivity::class.java)
             startActivity(intent)
