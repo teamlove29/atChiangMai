@@ -6,102 +6,134 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/linearLayoutActionbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:background="@color/colorActionBarOTOP"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/scrollViewOtop"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayoutActionbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorActionBarOTOP"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearOTOPScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/linearBackOtopToHome"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/icBack"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="25dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:background="@drawable/ic_action_back"-->
-<!--                android:contentDescription="BackBtnOTOP"-->
-<!--                android:title="@string/otop_cart_ic"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:showAsAction="always" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/txtBack"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/backtxt"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="18sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/icBack"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-<!--        </LinearLayout>-->
-<!--            <TextView-->
-<!--                android:id="@+id/txtOtop"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/otop_btn"-->
-<!--                android:textSize="24sp"-->
-<!--                android:textColor="@color/white"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:showAsAction="always" />-->
-
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/icCart"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_gravity="end"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:background="@drawable/ic_action_cart"-->
-<!--            android:title="@string/otop_cart_ic"-->
-<!--            app:actionLayout="@layout/action_bar_notify_icon"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <ScrollView
-            android:id="@+id/scrollViewOtop"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <ImageButton
+            android:id="@+id/backBtnOTOP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_action_back_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:foreground="?android:selectableItemBackground"/>
+
+        <TextView
+            android:id="@+id/txtOtop"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/otop_btn"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/icCart"
+            app:layout_constraintStart_toEndOf="@id/backBtnOTOP"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showAsAction="always" />
+
+
+        <ImageButton
+            android:id="@+id/icCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/ic_action_cart"
+            android:title="@string/otop_cart_ic"
+            app:actionLayout="@layout/action_bar_notify_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/linearLayoutActionbar"-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
 
+            android:foreground="?android:selectableItemBackground"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearOTOPScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutActionbar">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_otop_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/scrollViewOtop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--            app:layout_constraintTop_toTopOf="parent"-->
+                <!--            app:layout_constraintTop_toBottomOf="@+id/linearLayoutActionbar"-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <io.supercharge.shimmerlayout.ShimmerLayout
+                            android:id="@+id/shimmerLayoutOTOP_Main_Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <include layout="@layout/placeholder_otop_category" />
+
+                                <include layout="@layout/placeholder_otop_category" />
+
+                                <include layout="@layout/placeholder_otop_category" />
+
+                                <include layout="@layout/placeholder_otop_category" />
+
+                                <include layout="@layout/placeholder_otop_category" />
+
+                            </LinearLayout>
+
+                        </io.supercharge.shimmerlayout.ShimmerLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvOTOP_categories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="140dp"
+                            android:padding="10dp"
+                            tools:listitem="@layout/category_ot_row" />
+
+                    </LinearLayout>
 
                     <io.supercharge.shimmerlayout.ShimmerLayout
-                        android:id="@+id/shimmerLayoutOTOP_Main_Horizontal"
+                        android:id="@+id/shimmerLayoutOTOP_Main_Vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -115,68 +147,35 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <include layout="@layout/placeholder_otop_category" />
+                            <include layout="@layout/placeholder_otop" />
 
-                            <include layout="@layout/placeholder_otop_category" />
+                            <include layout="@layout/placeholder_otop" />
 
-                            <include layout="@layout/placeholder_otop_category" />
+                            <include layout="@layout/placeholder_otop" />
 
-                            <include layout="@layout/placeholder_otop_category" />
+                            <include layout="@layout/placeholder_otop" />
 
-                            <include layout="@layout/placeholder_otop_category" />
+                            <include layout="@layout/placeholder_otop" />
 
                         </LinearLayout>
 
                     </io.supercharge.shimmerlayout.ShimmerLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvOTOP_categories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="140dp"
-                        android:padding="10dp"
-                        tools:listitem="@layout/category_ot_row" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvOTOP_Lists"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            tools:listitem="@layout/item_otop_lists" />
+
 
                 </LinearLayout>
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                <io.supercharge.shimmerlayout.ShimmerLayout
-                    android:id="@+id/shimmerLayoutOTOP_Main_Vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <include layout="@layout/placeholder_otop" />
-
-                        <include layout="@layout/placeholder_otop" />
-
-                        <include layout="@layout/placeholder_otop" />
-
-                        <include layout="@layout/placeholder_otop" />
-
-                        <include layout="@layout/placeholder_otop" />
-
-                    </LinearLayout>
-
-                </io.supercharge.shimmerlayout.ShimmerLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvOTOP_Lists"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="10dp"
-                    tools:listitem="@layout/item_otop_lists" />
-            </LinearLayout>
-        </ScrollView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

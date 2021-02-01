@@ -59,6 +59,11 @@ class HospitalActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
 
+        //Back Btn
+        backBtnHospital.setOnClickListener{
+            finish()
+        }
+
         shimmerLayoutHos1.startShimmerAnimation()
 
         addScrollerHospitalListener()
@@ -142,7 +147,7 @@ class HospitalActivity: AppCompatActivity() {
     }
 
     private fun loadMoreHospitalData(){
-        FirebaseController.Firebase.db.collection("hospital")
+        db.collection("hospital")
             .orderBy("name")
             .startAfter(hospitalList[hospitalList.size - 1].hospitalName)
             .limit(10).get()
@@ -166,8 +171,7 @@ class HospitalActivity: AppCompatActivity() {
                         )
                     }
                     rvHospital_Lists.adapter!!.notifyItemChanged(
-                        hospitalList.size,
-                        hospitalList.size
+                        hospitalList.size, hospitalList.size
                     )
 
                 }
@@ -238,7 +242,7 @@ class HospitalActivity: AppCompatActivity() {
 
     /// Get data once from Firestore
     private fun getFirestoreHospitalResult() {
-            FirebaseController.Firebase.db.collection("hospital")
+            db.collection("hospital")
                 .get()
                 .addOnSuccessListener { result ->
                  //   val hospitalList = ArrayList<Hospital_Model>()

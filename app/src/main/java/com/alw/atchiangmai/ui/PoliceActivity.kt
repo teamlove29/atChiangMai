@@ -57,6 +57,11 @@ class PoliceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_police)
 
+        //Back Btn
+        backBtnPoliceStation.setOnClickListener{
+            finish()
+        }
+
         shimmerLayoutPolice1.startShimmerAnimation()
 
         addScrollerPoliceListener()

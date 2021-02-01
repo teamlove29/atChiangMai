@@ -26,7 +26,6 @@ class HospitalAdapter(private var context: Context,
     val ITEM_HOSPITAL_TYPE = 0
     val LOADING_HOSPITAL_TYPE = 1
 
-
     inner class HospitalViewHolder(itemHosView: View): RecyclerView.ViewHolder(itemHosView){
         //val shimmerFrameLayout: ShimmerFrameLayout = itemHosView.shimmerLayoutHos1
         private val hospital_img: ImageView = itemHosView.imgHospitalItem
