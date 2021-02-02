@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/linearLayoutActionbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -29,13 +29,15 @@
 
         <TextView
             android:id="@+id/txtOtop"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/txt_police_title"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:paddingStart="0dp"
+            android:paddingEnd="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.45"
@@ -44,7 +46,7 @@
             app:layout_constraintVertical_bias="0.0"
             app:showAsAction="always" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"

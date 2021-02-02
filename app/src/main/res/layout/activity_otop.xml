@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/linearLayoutActionbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -36,15 +36,15 @@
             android:text="@string/otop_btn"
             android:textSize="18sp"
             android:textColor="@color/white"
+            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/icCart"
+            app:layout_constraintEnd_toStartOf="@id/icCartOTOP"
             app:layout_constraintStart_toEndOf="@id/backBtnOTOP"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showAsAction="always" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageButton
-            android:id="@+id/icCart"
+            android:id="@+id/icCartOTOP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -55,10 +55,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             android:foreground="?android:selectableItemBackground"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <LinearLayout

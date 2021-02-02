@@ -5,6 +5,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,6 +52,9 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             finish()
         }
 
+        icCartOTOP.setOnClickListener{
+            Toast.makeText(this, "Go to Cart", Toast.LENGTH_SHORT).show()
+        }
 
         getOtopItem()
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
