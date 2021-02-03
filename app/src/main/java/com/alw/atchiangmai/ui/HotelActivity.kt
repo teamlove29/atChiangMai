@@ -24,7 +24,7 @@ class HotelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel)
         getFavHotel()
-        toolBarHotel.setOnClickListener {
+        backBtnHotel.setOnClickListener {
             finish()
         }
 

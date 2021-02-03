@@ -58,4 +58,7 @@
     <string name="txt_police_tel_detail"><b>Tel. detail</b></string>
     <string name="backtxt">Back</string>
 
+    <!--  Hotel String  -->
+    <string name="txt_hotel_title">Hotel</string>
+
 </resources>

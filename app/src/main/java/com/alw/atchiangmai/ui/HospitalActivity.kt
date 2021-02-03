@@ -123,9 +123,11 @@ class HospitalActivity: AppCompatActivity() {
                     rvHospital_Lists.adapter!!.notifyItemInserted(hospitalList.size)
 
                     Handler().postDelayed({
-                        hospitalList.removeAt(hospitalList.size - 1)
-                        loading = false
-                        loadMoreHospitalData()
+                        if (hospitalList.size > 10) {
+                            hospitalList.removeAt(hospitalList.size - 1)
+                            loading = false
+                            loadMoreHospitalData()
+                        }
                     }, 2000)
                 }
             }

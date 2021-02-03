@@ -53,7 +53,7 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         }
 
         icCartOTOP.setOnClickListener{
-            Toast.makeText(this, "Go to Cart", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(this, "Go to Cart", Toast.LENGTH_SHORT).show()
         }
 
         getOtopItem()

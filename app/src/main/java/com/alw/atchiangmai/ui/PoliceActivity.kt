@@ -122,11 +122,13 @@ class PoliceActivity : AppCompatActivity() {
                 rvPolice_Lists.adapter!!.notifyItemInserted(policeLists.size)
 
 //              Bug for 1 Index
-//                Handler().postDelayed({
-//                        policeLists.removeAt(policeLists.size)
-//                        loadingPol = false
-//                        loadMorePoliceStationData()
-//                }, 2000)
+                Handler().postDelayed({
+                    if(policeLists.size > 10) {
+                        policeLists.removeAt(policeLists.size - 1)
+                        loadingPol = false
+                        loadMorePoliceStationData()
+                    }
+                }, 2000)
             }
         })
     }
