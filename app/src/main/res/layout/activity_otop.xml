@@ -127,6 +127,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="140dp"
                             android:padding="10dp"
+                            android:splitMotionEvents="false"
                             tools:listitem="@layout/category_ot_row" />
 
                     </LinearLayout>

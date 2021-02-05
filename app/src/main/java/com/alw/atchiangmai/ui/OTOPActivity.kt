@@ -16,6 +16,10 @@ import com.alw.atchiangmai.Model.OTOP_Category_Model
 import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_otop.*
+import kotlinx.coroutines.*
+import com.prof.rssparser.Channel
+import com.prof.rssparser.Parser
+//import com.prof.rssparser.Article
 
 class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
 
@@ -40,8 +44,16 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         R.drawable.ic_otop_accesory
     )
 
+
     //Array OTOP Category IMG
     private val categoryOTOPname = arrayOf("Food", "Drink", "Clothes", "Accessories")
+
+    override fun onStart() {
+        super.onStart()
+//        if (otopLists.isEmpty()){
+//            getOtopItem()
+//        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +95,8 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         rvOTOP_categories.adapter = CategoriesOTOPAdapter(categoryList, this)
         rvOTOP_categories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
+
+
 
     private fun addScrollerOTOPListener(){
         rvOTOP_Lists.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -131,28 +145,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             }
     }
 
-    /// Get data once from Firestore
-    private fun firebaseFirestoreOTOP(collection : String) {
-        db.collection(collection)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-//                    Log.e(TAG, "${document.id} => ${document.data}")
-                    val otopImages = document.getString("image")
-                    val otopText = document.getString("name")
-//                    when (collection) {
-                     //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
-                    otopLists.add(OTOP_Model("$otopImages", "$otopText"))
-//                    }
-                }
-                rvOTOP_Lists.adapter = OTOP_Adapter(this, otopLists)
-                rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
-    }
-
     // Test New Otop Data
     private fun getOtopItem(){
         val ref = db.collection("otop")
@@ -177,35 +169,52 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
 
     }
 
-    override fun onStart() {
-        super.onStart()
-//        otop_Adapter!!.startListening()
+    /// Get data once from Firestore
+    private fun firebaseFirestoreOTOP(collection : String) {
+        otopLists.clear()
+        rvOTOP_Lists.adapter = null
+        db.collection(collection)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+//                    Log.e(TAG, "${document.id} => ${document.data}")
+                    val otopImages = document.getString("image")
+                    val otopText = document.getString("name")
+//                    when (collection) {
+                    //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
+                    otopLists.add(OTOP_Model("$otopImages", "$otopText"))
+//                            println("$otopLists, 5454545 1")
+//                    }
+                    println("${result.size()}, test////////////////////////////////////")
+                }
 
-//        updateUI(currentUser)
+                rvOTOP_Lists.adapter = OTOP_Adapter(this@OTOPActivity, otopLists)
+                rvOTOP_Lists.layoutManager = LinearLayoutManager(this@OTOPActivity)
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
     }
-
-    ////// Action bar function
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.app_bar_menu_otop, menu)
-        return true
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
-
 
 //    OTOP Categories Function
     override fun onItemClick(item: OTOP_Category_Model, position: Int){
-       // Toast.makeText(this, item.cateOTText, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this, item.cateOTText, Toast.LENGTH_SHORT).show(
+        rvOTOP_Lists.adapter = null
         otopLists.clear()
         when(item.cateOTText){
+//            "Food" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("otopFood") }
+//            "Drink" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("drink") }
+//            "Clothes" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("shirt") }
+//            "Accessories" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("acessories") }
+
            "Food" -> firebaseFirestoreOTOP("otopFood")
            "Drink" -> firebaseFirestoreOTOP("drink")
            "Clothes" -> firebaseFirestoreOTOP("shirt")
            "Accessories" -> firebaseFirestoreOTOP("acessories")
+
+
         }
+
     }
 
 }
