@@ -28,12 +28,12 @@ class FeedRecyclerAdapter(var itemlists : ArrayList<ItemDataFeed>,var onNoteCLic
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.feed_list,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.feed_list,parent,false)
         return  FeedViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        var currency = itemlists[position]
+        val currency = itemlists[position]
 
         Picasso.get().load(currency.image).into(holder.itemView.imageViewFeed);
         holder.itemView.textViewFeedTitle.text = currency.title

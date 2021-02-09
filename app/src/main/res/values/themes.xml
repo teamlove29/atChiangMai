@@ -14,14 +14,21 @@
         <!-- Customize your theme here. -->
     </style>
 
-<!--    <style name="Theme.ChiangMai.NoActionBar">-->
-<!--        <item name="windowActionBar">false</item>-->
-<!--        <item name="windowNoTitle">true</item>-->
-<!--    </style>-->
+    <!--    <style name="Theme.ChiangMai.NoActionBar">-->
+    <!--        <item name="windowActionBar">false</item>-->
+    <!--        <item name="windowNoTitle">true</item>-->
+    <!--    </style>-->
 
     <style name="Theme.ChiangMai.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:homeAsUpIndicator">@drawable/ic_action_back_default</item>
     </style>
 
-<!--    <style name="Theme.ChiangMai.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+    <style name="Theme.ChiangMai.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ChiangMai.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--    <style name="Theme.ChiangMai.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 </resources>

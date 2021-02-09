@@ -114,11 +114,7 @@ class HospitalActivity: AppCompatActivity() {
                     loading = true
 
                     hospitalList.add(
-                        Hospital_Model("",
-                        "loadmore_hospital",
-                        "",
-                        "",
-                        "")
+                        Hospital_Model("", "loadmore_hospital", "", "", "")
                     )
                     rvHospital_Lists.adapter!!.notifyItemInserted(hospitalList.size)
 

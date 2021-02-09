@@ -60,5 +60,8 @@
 
     <!--  Hotel String  -->
     <string name="txt_hotel_title">Hotel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_get_data_otop">testGetData_otop</string>
 
 </resources>
