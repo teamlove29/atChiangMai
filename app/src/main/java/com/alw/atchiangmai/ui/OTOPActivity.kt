@@ -3,9 +3,7 @@ package com.alw.atchiangmai.ui
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +15,7 @@ import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_otop.*
 import kotlinx.coroutines.*
-import com.prof.rssparser.Channel
-import com.prof.rssparser.Parser
+
 //import com.prof.rssparser.Article
 
 class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
@@ -68,7 +65,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
           //  Toast.makeText(this, "Go to Cart", Toast.LENGTH_SHORT).show()
         }
 
-        getOtopItem()
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
 
@@ -78,7 +74,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         swipe_refresh_otop_layout.setOnRefreshListener {
             Handler().postDelayed({
                 otopLists.clear()
-                getOtopItem()
                 rvOTOP_Lists.adapter!!.notifyDataSetChanged()
                 swipe_refresh_otop_layout.isRefreshing = false
             }, 1000)
@@ -145,29 +140,6 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             }
     }
 
-    // Test New Otop Data
-    private fun getOtopItem(){
-        val ref = db.collection("otop")
-        ref.get().addOnCompleteListener {
-            for ( dt in it.result!!){
-                val ls = dt["list"] as ArrayList<*>
-                for (doc in ls){
-                    val data: MutableMap<*, *>? = doc as MutableMap<*, *>?
-                    val images = data?.get("image").toString()
-                    val name = data?.get("name").toString()
-                    otopLists.add(OTOP_Model(images, name))
-                }
-            }
-            rvOTOP_Lists.adapter = OTOP_Adapter(this, otopLists)
-            rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
-
-            shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
-            shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
-            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
-            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
-        }
-
-    }
 
     /// Get data once from Firestore
     private fun firebaseFirestoreOTOP(collection : String) {
