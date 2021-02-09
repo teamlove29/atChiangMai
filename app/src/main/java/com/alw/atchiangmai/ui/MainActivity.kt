@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent)
 //            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
-
     }
 
     private fun insertSlideImg() {

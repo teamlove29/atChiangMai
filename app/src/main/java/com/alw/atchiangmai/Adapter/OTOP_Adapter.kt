@@ -1,5 +1,7 @@
 package com.alw.atchiangmai.Adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +13,25 @@ import com.alw.atchiangmai.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_otop_lists.view.*
 
-class OTOP_Adapter(private var itemList: ArrayList<OTOP_Model> ) :  RecyclerView.Adapter<OTOP_Adapter.OTOPViewHolder>() {
+class OTOP_Adapter(private var context: Context,
+                   private var itemList: ArrayList<OTOP_Model>) :  RecyclerView.Adapter<OTOP_Adapter.OTOPViewHolder>() {
 
-    class OTOPViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    val  ITEM_OTOP_TYPE = 0
+    val LOADING_OTOP_TYPE = 1
+
+    inner class OTOPViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val ot_img: ImageView = itemView.imgOTOPItem
         val ot_text: TextView = itemView.tvOTOP_name
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OTOPViewHolder {
-        return OTOPViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_otop_lists, parent, false))
-
+        return if(viewType == ITEM_OTOP_TYPE){
+           val view: View = LayoutInflater.from(context).inflate(R.layout.item_otop_lists, parent, false)
+           OTOPViewHolder(view)
+        }else{
+            val view: View = LayoutInflater.from(context).inflate(R.layout.item_loading, parent, false)
+            OTOPViewHolder(view)
+        }
     }
 
     override fun onBindViewHolder(holder: OTOPViewHolder, position: Int) {
@@ -32,6 +42,13 @@ class OTOP_Adapter(private var itemList: ArrayList<OTOP_Model> ) :  RecyclerView
 
     override fun getItemCount(): Int = itemList.size
 
+    override fun getItemViewType(position: Int): Int {
+        return if (itemList[position].otopItemText == "loadmore_otop"){
+            LOADING_OTOP_TYPE
+        }else{
+            ITEM_OTOP_TYPE
+        }
+    }
 }
 
 

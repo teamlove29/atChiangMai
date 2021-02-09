@@ -1,25 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/linearLayoutActionbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="60dp"
+        android:background="@color/colorActionBarOTOP"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearHospital"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/backBtnHospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_action_back_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:foreground="?android:selectableItemBackground"/>
+
+        <TextView
+            android:id="@+id/txtOtop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/txt_hospital"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingStart="0dp"
+            android:paddingEnd="24dp"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/backBtnHospital"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/linearHospital"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutActionbar">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <SearchView
                 android:id="@+id/searchViewHospital"
@@ -28,20 +72,9 @@
                 android:background="@drawable/rounded_txt_search_input"
                 android:focusableInTouchMode="true"
                 android:iconifiedByDefault="false"
-                android:queryHint="Search hospital..."
-                />
+                android:queryHint="Search hospital..." />
 
         </LinearLayout>
-
-<!--        <ScrollView-->
-<!--            android:id="@+id/scrollView_hospital"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
 
         <io.supercharge.shimmerlayout.ShimmerLayout
             android:id="@+id/shimmerLayoutHos1"
@@ -55,42 +88,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                 <include layout="@layout/placeholder_hospital"/>
-                 <include layout="@layout/placeholder_hospital"/>
-                 <include layout="@layout/placeholder_hospital"/>
-                 <include layout="@layout/placeholder_hospital"/>
-                 <include layout="@layout/placeholder_hospital"/>
+                <include layout="@layout/placeholder_hospital" />
 
-             </LinearLayout>
+                <include layout="@layout/placeholder_hospital" />
+
+                <include layout="@layout/placeholder_hospital" />
+
+                <include layout="@layout/placeholder_hospital" />
+
+                <include layout="@layout/placeholder_hospital" />
+
+            </LinearLayout>
 
         </io.supercharge.shimmerlayout.ShimmerLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_hospital_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/swipe_refresh_hospital_layout">
+            android:layout_height="match_parent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvHospital_Lists"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="10dp"
-                    tools:listitem="@layout/item_hospital_lists">
-                </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHospital_Lists"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                tools:listitem="@layout/item_hospital_lists" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-<!--                <ProgressBar-->
-<!--                    android:id="@+id/progress_bar_hospital"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"/>-->
-
-<!--            </LinearLayout>-->
-<!--        </ScrollView>-->
 
     </LinearLayout>
 

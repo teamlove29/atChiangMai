@@ -11,7 +11,6 @@
     android:foreground="?android:selectableItemBackground"
     android:orientation="vertical">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewCategoryOT"
         android:layout_width="80dp"
@@ -29,7 +28,6 @@
             android:layout_margin="15dp"
             android:contentDescription="@string/categoryotopicon" />
     </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:id="@+id/tvCateOTOP"

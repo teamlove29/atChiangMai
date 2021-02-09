@@ -20,6 +20,8 @@ import com.alw.atchiangmai.Model.PoliceModel
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_hospital.*
 import kotlinx.android.synthetic.main.activity_police.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PoliceActivity : AppCompatActivity() {
 
@@ -57,6 +59,11 @@ class PoliceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_police)
 
+        //Back Btn
+        backBtnPoliceStation.setOnClickListener{
+            finish()
+        }
+
         shimmerLayoutPolice1.startShimmerAnimation()
 
         addScrollerPoliceListener()
@@ -74,28 +81,12 @@ class PoliceActivity : AppCompatActivity() {
 
         searchViewPoliceDepartment.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(queryPolice: String?): Boolean {
-//                if(queryPolice != null){
-//                    policeLists.clear()
-//                    searchPoliceStationInFirestore(queryPolice)
-//                }
-//                else{
-//                    getFirestorePoliceStationResult()
-//                }
-//                return false
                 searchPoliceStationInFirestore(queryPolice.toString())
                 shimmerLayoutPolice1.startShimmerAnimation()
                 return false
             }
 
             override fun onQueryTextChange(newTextPoliceStation: String?): Boolean {
-//                if (newTextPoliceStation != null){
-//                    policeLists.clear()
-//                    searchPoliceStationInFirestore(newTextPoliceStation)
-//                }
-//                else {
-//                    getFirestorePoliceStationResult()
-//                }
-//                return false
                 shimmerLayoutPolice1.startShimmerAnimation()
                 searchPoliceStationInFirestore(newTextPoliceStation.toString())
                 return false
@@ -131,18 +122,13 @@ class PoliceActivity : AppCompatActivity() {
                 rvPolice_Lists.adapter!!.notifyItemInserted(policeLists.size)
 
 //              Bug for 1 Index
-//                Handler().postDelayed({
-//                    if (policeLists.size == 1){
-//                        policeLists.removeAt(policeLists.size)
-//                        loadingPol = false
-//                        loadMorePoliceStationData()
-//                    }else{
-//                        policeLists.removeAt(policeLists.size - 1)
-//                        loadingPol = false
-//                        loadMorePoliceStationData()
-//                    }
-//
-//                }, 2000)
+                Handler().postDelayed({
+                    if(policeLists.size > 10) {
+                        policeLists.removeAt(policeLists.size - 1)
+                        loadingPol = false
+                        loadMorePoliceStationData()
+                    }
+                }, 2000)
             }
         })
     }
@@ -180,59 +166,83 @@ class PoliceActivity : AppCompatActivity() {
 
     //Search Function
     private fun searchPoliceStationInFirestore(searchPolTxt: String){
-       if (searchPolTxt.isNotEmpty()){
-           db.collection("policestation")
-               .whereEqualTo("name", searchPolTxt)
-               .get()
-               .addOnCompleteListener { task ->
-                   if (task.isSuccessful) {
-                       for (documentSearch in task.result!!) {
-//                           Log.e(TAG, "${documentSearch.id} => ${documentSearch.data}")
-                           val policeImages = documentSearch.getString("image")
-                           val policeName = documentSearch.getString("name")
-                           val policeAddress = documentSearch.getString("add")
-                           val policeTel = documentSearch.getString("tel")
+        if (searchPolTxt.isNotEmpty()){
+            policeLists.clear()
+            val searchTxt = searchPolTxt.toLowerCase(Locale.getDefault())
+            policeStoreLists.forEach{
+                if (it.cmpdName.toLowerCase(Locale.getDefault()).contains(searchTxt)){
+                    policeLists.add(it)
+                }
+            }
+            rvPolice_Lists.adapter!!.notifyDataSetChanged()
+            shimmerLayoutPolice1.stopShimmerAnimation().apply {
+                shimmerLayoutPolice1.visibility = View.GONE
+            }
+        }else{
+            policeLists.clear()
+            policeLists.addAll(policeStoreLists)
+            rvPolice_Lists.adapter = PoliceAdapter(this, policeLists){
+                val intent = Intent(this, PoliceStationDetailActivity::class.java)
+                intent.putExtra(INTENT_PARCELABLE_Police, it)
+                startActivity(intent)
+            }
+            shimmerLayoutPolice1.stopShimmerAnimation()
+            shimmerLayoutPolice1.visibility = View.GONE
+        }
 
-                           policeLists.add(PoliceModel(
-                                   "$policeImages",
-                                   "$policeName",
-                                   "$policeAddress",
-                                   "$policeTel"
-                               )
-                           )
-                       }
-                   }
-                   rvPolice_Lists.layoutManager = linearLayoutManager
-                   rvPolice_Lists.setHasFixedSize(true)
-                   shimmerLayoutPolice1.apply{
-                       stopShimmerAnimation()
-                       visibility = View.GONE
-                   }
-
-                   rvPolice_Lists.adapter = PoliceAdapter(this, policeLists) {
-                       //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
-                       val intent = Intent(this, PoliceStationDetailActivity::class.java)
-                       intent.putExtra(PoliceActivity.INTENT_PARCELABLE_Police, it)
-                       startActivity(intent)
-//                       overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
-                   }
-               }
-               .addOnFailureListener { exception ->
-                   Log.d(TAG, "Error getting documents: ", exception)
-               }
-       }else{
-           policeLists.clear()
-           policeLists.addAll(policeStoreLists)
-           rvPolice_Lists.adapter = PoliceAdapter(this, policeLists){
-               val intent = Intent(this, HospitalDetailActivity::class.java)
-               intent.putExtra(HospitalActivity.INTENT_PARCELABLE_hospital, it)
-               startActivity(intent)
-           }
-           shimmerLayoutPolice1.apply {
-               stopShimmerAnimation()
-               visibility = View.GONE
-           }
-       }
+//       if (searchPolTxt.isNotEmpty()){
+//           db.collection("policestation")
+//               .whereEqualTo("name", searchPolTxt)
+//               .get()
+//               .addOnCompleteListener { task ->
+//                   if (task.isSuccessful) {
+//                       for (documentSearch in task.result!!) {
+////                           Log.e(TAG, "${documentSearch.id} => ${documentSearch.data}")
+//                           val policeImages = documentSearch.getString("image")
+//                           val policeName = documentSearch.getString("name")
+//                           val policeAddress = documentSearch.getString("add")
+//                           val policeTel = documentSearch.getString("tel")
+//
+//                           policeLists.add(PoliceModel(
+//                                   "$policeImages",
+//                                   "$policeName",
+//                                   "$policeAddress",
+//                                   "$policeTel"
+//                               )
+//                           )
+//                       }
+//                   }
+//                   rvPolice_Lists.layoutManager = linearLayoutManager
+//                   rvPolice_Lists.setHasFixedSize(true)
+//                   shimmerLayoutPolice1.apply{
+//                       stopShimmerAnimation()
+//                       visibility = View.GONE
+//                   }
+//
+//                   rvPolice_Lists.adapter = PoliceAdapter(this, policeLists) {
+//                       //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
+//                       val intent = Intent(this, PoliceStationDetailActivity::class.java)
+//                       intent.putExtra(PoliceActivity.INTENT_PARCELABLE_Police, it)
+//                       startActivity(intent)
+////                       overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
+//                   }
+//               }
+//               .addOnFailureListener { exception ->
+//                   Log.d(TAG, "Error getting documents: ", exception)
+//               }
+//       }else{
+//           policeLists.clear()
+//           policeLists.addAll(policeStoreLists)
+//           rvPolice_Lists.adapter = PoliceAdapter(this, policeLists){
+//               val intent = Intent(this, HospitalDetailActivity::class.java)
+//               intent.putExtra(HospitalActivity.INTENT_PARCELABLE_hospital, it)
+//               startActivity(intent)
+//           }
+//           shimmerLayoutPolice1.apply {
+//               stopShimmerAnimation()
+//               visibility = View.GONE
+//           }
+//       }
     }
 
     //Get data once from Firestore
@@ -253,7 +263,7 @@ class PoliceActivity : AppCompatActivity() {
 //                            PoliceModel("$policeImages", "$policeName", "$policeAddress", "$policeTel")
 //                        )
 //                    }
-                    policeLists.add(
+                    policeStoreLists.add(
                             PoliceModel("$policeImages",
                                 "$policeName",
                                 "$policeAddress",
@@ -261,6 +271,7 @@ class PoliceActivity : AppCompatActivity() {
                             )
                     )
                 }
+                policeLists.addAll(policeStoreLists)
                 rvPolice_Lists.layoutManager = linearLayoutManager
                 rvPolice_Lists.setHasFixedSize(true)
                 rvPolice_Lists.adapter = PoliceAdapter(this, policeLists){

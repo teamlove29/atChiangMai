@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,15 +16,25 @@ import com.alw.atchiangmai.Model.OTOP_Category_Model
 import com.alw.atchiangmai.Model.OTOP_Model
 import com.alw.atchiangmai.R
 import kotlinx.android.synthetic.main.activity_otop.*
-import kotlinx.android.synthetic.main.activity_police.*
+import kotlinx.coroutines.*
+import com.prof.rssparser.Channel
+import com.prof.rssparser.Parser
+//import com.prof.rssparser.Article
 
 class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryClickListener {
 
     /// Firebase Firestore
     val TAG = "MyMessage"
 
-    private var otopLists = arrayListOf<OTOP_Model>()
+    private var otopLists = ArrayList<OTOP_Model>()
+    private var linearLayoutManager = LinearLayoutManager(this)
 
+    //For Swipe Refresh
+    var visibleThresholdOTOP = 1
+    var firstItemVisible = 0
+    var lastVisibleItem = 0
+    var totalItemCount = 0
+    var loading: Boolean = false
 
     //Array OTOP Category IMG
     private val categoryOTOPimg = arrayOf(
@@ -37,39 +44,45 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         R.drawable.ic_otop_accesory
     )
 
+
     //Array OTOP Category IMG
     private val categoryOTOPname = arrayOf("Food", "Drink", "Clothes", "Accessories")
+
+    override fun onStart() {
+        super.onStart()
+//        if (otopLists.isEmpty()){
+//            getOtopItem()
+//        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otop)
 
+        // Back Btn
+        backBtnOTOP.setOnClickListener{
+            finish()
+        }
 
+        icCartOTOP.setOnClickListener{
+          //  Toast.makeText(this, "Go to Cart", Toast.LENGTH_SHORT).show()
+        }
 
         getOtopItem()
         shimmerLayoutOTOP_Main_Horizontal.startShimmerAnimation()
         shimmerLayoutOTOP_Main_Vertical.startShimmerAnimation()
-        shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
-        shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
 
-        shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
-        shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
-//        Handler().postDelayed({
-//            shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
-//            shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
-//
-//            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
-//            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
-//        }, 4000)
+        addScrollerOTOPListener()
 
-        ///////////// Action Bar ////////////////
-        val actionbarOtop = supportActionBar
-//        actionbarOtop!!.title = "OTOP"
-        actionbarOtop?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        actionbarOtop?.setCustomView(R.layout.title_otop_layout)
-        actionbarOtop?.setHomeAsUpIndicator(R.drawable.ic_action_back_default)
-        //Set back button
-        actionbarOtop?.setDisplayHomeAsUpEnabled(true)
+        //Swipe Refresh
+        swipe_refresh_otop_layout.setOnRefreshListener {
+            Handler().postDelayed({
+                otopLists.clear()
+                getOtopItem()
+                rvOTOP_Lists.adapter!!.notifyDataSetChanged()
+                swipe_refresh_otop_layout.isRefreshing = false
+            }, 1000)
+        }
 
         /////////////////// OTOP Categories /////////////////////
         val categoryList = ArrayList<OTOP_Category_Model>()
@@ -83,25 +96,52 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         rvOTOP_categories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
 
-    /// Get data once from Firestore
-    private fun firebaseFirestore(collection : String) {
-        db.collection(collection)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.e(TAG, "${document.id} => ${document.data}")
-                    val otopImages = document.getString("image")
-                    val otopText = document.getString("name")
-//                    when (collection) {
-                     //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
-                    otopLists.add(OTOP_Model("$otopImages", "$otopText"))
-//                    }
+
+
+    private fun addScrollerOTOPListener(){
+        rvOTOP_Lists.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                totalItemCount = linearLayoutManager.itemCount
+                firstItemVisible = linearLayoutManager.findFirstVisibleItemPosition()
+                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
+
+                if (!loading && totalItemCount <= (lastVisibleItem + visibleThresholdOTOP) && otopLists.size >= 10 &&
+                        !swipe_refresh_otop_layout.isRefreshing && (otopLists.size % 10) == 0){
+
+                    loading = true
+                    otopLists.add(OTOP_Model("", "loadmore_otop"))
+
+                    rvOTOP_Lists.adapter!!.notifyItemInserted(otopLists.size)
+                    Handler().postDelayed({
+                        otopLists.removeAt(otopLists.size - 1)
+                        loading = false
+                        loadMoreOTOPData()
+                    }, 2000)
                 }
-                rvOTOP_Lists.adapter = OTOP_Adapter(otopLists)
-                rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
+        })
+    }
+
+    private fun loadMoreOTOPData(){
+        db.collection("otop")
+            .orderBy("name")
+            .startAfter(otopLists[otopLists.size - 1].otopItemText)
+            .limit(10).get()
+            .addOnCompleteListener{ value ->
+                if (value.isSuccessful){
+                    for (documentLoad in value.result!!){
+                        val otopImages = documentLoad.getString("image").toString()
+                        val otopText = documentLoad.getString("name").toString()
+
+                        otopLists.add(OTOP_Model(otopImages, otopText))
+                    }
+
+                    rvOTOP_Lists.adapter!!.notifyItemChanged(
+                        otopLists.size, otopLists.size
+                    )
+                }
             }
     }
 
@@ -118,41 +158,63 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
                     otopLists.add(OTOP_Model(images, name))
                 }
             }
-            rvOTOP_Lists.adapter = OTOP_Adapter(otopLists)
+            rvOTOP_Lists.adapter = OTOP_Adapter(this, otopLists)
             rvOTOP_Lists.layoutManager = LinearLayoutManager(this)
+
+            shimmerLayoutOTOP_Main_Horizontal.stopShimmerAnimation()
+            shimmerLayoutOTOP_Main_Vertical.stopShimmerAnimation()
+            shimmerLayoutOTOP_Main_Horizontal.visibility = View.GONE
+            shimmerLayoutOTOP_Main_Vertical.visibility = View.GONE
         }
 
     }
 
-    override fun onStart() {
-        super.onStart()
-//        otop_Adapter!!.startListening()
+    /// Get data once from Firestore
+    private fun firebaseFirestoreOTOP(collection : String) {
+        otopLists.clear()
+        rvOTOP_Lists.adapter = null
+        db.collection(collection)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+//                    Log.e(TAG, "${document.id} => ${document.data}")
+                    val otopImages = document.getString("image")
+                    val otopText = document.getString("name")
+//                    when (collection) {
+                    //   "otopFood" -> otopLists.add(OTOP_Model("$otopImages", "$otopText").toString())
+                    otopLists.add(OTOP_Model("$otopImages", "$otopText"))
+//                            println("$otopLists, 5454545 1")
+//                    }
+                    println("${result.size()}, test////////////////////////////////////")
+                }
 
-//        updateUI(currentUser)
+                rvOTOP_Lists.adapter = OTOP_Adapter(this@OTOPActivity, otopLists)
+                rvOTOP_Lists.layoutManager = LinearLayoutManager(this@OTOPActivity)
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
     }
-
-    ////// Action bar function
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.app_bar_menu_otop, menu)
-        return true
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
-
 
 //    OTOP Categories Function
     override fun onItemClick(item: OTOP_Category_Model, position: Int){
-       // Toast.makeText(this, item.cateOTText, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this, item.cateOTText, Toast.LENGTH_SHORT).show(
+        rvOTOP_Lists.adapter = null
         otopLists.clear()
         when(item.cateOTText){
-           "Food" -> firebaseFirestore("otopFood")
-           "Drink" -> firebaseFirestore("drink")
-           "Clothes" -> firebaseFirestore("shirt")
-           "Accessories" -> firebaseFirestore("acessories")
+//            "Food" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("otopFood") }
+//            "Drink" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("drink") }
+//            "Clothes" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("shirt") }
+//            "Accessories" -> withContext(Dispatchers.Default) { firebaseFirestoreOTOP("acessories") }
+
+           "Food" -> firebaseFirestoreOTOP("otopFood")
+           "Drink" -> firebaseFirestoreOTOP("drink")
+           "Clothes" -> firebaseFirestoreOTOP("shirt")
+           "Accessories" -> firebaseFirestoreOTOP("acessories")
+
+
         }
+
     }
 
 }

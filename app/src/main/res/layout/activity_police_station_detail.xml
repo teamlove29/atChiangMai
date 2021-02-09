@@ -6,98 +6,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutImgPolDetail"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imgPolDetail"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:layout_gravity="top"
-            android:contentDescription="@string/hospitaldetailimg"
-            tools:srcCompat="@tools:sample/avatars" />
-
         <LinearLayout
-            android:id="@+id/infoGroupLinear"
+            android:id="@+id/linearLayoutImgPolDetail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
-            android:padding="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgPolDetail"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_gravity="top"
+                android:contentDescription="@string/hospitaldetailimg"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
-                android:id="@+id/linearTxtNamePolDetail"
+                android:id="@+id/infoGroupLinear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <TextView
-                    android:id="@+id/txtNamePolDetail"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearTxtNamePolDetail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_hospital_name"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtNamePolDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_hospital_name"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/linearTxtAddPolDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp">
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtAddressPolDetailTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/txt_hospital_address_title"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/addressPolDetail"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearTxtAddPolDetail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:text="@string/address"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp">
 
-            <LinearLayout
-                android:id="@+id/linearTelDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp">
+                    <TextView
+                        android:id="@+id/txtAddressPolDetailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/txt_hospital_address_title"
+                        android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/txtTelPolDetailTitle"
-                    android:layout_width="76dp"
-                    android:layout_height="26dp"
-                    android:text="@string/txt_hospital_tel_title"
-                    android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/addressPolDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:text="@string/address"
+                        android:textColor="@color/black" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/telPolDetail"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearTelDetail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/telephone"
-                    android:textColor="@color/black" />
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp">
+
+                    <TextView
+                        android:id="@+id/txtTelPolDetailTitle"
+                        android:layout_width="76dp"
+                        android:layout_height="26dp"
+                        android:text="@string/txt_hospital_tel_title"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/telPolDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/telephone"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

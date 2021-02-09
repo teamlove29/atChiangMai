@@ -59,6 +59,11 @@ class HospitalActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital)
 
+        //Back Btn
+        backBtnHospital.setOnClickListener{
+            finish()
+        }
+
         shimmerLayoutHos1.startShimmerAnimation()
 
         addScrollerHospitalListener()
@@ -76,25 +81,11 @@ class HospitalActivity: AppCompatActivity() {
 
         searchViewHospital.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(queryHospital: String?): Boolean {
-//                if (queryHospital != null){
-//                    hospitalList.clear()
-//                    searchHospitalInFirestore(queryHospital)
-//                }
-//                else {
-//                    getFirestoreHospitalResult()
-//                }
                 searchHospitalInFirestore(queryHospital.toString())
                 shimmerLayoutHos1.startShimmerAnimation()
                 return false
             }
             override fun onQueryTextChange(newTextHospital: String?): Boolean {
-//                if (newTextHospital != null){
-//                    hospitalList.clear()
-//                    searchHospitalInFirestore(newTextHospital)
-//                }
-//                else {
-//                    getFirestoreHospitalResult()
-//                }
                 shimmerLayoutHos1.startShimmerAnimation()
                 searchHospitalInFirestore(newTextHospital.toString())
                return false
@@ -132,9 +123,11 @@ class HospitalActivity: AppCompatActivity() {
                     rvHospital_Lists.adapter!!.notifyItemInserted(hospitalList.size)
 
                     Handler().postDelayed({
-                        hospitalList.removeAt(hospitalList.size - 1)
-                        loading = false
-                        loadMoreHospitalData()
+                        if (hospitalList.size > 10) {
+                            hospitalList.removeAt(hospitalList.size - 1)
+                            loading = false
+                            loadMoreHospitalData()
+                        }
                     }, 2000)
                 }
             }
@@ -142,7 +135,7 @@ class HospitalActivity: AppCompatActivity() {
     }
 
     private fun loadMoreHospitalData(){
-        FirebaseController.Firebase.db.collection("hospital")
+        db.collection("hospital")
             .orderBy("name")
             .startAfter(hospitalList[hospitalList.size - 1].hospitalName)
             .limit(10).get()
@@ -166,8 +159,7 @@ class HospitalActivity: AppCompatActivity() {
                         )
                     }
                     rvHospital_Lists.adapter!!.notifyItemChanged(
-                        hospitalList.size,
-                        hospitalList.size
+                        hospitalList.size, hospitalList.size
                     )
 
                 }
@@ -177,50 +169,16 @@ class HospitalActivity: AppCompatActivity() {
     private fun searchHospitalInFirestore(searchHosTxt: String){
         if(searchHosTxt.isNotEmpty()){
             hospitalList.clear()
-            db.collection("hospital")
-                .whereEqualTo("name", searchHosTxt)
-                .get()
-                .addOnCompleteListener { task ->
-                    //  val hospitalList = ArrayList<Hospital_Model>()
-                    if (task.isSuccessful){
-                        for (documentSearch in task.result!!){
-    //                        Log.e(TAG, "${documentSearch.id} => ${documentSearch.data}")
-                            val hospitalImages = documentSearch.getString("image")
-                            val hospitalName = documentSearch.getString("name")
-                            val hospitalDescription = documentSearch.getString("des")
-                            val hospitalAddress = documentSearch.getString("add")
-                            val hospitalTel = documentSearch.getString("tel")
-
-                            hospitalList.add(Hospital_Model(
-                                "$hospitalImages",
-                                "$hospitalName",
-                                "$hospitalDescription",
-                                "$hospitalAddress",
-                                "$hospitalTel"
-                            )
-                            )
-                        }
-                    }
-
-                    rvHospital_Lists.layoutManager = linearLayoutManager
-                    rvHospital_Lists.setHasFixedSize(true)
-                    shimmerLayoutHos1.apply {
-                        stopShimmerAnimation()
-                        visibility = View.GONE
-                    }
-
-                    rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
-                        //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this, HospitalDetailActivity::class.java)
-                        intent.putExtra(INTENT_PARCELABLE_hospital, it)
-                        startActivity(intent)
-    //                        overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
-                        // rvHospital_Lists.adapter?.notifyDataSetChanged()
-                    }
+            val searchTxt = searchHosTxt.toLowerCase(Locale.getDefault())
+            hospitalStoreList.forEach{
+                if(it.hospitalName.toLowerCase(Locale.getDefault()).contains(searchTxt)){
+                    hospitalList.add(it)
                 }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "Error getting documents: ", exception)
-                }
+            }
+            rvHospital_Lists.adapter!!.notifyDataSetChanged()
+            shimmerLayoutHos1.stopShimmerAnimation().apply {
+                shimmerLayoutHos1.visibility = View.GONE
+            }
         }else{
             hospitalList.clear()
             hospitalList.addAll(hospitalStoreList)
@@ -229,16 +187,75 @@ class HospitalActivity: AppCompatActivity() {
                 intent.putExtra(INTENT_PARCELABLE_hospital, it)
                 startActivity(intent)
             }
-            shimmerLayoutHos1.apply {
-                stopShimmerAnimation()
-                visibility = View.GONE
-            }
+            shimmerLayoutHos1.stopShimmerAnimation()
+            shimmerLayoutHos1.visibility = View.GONE
         }
+
+
+//        if(searchHosTxt.isNotEmpty()){
+//            hospitalList.clear()
+//            db.collection("hospital")
+//                .whereEqualTo("name", searchHosTxt)
+//                .get()
+//                .addOnCompleteListener { task ->
+//                    //  val hospitalList = ArrayList<Hospital_Model>()
+//                    if (task.isSuccessful){
+//                        for (documentSearch in task.result!!){
+//    //                        Log.e(TAG, "${documentSearch.id} => ${documentSearch.data}")
+//                            val hospitalImages = documentSearch.getString("image")
+//                            val hospitalName = documentSearch.getString("name")
+//                            val hospitalDescription = documentSearch.getString("des")
+//                            val hospitalAddress = documentSearch.getString("add")
+//                            val hospitalTel = documentSearch.getString("tel")
+//
+//                            hospitalList.add(Hospital_Model(
+//                                "$hospitalImages",
+//                                "$hospitalName",
+//                                "$hospitalDescription",
+//                                "$hospitalAddress",
+//                                "$hospitalTel"
+//                            )
+//                            )
+//                        }
+//                    }
+//
+//                    rvHospital_Lists.layoutManager = linearLayoutManager
+//                    rvHospital_Lists.setHasFixedSize(true)
+//                    shimmerLayoutHos1.apply {
+//                        stopShimmerAnimation()
+//                        visibility = View.GONE
+//                    }
+//
+//                    rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
+//                        //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
+//                        val intent = Intent(this, HospitalDetailActivity::class.java)
+//                        intent.putExtra(INTENT_PARCELABLE_hospital, it)
+//                        startActivity(intent)
+//    //                        overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
+//                        // rvHospital_Lists.adapter?.notifyDataSetChanged()
+//                    }
+//                }
+//                .addOnFailureListener { exception ->
+//                    Log.d(TAG, "Error getting documents: ", exception)
+//                }
+//        }else{
+//            hospitalList.clear()
+//            hospitalList.addAll(hospitalStoreList)
+//            rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
+//                val intent = Intent(this, HospitalDetailActivity::class.java)
+//                intent.putExtra(INTENT_PARCELABLE_hospital, it)
+//                startActivity(intent)
+//            }
+//            shimmerLayoutHos1.apply {
+//                stopShimmerAnimation()
+//                visibility = View.GONE
+//            }
+//        }
     }
 
     /// Get data once from Firestore
     private fun getFirestoreHospitalResult() {
-            FirebaseController.Firebase.db.collection("hospital")
+            db.collection("hospital")
                 .get()
                 .addOnSuccessListener { result ->
                  //   val hospitalList = ArrayList<Hospital_Model>()
@@ -249,7 +266,7 @@ class HospitalActivity: AppCompatActivity() {
                         val hospitalDescription = document.getString("des")
                         val hospitalAddress = document.getString("add")
                         val hospitalTel = document.getString("tel")
-                        hospitalList.add(
+                        hospitalStoreList.add(
                             Hospital_Model(
                                     "$hospitalImages",
                                     "$hospitalName",
@@ -259,6 +276,7 @@ class HospitalActivity: AppCompatActivity() {
                                 )
                             )
                     }
+                    hospitalList.addAll(hospitalStoreList)
                     rvHospital_Lists.layoutManager = linearLayoutManager
                     rvHospital_Lists.setHasFixedSize(true)
                     rvHospital_Lists.adapter = HospitalAdapter(this, hospitalList){
@@ -269,8 +287,10 @@ class HospitalActivity: AppCompatActivity() {
 //                        overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
 //                        rvHospital_Lists.adapter?.notifyDataSetChanged()
                     }
-                    shimmerLayoutHos1.stopShimmerAnimation()
-                    shimmerLayoutHos1.visibility = View.GONE
+                    shimmerLayoutHos1.apply {
+                        stopShimmerAnimation()
+                        visibility = View.GONE
+                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)

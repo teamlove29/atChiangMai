@@ -1,5 +1,6 @@
 package com.alw.atchiangmai.Adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alw.atchiangmai.R
 import com.alw.atchiangmai.Model.OTOP_Category_Model
+import com.alw.atchiangmai.Model.OTOP_Model
 import kotlinx.android.synthetic.main.category_ot_row.view.*
 
-class CategoriesOTOPAdapter(private val categoryList: ArrayList<OTOP_Category_Model>, var clickListener: OnItemCategoryClickListener) : RecyclerView.Adapter<CategoriesOTOPAdapter.CateOTOPViewHolder>() {
+class CategoriesOTOPAdapter(private val categoryList: ArrayList<OTOP_Category_Model>,
+                            var clickListener: OnItemCategoryClickListener) : RecyclerView.Adapter<CategoriesOTOPAdapter.CateOTOPViewHolder>() {
 
     override fun getItemCount(): Int = categoryList.size
 
@@ -23,7 +26,7 @@ class CategoriesOTOPAdapter(private val categoryList: ArrayList<OTOP_Category_Mo
 //        val categoryPos = categoryList[position]
 //        holder.cateOTimg.setImageResource(categoryPos.cateOTimg)
 //        holder.cateOTtext.text = categoryPos.cateOTText
-        holder.initializeClick(categoryList[position], clickListener)
+        holder.initializeClickBind(categoryList[position], clickListener)
 
     }
 
@@ -31,13 +34,20 @@ class CategoriesOTOPAdapter(private val categoryList: ArrayList<OTOP_Category_Mo
         val cateOTimg: ImageView = itemCateOTOPView.categoryIMG
         val cateOTtext: TextView = itemCateOTOPView.tvCateOTOP
 
-        fun initializeClick(item: OTOP_Category_Model, action: OnItemCategoryClickListener) {
-            cateOTimg.setImageResource(item.cateOTimg)
-            cateOTtext.text = item.cateOTText
+        @SuppressLint("SetJavaScriptEnabled")
 
-            itemView.setOnClickListener{
-                action.onItemClick(item, adapterPosition)
+        fun initializeClickBind(item: OTOP_Category_Model, action: OnItemCategoryClickListener) {
+            try {
+                cateOTimg.setImageResource(item.cateOTimg)
+                cateOTtext.text = item.cateOTText
+                itemView.setOnClickListener{
+                    action.onItemClick(item, adapterPosition)
+                }
+            } catch (e: Exception){
+                e.printStackTrace()
             }
+
+
         }
     }
 
