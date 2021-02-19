@@ -25,7 +25,6 @@ class HospitalDetailActivity: AppCompatActivity() {
         val imgHosAddress = findViewById<TextView>(R.id.addressHosDetail)
         val imgHosTel = findViewById<TextView>(R.id.telHosDetail)
 
-
         if (imageIntent != null) {
             Picasso.get().load(imageIntent.hospitalImg).into(imgSrcHos)
         }
