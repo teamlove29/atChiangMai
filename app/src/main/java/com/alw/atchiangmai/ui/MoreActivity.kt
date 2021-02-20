@@ -25,7 +25,8 @@ class MoreActivity : AppCompatActivity() {
         Picasso.get().load(uriMass)
             .into(imgMassage)
 
-        toolbarMore.setOnClickListener {
+        //Back Button
+        backBtnMore.setOnClickListener{
             finish()
         }
     }

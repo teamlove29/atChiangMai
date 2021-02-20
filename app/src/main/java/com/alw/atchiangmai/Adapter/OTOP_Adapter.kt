@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_otop_lists.view.*
 class OTOP_Adapter(private var context: Context,
                    private var itemList: ArrayList<OTOP_Model>) :  RecyclerView.Adapter<OTOP_Adapter.OTOPViewHolder>() {
 
-    val  ITEM_OTOP_TYPE = 0
+    val ITEM_OTOP_TYPE = 0
     val LOADING_OTOP_TYPE = 1
 
     inner class OTOPViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

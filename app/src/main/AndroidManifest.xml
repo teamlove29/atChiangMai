@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
         <activity android:name=".ui.SplashActivity">
-            <intent-filter>
+                <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:screenOrientation="sensor"/>
         <activity android:name=".ui.FeedActivity" android:screenOrientation="sensor" />

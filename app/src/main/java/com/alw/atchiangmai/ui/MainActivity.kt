@@ -43,6 +43,12 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent)
 //            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
+//        btn_otop.setOnClickListener{
+//            val intent = Intent(this, OTOPFragmentActivity::class.java)
+//            startActivity(intent)
+////            overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
+//        }
+
         btn_feed.setOnClickListener {
             val intent = Intent(this, FeedActivity::class.java)
             startActivity(intent)

@@ -17,15 +17,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/abc_vector_test"
         app:titleTextColor="@color/white">
+
+        <ImageButton
+            android:id="@+id/backBtnMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_action_back_default"
+            android:foreground="?android:selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingStart="0dp"
-            android:paddingEnd="60dp"
+            android:layout_marginEnd="16dp"
             android:text="More"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -55,11 +64,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+
                     android:orientation="vertical">
 
                     <ImageView
@@ -87,11 +100,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:foreground="?android:selectableItemBackground"
                     android:orientation="vertical">
 
                     <ImageView
@@ -119,11 +136,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:foreground="?android:selectableItemBackground"
                     android:orientation="vertical">
 
                     <ImageView

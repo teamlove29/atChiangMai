@@ -14,8 +14,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearOTOPScrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/backBtnOTOP"
@@ -23,20 +22,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="@drawable/ic_action_back_default"
+            android:foreground="?android:selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:foreground="?android:selectableItemBackground"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtOtop"
             android:layout_width="320dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
             android:gravity="center"
             android:text="@string/otop_btn"
-            android:textSize="18sp"
             android:textColor="@color/white"
-            android:layout_marginStart="16dp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/icCartOTOP"
             app:layout_constraintStart_toEndOf="@id/backBtnOTOP"
@@ -50,22 +49,21 @@
             android:layout_gravity="end"
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_action_cart"
+            android:foreground="?android:selectableItemBackground"
             android:title="@string/otop_cart_ic"
             app:actionLayout="@layout/action_bar_notify_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:foreground="?android:selectableItemBackground"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.appcompat.widget.Toolbar>
 
 
     <LinearLayout
         android:id="@+id/linearOTOPScrollView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutActionbar">
@@ -84,6 +82,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="64dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -91,88 +90,85 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <io.supercharge.shimmerlayout.ShimmerLayout
-                            android:id="@+id/shimmerLayoutOTOP_Main_Horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+<!--                        <io.supercharge.shimmerlayout.ShimmerLayout-->
+<!--                            android:id="@+id/shimmerLayoutOTOP_Main_Horizontal"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="8dp"-->
+<!--                            android:layout_marginEnd="8dp"-->
+<!--                            android:layout_marginBottom="8dp"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:orientation="horizontal">-->
 
-                                <include layout="@layout/placeholder_otop_category" />
+<!--                                <include layout="@layout/placeholder_otop_category" />-->
 
-                                <include layout="@layout/placeholder_otop_category" />
+<!--                                <include layout="@layout/placeholder_otop_category" />-->
 
-                                <include layout="@layout/placeholder_otop_category" />
+<!--                                <include layout="@layout/placeholder_otop_category" />-->
 
-                                <include layout="@layout/placeholder_otop_category" />
+<!--                                <include layout="@layout/placeholder_otop_category" />-->
 
-                                <include layout="@layout/placeholder_otop_category" />
+<!--                                <include layout="@layout/placeholder_otop_category" />-->
 
-                            </LinearLayout>
+<!--                            </LinearLayout>-->
 
-                        </io.supercharge.shimmerlayout.ShimmerLayout>
+<!--                        </io.supercharge.shimmerlayout.ShimmerLayout>-->
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvOTOP_categories"
-                            android:layout_width="wrap_content"
-                            android:layout_height="140dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:padding="10dp"
                             android:splitMotionEvents="false"
                             tools:listitem="@layout/category_ot_row" />
 
                     </LinearLayout>
+                    <!--                    -->
+<!--                    <io.supercharge.shimmerlayout.ShimmerLayout-->
+<!--                        android:id="@+id/shimmerLayoutOTOP_Main_Vertical"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginEnd="8dp"-->
+<!--                        android:layout_marginBottom="8dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
 
-                    <io.supercharge.shimmerlayout.ShimmerLayout
-                        android:id="@+id/shimmerLayoutOTOP_Main_Vertical"
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="vertical">-->
+
+<!--                            <include layout="@layout/placeholder_otop" />-->
+
+<!--                            <include layout="@layout/placeholder_otop" />-->
+
+<!--                            <include layout="@layout/placeholder_otop" />-->
+
+<!--                            <include layout="@layout/placeholder_otop" />-->
+
+<!--                            <include layout="@layout/placeholder_otop" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                    </io.supercharge.shimmerlayout.ShimmerLayout>-->
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvOTOP_Lists"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <include layout="@layout/placeholder_otop" />
-
-                            <include layout="@layout/placeholder_otop" />
-
-                            <include layout="@layout/placeholder_otop" />
-
-                            <include layout="@layout/placeholder_otop" />
-
-                            <include layout="@layout/placeholder_otop" />
-
-                        </LinearLayout>
-
-                    </io.supercharge.shimmerlayout.ShimmerLayout>
-
-
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvOTOP_Lists"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="10dp"
-                            tools:listitem="@layout/item_otop_lists" />
-
-
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:layout_marginBottom="64dp"
+                        tools:listitem="@layout/item_otop_lists" />
                 </LinearLayout>
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
