@@ -12,32 +12,61 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChiangMai">
         <activity android:name=".ui.SplashActivity">
-                <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:screenOrientation="sensor"/>
-        <activity android:name=".ui.FeedActivity" android:screenOrientation="sensor" />
-        <activity android:name=".ui.OTOPActivity" android:parentActivityName="MainActivity" android:screenOrientation="sensor"/>
-        <activity android:name=".ui.HotelActivity" android:screenOrientation="sensor"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.FeedActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.OTOPActivity"
+            android:parentActivityName="MainActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.HotelActivity"
+            android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.RestaurantActivity" android:screenOrientation="sensor" />
-        <activity android:name=".ui.DetailRestaurantActivity" android:screenOrientation="sensor" />
-        <activity android:name=".ui.ExchangeActivity" android:screenOrientation="sensor"/>
+        <activity
+            android:name=".ui.RestaurantActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.DetailRestaurantActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.ExchangeActivity"
+            android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.HospitalActivity" android:parentActivityName="MainActivity" android:screenOrientation="sensor"/>
-        <activity android:name=".ui.HospitalDetailActivity" android:parentActivityName="MainActivity" android:screenOrientation="sensor"/>
+        <activity
+            android:name=".ui.HospitalActivity"
+            android:parentActivityName="MainActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.HospitalDetailActivity"
+            android:parentActivityName="MainActivity"
+            android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.PoliceStationDetailActivity" android:screenOrientation="sensor" />
-        <activity android:name=".ui.PoliceActivity" android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.PoliceStationDetailActivity"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.PoliceActivity"
+            android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.MoreActivity" android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.MoreActivity"
+            android:screenOrientation="sensor" />
 
-        <activity android:name=".ui.UserActivity" android:screenOrientation="sensor"/>
+        <activity
+            android:name=".ui.UserActivity"
+            android:screenOrientation="sensor" />
 
-<!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
+        <!--            android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
     </application>
 
 </manifest>
