@@ -14,7 +14,7 @@ import com.alw.atchiangmai.Model.ModelCardPicText1
 import com.alw.atchiangmai.Model.ModelYoutube
 import com.alw.atchiangmai.ui.*
 import com.firebase.ui.auth.AuthUI
-import com.google.firebase.auth.FirebaseAuth
+import org.xms.f.auth.ExtensionAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun checkingUser() {
-        if (FirebaseAuth.getInstance().currentUser?.uid == null) {
+        if (ExtensionAuth.getInstance().currentUser?.uid == null) {
 //            val inten = Intent(this, UserActivity::class.java)
 //            startActivity(inten)
             val providers = arrayListOf(
@@ -108,11 +108,11 @@ class MainActivity : AppCompatActivity(){
             )
 
         } else {
-            txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
+            txt_user_name.text = "${ExtensionAuth.getInstance().currentUser?.displayName}"
 
 
-            if (FirebaseAuth.getInstance().currentUser?.photoUrl !== null) {
-                Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+            if (ExtensionAuth.getInstance().currentUser?.photoUrl !== null) {
+                Picasso.get().load(ExtensionAuth.getInstance().currentUser?.photoUrl)
                     .into(image_user)
 
             } else {
@@ -123,9 +123,9 @@ class MainActivity : AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
-            Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+            Picasso.get().load(ExtensionAuth.getInstance().currentUser?.photoUrl)
                 .into(image_user)
-            txt_user_name.text = "${FirebaseAuth.getInstance().currentUser?.displayName}"
+            txt_user_name.text = "${ExtensionAuth.getInstance().currentUser?.displayName}"
         }
     }
 

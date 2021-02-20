@@ -189,60 +189,6 @@ class PoliceActivity : AppCompatActivity() {
             shimmerLayoutPolice1.stopShimmerAnimation()
             shimmerLayoutPolice1.visibility = View.GONE
         }
-
-//       if (searchPolTxt.isNotEmpty()){
-//           db.collection("policestation")
-//               .whereEqualTo("name", searchPolTxt)
-//               .get()
-//               .addOnCompleteListener { task ->
-//                   if (task.isSuccessful) {
-//                       for (documentSearch in task.result!!) {
-////                           Log.e(TAG, "${documentSearch.id} => ${documentSearch.data}")
-//                           val policeImages = documentSearch.getString("image")
-//                           val policeName = documentSearch.getString("name")
-//                           val policeAddress = documentSearch.getString("add")
-//                           val policeTel = documentSearch.getString("tel")
-//
-//                           policeLists.add(PoliceModel(
-//                                   "$policeImages",
-//                                   "$policeName",
-//                                   "$policeAddress",
-//                                   "$policeTel"
-//                               )
-//                           )
-//                       }
-//                   }
-//                   rvPolice_Lists.layoutManager = linearLayoutManager
-//                   rvPolice_Lists.setHasFixedSize(true)
-//                   shimmerLayoutPolice1.apply{
-//                       stopShimmerAnimation()
-//                       visibility = View.GONE
-//                   }
-//
-//                   rvPolice_Lists.adapter = PoliceAdapter(this, policeLists) {
-//                       //       Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show()
-//                       val intent = Intent(this, PoliceStationDetailActivity::class.java)
-//                       intent.putExtra(PoliceActivity.INTENT_PARCELABLE_Police, it)
-//                       startActivity(intent)
-////                       overridePendingTransition(R.anim.slide_down, R.anim.slide_up)
-//                   }
-//               }
-//               .addOnFailureListener { exception ->
-//                   Log.d(TAG, "Error getting documents: ", exception)
-//               }
-//       }else{
-//           policeLists.clear()
-//           policeLists.addAll(policeStoreLists)
-//           rvPolice_Lists.adapter = PoliceAdapter(this, policeLists){
-//               val intent = Intent(this, HospitalDetailActivity::class.java)
-//               intent.putExtra(HospitalActivity.INTENT_PARCELABLE_hospital, it)
-//               startActivity(intent)
-//           }
-//           shimmerLayoutPolice1.apply {
-//               stopShimmerAnimation()
-//               visibility = View.GONE
-//           }
-//       }
     }
 
     //Get data once from Firestore
@@ -285,7 +231,6 @@ class PoliceActivity : AppCompatActivity() {
                     stopShimmerAnimation()
                     visibility = View.GONE
                 }
-
             }
             .addOnFailureListener { exception ->
                 Log.d(TAG, "Error getting documents: ", exception)

@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.huawei.agconnect'
+apply from: 'scripts/productFlavor.gradle'
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    //Authentication
+    compileOnly 'com.google.android.gms:play-services-base:17.1.0'
+    compileOnly 'com.google.android.gms:play-services-basement:17.1.0'
+    compileOnly 'com.google.firebase:firebase-auth:19.3.0'
+    compileOnly 'com.huawei.agconnect:agconnect-auth:1.4.2.301'
+    compileOnly 'com.huawei.hms:base:5.1.0.300'
+}

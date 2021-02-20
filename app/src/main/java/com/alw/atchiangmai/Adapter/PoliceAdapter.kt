@@ -28,7 +28,7 @@ class PoliceAdapter(private var context: Context,
         val pd_address: TextView = itemPoliceView.tvPolice_address
         val pd_tel: TextView = itemPoliceView.tvPolice_tel
 
-        fun bindViewPolice(policeIMG: PoliceModel, liatenerPol: (PoliceModel) -> Unit){
+        fun bindViewPolice(policeIMG: PoliceModel, listenerPol: (PoliceModel) -> Unit){
             Picasso.get().load(policeIMG.cmpdImg).into(pd_img)
             pd_Name.text = policeIMG.cmpdName
 //            pd_des.text = policeIMG.cmpdDes
@@ -36,7 +36,7 @@ class PoliceAdapter(private var context: Context,
             pd_tel.text = policeIMG.cmpdTel
 
             itemView.setOnClickListener{
-                liatenerPol(policeIMG)
+                listenerPol(policeIMG)
             }
         }
     }

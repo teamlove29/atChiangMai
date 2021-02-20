@@ -95,16 +95,12 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
         /////////////////// OTOP Categories /////////////////////
         val categoryList = ArrayList<OTOP_Category_Model>()
         for (categoryItemList in categoryOTOPname.indices) {
-
             categoryList.add(OTOP_Category_Model(  categoryOTOPimg[categoryItemList], categoryOTOPname[categoryItemList] ))
-
         }
 
         rvOTOP_categories.adapter = CategoriesOTOPAdapter(categoryList, this)
         rvOTOP_categories.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
-
-
 
     private fun addScrollerOTOPListener(){
         rvOTOP_Lists.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -171,13 +167,11 @@ class OTOPActivity : AppCompatActivity(), CategoriesOTOPAdapter.OnItemCategoryCl
             }
 
             // If both of data are equal, let's add them into adapter
-
                 otopLists.addAll(otopStoreLists)
                 rvOTOP_Lists.apply {
                     layoutManager = linearLayoutManager
                     adapter = OTOP_Adapter(this@OTOPActivity, otopLists)
                 }
-
 
 //            shimmerLayoutOTOP_Main_Horizontal.apply {
 //                stopShimmerAnimation()
